@@ -259,7 +259,7 @@ if IsServer then
                     sayToNum = _G.tonumber(string.sub(message, 5, string.len(message)))
                 end
 
-                if sayToNum ~= nil and (string.lower(sayAction) == "#清酒+" or string.lower(sayAction) == "#清酒-") then
+                if sayToNum ~= nil and (string.lower(sayAction) == "#add" or string.lower(sayAction) == "#del") then
                     RefreshPlayers()
                     recipient = AllPlayers[sayToNum]
                     recipient_client = AllClientPlayers[sayToNum]
@@ -270,7 +270,7 @@ if IsServer then
                         end
 
                         --给权限
-                        if sayAction == "#清酒+" then
+                        if sayAction == "#add" then
                             if recipient_client.userid ~= userid then
                                 if inst.guard_authorization[userid].friends == nil then
                                     inst.guard_authorization[userid].friends = {}
@@ -286,7 +286,7 @@ if IsServer then
                         end
 
                         --收回权限
-                        if sayAction == "#清酒-" then
+                        if sayAction == "#del" then
                             if recipient_client.userid ~= userid then
                                 if inst.guard_authorization[userid].friends ~= nil and inst.guard_authorization[userid].friends[recipient_client.userid] then
                                     inst.guard_authorization[userid].friends[recipient_client.userid] = false
@@ -303,7 +303,7 @@ if IsServer then
                     else
                         PlayerSay(talker, GetSayMsg("permission_remove_num_err"))
                     end
-                elseif sayAction == "#清酒+" or sayAction == "#清酒-" then
+                elseif sayAction == "#add" or sayAction == "#del" then
                     --命令输入有误
                     PlayerSay(talker, GetSayMsg("command_error"))
                     PlayerSay(talker, GetSayMsg("command_help"), 2.5, 4)

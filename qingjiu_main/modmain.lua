@@ -1450,7 +1450,7 @@ end
 
 
 
---防熊锁
+--fr防熊锁
 local _G = GLOBAL
 local TheSim = _G.TheSim
 local TheNet = _G.TheNet
@@ -2333,7 +2333,7 @@ end
 
 
 
---食物属性
+--fr食物属性
 table.insert(GLOBAL.STRINGS, "DFV_LANG")
 table.insert(GLOBAL.STRINGS, "DFV_HUNGER")
 table.insert(GLOBAL.STRINGS, "DFV_HEALTH")
@@ -2527,7 +2527,7 @@ end)
 
 
 
---简易血条
+--fr简易血条
 local function IsDST()
     return GLOBAL.TheSim:GetGameID() == "DST"
 end
@@ -2998,3 +2998,124 @@ end)
 
 AddPrefabPostInit("world", WorldPost)
 AddPrefabPostInitAny(AnyPost)
+
+
+
+
+
+--fr死亡不掉落
+local R_diao = 0
+local B_diao = 0
+--死亡必然掉落复活护符
+local amu_diao = true
+--死亡不掉落装备
+local zhuang_bei = false
+local R_d = R_diao - 3
+local B_d = B_diao - 5
+if R_d < 0 then R_d = 0 end if B_d < 0 then B_d = 0 end
+
+AddComponentPostInit("container", function(Container, inst)
+    function Container:DropSuiji(ondeath)
+        local amu_x = true
+        for k = 1, self.numslots do
+            local v = self.slots[k]
+            if amu_diao and amu_x and v and v.prefab == "amulet" then
+                amu_x = false
+                self:DropItem(v)
+            end
+            if B_diao ~= 0 and v and v.prefab == "reviver" then
+                self:DropItem(v)
+            end
+        end
+        for k = 1, self.numslots do
+            local v = self.slots[math.random(1, self.numslots)]
+            if k > math.random(B_d, B_diao) then
+                return false
+            end
+            if v then
+                self:DropItem(v)
+            end
+        end
+    end
+end)
+
+AddComponentPostInit("inventory", function(Inventory, inst)
+    Inventory.oldDropEverythingFn = Inventory.DropEverything
+    function Inventory:DropSuiji(ondeath)
+        local amu_x = true
+        for k = 1, self.maxslots do
+            local v = self.itemslots[k]
+            if amu_diao and amu_x and v and v.prefab == "amulet" then
+                amu_x = false
+                self:DropItem(v, true, true)
+            end
+            if R_diao ~= 0 and v and v.prefab == "reviver" then
+                self:DropItem(v, true, true)
+            end
+        end
+        for k = 1, self.maxslots do
+            local v = self.itemslots[math.random(1, self.maxslots)]
+            if k ~= 1 and k > math.random(R_d, R_diao) then
+                return false
+            end
+            if v then
+                self:DropItem(v, true, true)
+            end
+        end
+    end
+
+    function Inventory:PlayerSiWang(ondeath)
+        for k, v in pairs(self.equipslots) do
+            if v:HasTag("backpack") and v.components.container then
+                v.components.container:DropSuiji(true)
+            end
+        end
+        if zhuang_bei then
+            for k, v in pairs(self.equipslots) do
+                if not v:HasTag("backpack") then
+                    self:DropItem(v, true, true)
+                end
+            end
+        end
+        self.inst.components.inventory:DropSuiji(true)
+    end
+
+    function Inventory:DropEverything(ondeath, keepequip)
+        if not inst:HasTag("player") then
+            return Inventory:oldDropEverythingFn(ondeath, keepequip)
+        else
+            return Inventory:PlayerSiWang(ondeath)
+        end
+    end
+end)
+
+
+
+
+
+--fr死亡速度提升
+local function onDeath(inst, data, ...)
+    if inst.components.locomotor then
+        --死亡5倍速度
+        inst.components.locomotor:SetExternalSpeedMultiplier(inst, "ghostspeed", 5)
+    end
+end
+
+local function onRessurection(inst, data, ...)
+    if inst.components.locomotor then
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ghostspeed")
+    end
+end
+
+local function overrideGhostSpeed(player_inst)
+    player_inst:ListenForEvent("ms_becameghost", onDeath)
+    player_inst:ListenForEvent("respawnfromghost", onRessurection)
+end
+
+AddPlayerPostInit(overrideGhostSpeed)
+
+
+
+
+
+--fr

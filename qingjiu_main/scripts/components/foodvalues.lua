@@ -157,7 +157,7 @@ function FoodValues:On_FoodValue_Changed(player, item, keydown, ctrlkeydown)
 						elseif strings.DFV_LANG == "IT" then
 							self.string = self.string .. "i"						
 						else
-							self.string = self.string .. "-清酒"
+							self.string = self.string .. "--清酒"
 						end
 					elseif self.perishremainingtime >= 1 and strings.DFV_LANG == "IT" then
 							self.string = self.string .. "o"											
