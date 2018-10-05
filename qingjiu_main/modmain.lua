@@ -621,6 +621,7 @@ PrefabFiles = {
     "globalmapicon_noproxy",
     "worldmapexplorer",
     "dychealthbar",
+    "touxian",
 }
 
 
@@ -3369,3 +3370,65 @@ AppendFn(health, "OnRemoveFromEntity", function(self)
         self.inst.net_health_epic_max:set(0)
     end
 end)
+
+
+
+
+
+--称号
+local Qing_Jiu = {
+    "萌新",
+    "咸鱼",
+    "米虫",
+    "猪精",
+    "金身不坏",
+    "大佬",
+    "酒神",
+}
+if GLOBAL.TheNet:GetIsServer() or GLOBAL.TheNet:IsDedicated() then
+    local function touxian(inst)
+        if inst.touxian == nil then
+            inst.touxian = GLOBAL.SpawnPrefab("touxian")
+            inst.touxian.entity:SetParent(inst.entity)
+            local sstr = Qing_Jiu[1]
+            inst.touxian:Stext(sstr, 3, 25, 1, true)
+        end
+        if inst.components.age and inst.components.age:GetAgeInDays() <= 30 then
+            local sstr = Qing_Jiu[1]
+            local YanSe = 1
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        elseif inst.components.age and inst.components.age:GetAgeInDays() > 30 and inst.components.age:GetAgeInDays() <= 70 then
+            local sstr = Qing_Jiu[2]
+            local YanSe = 2
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        elseif inst.components.age and inst.components.age:GetAgeInDays() > 70 and inst.components.age:GetAgeInDays() <= 150 then
+            local sstr = Qing_Jiu[3]
+            local YanSe = 3
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        elseif inst.components.age and inst.components.age:GetAgeInDays() > 150 and inst.components.age:GetAgeInDays() <= 250 and inst.components.touxian.deathnum > 0 then
+            local sstr = Qing_Jiu[4]
+            local YanSe = 4
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        elseif inst.components.age and inst.components.age:GetAgeInDays() > 150 and inst.components.age:GetAgeInDays() <= 250 and inst.components.touxian.deathnum == 0 then
+            local sstr = Qing_Jiu[5]
+            local YanSe = 4
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        elseif inst.components.age and inst.components.age:GetAgeInDays() > 250 and inst.components.age:GetAgeInDays() <= 400 then
+            local sstr = Qing_Jiu[6]
+            local YanSe = 5
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        elseif inst.components.age and inst.components.age:GetAgeInDays() > 400 then
+            local sstr = Qing_Jiu[7]
+            local YanSe = 5
+            inst.touxian:Stext(sstr, 3, 25, YanSe, true)
+        end
+    end
+
+    AddPlayerPostInit(function(inst)
+        inst:AddComponent("touxian")
+        inst.components.touxian:Init()
+        inst:DoPeriodicTask(4, function()
+            touxian(inst)
+        end)
+    end)
+end
