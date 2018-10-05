@@ -90,6 +90,9 @@ return {
         -------- 系统建筑 --------
         "ancient_altar", -- 完整远古祭坛
         "ancient_altar_broken", -- 残破的远古祭坛
+        -------- 清酒建筑 --------
+        "graboid",--梦乡
+        "dynamite",--梦乡烟花
     },
     --要记录状态的物品
     save_state_table = {
@@ -147,6 +150,7 @@ return {
         "statueglommer",      -- 咕噜咪雕像
         "resurrectionstone",  -- 复活石
         "moonbase", --月台
+        "graboid", --梦乡
 
         --地下
         "cave_exit",          -- 地下阶梯
