@@ -7,6 +7,8 @@ forumthread = ""
 api_version = 10
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
+--最后加载
+priority = -999
 --兼容单机
 dont_starve_compatible = false
 --兼容联机
