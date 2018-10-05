@@ -3437,11 +3437,3 @@ end
 
 
 
---fr榜文告示
-local function WelcomeMessageInit(inst)
-	inst:AddComponent("message")
-	inst.components.message:SetTitle("榜文告示")
-	inst.components.message:SetMessage("作为一名饥荒玩家,你要学会自己生存\n1.点击城门选择城堡\n2.时间季节均不同步\n其他详情参见Q群\n868423108")
-end
-
-AddPrefabPostInit("world", WelcomeMessageInit)

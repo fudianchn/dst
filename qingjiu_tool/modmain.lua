@@ -158,7 +158,7 @@ AddSimPostInit(function()
 
         if shared_island_hub == nil then
             --最大20个岛屿
-            local n = 20
+            local n = 10
             for i = 1, n do
                 local hub = gen_island()
                 if hub ~= nil then
@@ -209,3 +209,16 @@ AddSimPostInit(function()
         end
     end
 end)
+
+
+
+
+
+--fr榜文告示
+local function WelcomeMessageInit(inst)
+	inst:AddComponent("message")
+	inst.components.message:SetTitle("榜文告示")
+	inst.components.message:SetMessage("作为一名饥荒玩家,你要学会自己生存\n1.点击城门选择城堡\n2.时间季节异步执行\n其他详情参见Q群\n868423108")
+end
+
+AddPrefabPostInit("world", WelcomeMessageInit)
