@@ -59,14 +59,16 @@ Assets = {
     Asset("ATLAS", "images/sharelocation.xml"),
     Asset("IMAGE", "images/unsharelocation.tex"),
     Asset("ATLAS", "images/unsharelocation.xml"),
+
+    Asset("ATLAS", "images/ui/boss_hb.xml"),
 }
 
 --大陆设置
 local strings = {}
 strings.WORLD = "清酒大陆"
-strings.WHERE_TO_GO = "去向何处？"
+strings.WHERE_TO_GO = "大人,去向何处？"
 strings.HERE_IS = "这里是 "
-strings.WORLD_FULL = "那座城堡已经满人了"
+strings.WORLD_FULL = "那座城堡已经关闭城门"
 strings.WORLD_INVALID = "该城不可达"
 strings.SELECT_WORLD = "选择城堡"
 strings.PLAYER_COUNT = "人数 "
@@ -3118,4 +3120,252 @@ AddPlayerPostInit(overrideGhostSpeed)
 
 
 
---fr
+--fr没有草蜥蜴
+local modmastersim = GLOBAL.TheNet:GetIsMasterSimulation()
+
+local SpawnPrefab = GLOBAL.SpawnPrefab
+local TUNING = GLOBAL.TUNING
+
+TUNING.GRASSGEKKO_MORPH_CHANCE = 0
+
+TUNING.DISEASE_CHANCE = 0
+TUNING.DISEASE_DELAY_TIME = 0
+TUNING.DISEASE_DELAY_TIME_VARIANCE = 0
+
+if modmastersim then
+    local function TurnIntoGrass(inst)
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local grass = SpawnPrefab("grass")
+        grass.Transform:SetPosition(x, y, z)
+        inst:Remove()
+    end
+
+    local function DelaySwap(inst)
+        inst:DoTaskInTime(0, TurnIntoGrass)
+    end
+
+    AddPrefabPostInit("grassgekko", DelaySwap)
+
+    local function TurnIntoNormal(inst)
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local normal = SpawnPrefab(inst.prefab)
+        normal.Transform:SetPosition(x, y, z)
+        inst:Remove()
+    end
+
+    local function DelayCure(self)
+        if self:IsDiseased() or self:IsBecomingDiseased() then
+            self.inst:DoTaskInTime(0, TurnIntoNormal)
+        end
+    end
+
+    AddComponentPostInit("diseaseable", DelayCure)
+end
+
+
+
+
+
+--fr二本垃圾桶
+local require = GLOBAL.require
+local Vector3 = GLOBAL.Vector3
+local containers = require("containers")
+
+local params = {}
+
+local containers_widgetsetup_base = containers.widgetsetup
+function containers.widgetsetup(container, prefab, data, ...)
+    local t = params[prefab or container.inst.prefab]
+    if t ~= nil then
+        for k, v in pairs(t) do
+            container[k] = v
+        end
+        container:SetNumSlots(container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
+    else
+        containers_widgetsetup_base(container, prefab, data, ...)
+    end
+end
+
+local function eliminatingBox()
+    local container = {
+        widget = {
+            slotpos = {
+                Vector3(0, 64 + 32 + 8 + 4, 0),
+                Vector3(0, 32 + 4, 0),
+                Vector3(0, -(32 + 4), 0),
+                Vector3(0, -(64 + 32 + 8 + 4), 0),
+            },
+            animbank = "ui_cookpot_1x4",
+            animbuild = "ui_cookpot_1x4",
+            pos = Vector3(150, 0, 0),
+            side_align_tip = 100,
+            buttoninfo = {
+                text = "清理",
+                position = Vector3(0, -165, 0),
+            }
+        },
+        type = "eliminate",
+    }
+
+    return container
+end
+
+params.eliminate = eliminatingBox()
+
+for k, v in pairs(params) do
+    containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
+end
+
+local function eliminatingFn(player, inst)
+    local container = inst.components.container
+    local eliminated = false
+    for i = 1, container:GetNumSlots() do
+        local item = container:GetItemInSlot(i)
+        if item then
+            if not item:HasTag("nonpotatable") and not item:HasTag("irreplaceable") then
+                eliminated = true
+                container:RemoveItemBySlot(i)
+                item:Remove()
+            end
+        end
+    end
+    if eliminated then
+        player.components.talker:Say("龟龟！")
+    else
+        player.components.talker:Say("清理掉无用的垃圾")
+    end
+end
+
+function params.eliminate.widget.buttoninfo.fn(inst)
+    if GLOBAL.TheWorld.ismastersim then
+        eliminatingFn(inst.components.container.opener, inst)
+    else
+        SendModRPCToServer(GLOBAL.MOD_RPC["eliminate"]["eliminate"], inst)
+    end
+end
+
+AddModRPCHandler("eliminate", "eliminate", eliminatingFn)
+
+local function trashWidget(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        inst:DoTaskInTime(0, function()
+            if inst.replica then
+                if inst.replica.container then
+                    inst.replica.container:WidgetSetup("eliminate")
+                end
+            end
+        end)
+        return inst
+    end
+    if GLOBAL.TheWorld.ismastersim then
+        if not inst.components.container then
+            inst:AddComponent("container")
+            inst.components.container:WidgetSetup("eliminate")
+        end
+    end
+end
+
+AddPrefabPostInit("researchlab2", trashWidget)
+
+
+
+
+
+--frBOSS豪华血条
+_G = GLOBAL; require = _G.require
+IsDedicated = _G.TheNet:IsDedicated()
+
+
+local EpicHealthbar = require "widgets/epichealthbar/bar"
+AddClassPostConstruct("widgets/controls", function(self)
+    EpicHealthbar.init(self)
+end)
+
+
+local function OnHealthEpicDirty(inst)
+    inst.health_epic.act = inst.net_health_epic:value()
+end
+
+local function OnHealthEpicMaxDirty(inst)
+    inst.health_epic.max = inst.net_health_epic_max:value()
+end
+
+local function AddHealthNetvars(inst)
+    inst.health_epic = { act = 0, max = 0 }
+
+    if inst.prefab == "toadstool_dark" then
+        inst.net_health_epic = _G.net_uint(inst.GUID, "health_epic", "health_epic_dirty")
+        inst.net_health_epic_max = _G.net_uint(inst.GUID, "health_epic_max", "health_epic_max_dirty")
+    else --65535 max
+        inst.net_health_epic = _G.net_ushortint(inst.GUID, "health_epic", "health_epic_dirty")
+        inst.net_health_epic_max = _G.net_ushortint(inst.GUID, "health_epic_max", "health_epic_max_dirty")
+    end
+
+    if not IsDedicated then
+        inst:ListenForEvent("health_epic_dirty", OnHealthEpicDirty)
+        inst:ListenForEvent("health_epic_max_dirty", OnHealthEpicMaxDirty)
+    end
+
+    if not _G.TheWorld.ismastersim then
+        return
+    end
+
+    if inst.components.health ~= nil then
+        inst.net_health_epic:set(inst.components.health.currenthealth)
+        inst.net_health_epic_max:set(inst.components.health.maxhealth)
+    end
+end
+
+AddPrefabPostInitAny(function(inst)
+    if inst and inst:HasTag("epic") then
+        AddHealthNetvars(inst)
+    end
+end)
+
+for _, v in pairs({ "rook", "knight", "bishop" }) do
+    AddPrefabPostInit("shadow_" .. v, AddHealthNetvars)
+end
+
+if not _G.TheNet:GetIsServer() then return end
+
+
+local function AppendFn(comp, fn_name, fn)
+    local old_fn = comp[fn_name]
+    comp[fn_name] = function(self, ...)
+        local amount = old_fn(self, ...)
+
+        fn(self)
+
+        if amount ~= nil then
+            return amount
+        end
+    end
+end
+
+local health = require "components/health"
+
+AppendFn(health, "SetCurrentHealth", function(self)
+    if self.inst.health_epic ~= nil then
+        self.inst.net_health_epic:set(self.currenthealth)
+    end
+end)
+
+AppendFn(health, "SetMaxHealth", function(self)
+    if self.inst.health_epic ~= nil then
+        self.inst.net_health_epic:set(self.currenthealth)
+        self.inst.net_health_epic_max:set(self.maxhealth)
+    end
+end)
+
+AppendFn(health, "DoDelta", function(self)
+    if self.inst.health_epic ~= nil then
+        self.inst.net_health_epic:set(self.currenthealth)
+    end
+end)
+
+AppendFn(health, "OnRemoveFromEntity", function(self)
+    if self.inst.health_epic ~= nil then
+        self.inst.net_health_epic:set(0)
+        self.inst.net_health_epic_max:set(0)
+    end
+end)
