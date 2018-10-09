@@ -19,6 +19,7 @@ PrefabFiles = {
     "klaussack_placer",
     "achivbooks",
     "expbean",
+    "opalamulet",
 }
 
 Assets = {
@@ -1023,11 +1024,47 @@ TECH = GLOBAL.TECH
 
 STRINGS.RECIPE_DESC.GEARS = "应该是个有用的东西..."
 
-Recipe( "gears", { Ingredient("cutstone", 4), Ingredient("twigs", 6), Ingredient("goldnugget", 4), Ingredient("flint", 6) }, RECIPETABS.REFINE, TECH.SCIENCE_TWO )
+Recipe("gears", { Ingredient("cutstone", 4), Ingredient("twigs", 6), Ingredient("goldnugget", 4), Ingredient("flint", 6) }, RECIPETABS.REFINE, TECH.SCIENCE_TWO)
 
 
 
 
 
 
---fr
+--fr月光护符
+STRINGS = GLOBAL.STRINGS
+RECIPETABS = GLOBAL.RECIPETABS
+Ingredient = GLOBAL.Ingredient
+TECH = GLOBAL.TECH
+Recipe = GLOBAL.Recipe
+TUNING = GLOBAL.TUNING
+
+--prefabs names and descriptions
+STRINGS.NAMES.OPALAMULET = "月光护符"
+modimport("init/init_descriptions")
+
+local require = GLOBAL.require
+local AllRecipes = GLOBAL.AllRecipes
+local GetValidRecipe = GLOBAL.GetValidRecipe
+local RECIPETABS = GLOBAL.RECIPETABS
+local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
+
+--crafting
+AddRecipe("opalamulet",
+    { Ingredient("opalpreciousgem", 1), Ingredient("moonrocknugget", 6), Ingredient("yellowamulet", 1) },
+    RECIPETABS.MAGIC, TECH.LOST, nil, nil, nil, nil, nil, "images/inventoryimages/opalamulet.xml", "opalamulet.tex")
+
+--tuning月光护符爆率1%
+TUNING.OPALAMULETBLUEPRINT_DROPRARE = 0.01
+
+local function opalamuletblueprint_gargoyle(inst)
+    if (inst.components.lootdropper) then
+        inst.components.lootdropper:AddChanceLoot("opalamulet_blueprint", TUNING.OPALAMULETBLUEPRINT_DROPRARE)
+    end
+end
+
+AddPrefabPostInit("gargoyle_houndatk", opalamuletblueprint_gargoyle)
+AddPrefabPostInit("gargoyle_hounddeath", opalamuletblueprint_gargoyle)
+AddPrefabPostInit("gargoyle_werepigatk", opalamuletblueprint_gargoyle)
+AddPrefabPostInit("gargoyle_werepigdeath", opalamuletblueprint_gargoyle)
+AddPrefabPostInit("gargoyle_werepighowl", opalamuletblueprint_gargoyle)
