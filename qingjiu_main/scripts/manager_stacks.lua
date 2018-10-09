@@ -10,7 +10,7 @@ local FOODTYPE = _G.FOODTYPE
 local SEE_ITEM_STACK_DIST = 10
 
 -- 掉落物品自动堆叠
-local auto_stack = GetModConfigData("auto_stack")
+local auto_stack = true
 
 if auto_stack and IsServer then
     local function AnimPut(item, target)
