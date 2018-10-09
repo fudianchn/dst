@@ -151,6 +151,8 @@ Assets = {
     Asset("ATLAS", "images/mark_20.xml"),
     Asset("ATLAS", "images/mark_21.xml"),
     Asset("ATLAS", "images/mark_22.xml"),
+
+    Asset("ANIM", "anim/swap_book_maxwell.zip")
 }
 
 AddMinimapAtlas("minimap/shared_islands_minimap.xml")
@@ -1022,3 +1024,10 @@ TECH = GLOBAL.TECH
 STRINGS.RECIPE_DESC.GEARS = "应该是个有用的东西..."
 
 Recipe( "gears", { Ingredient("cutstone", 4), Ingredient("twigs", 6), Ingredient("goldnugget", 4), Ingredient("flint", 6) }, RECIPETABS.REFINE, TECH.SCIENCE_TWO )
+
+
+
+
+
+
+--fr

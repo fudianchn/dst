@@ -3437,3 +3437,19 @@ end
 
 
 
+--fr老麦书可装备
+AddPrefabPostInit("waxwelljournal", function(inst)
+    inst:AddTag("book")
+
+    if not GLOBAL.TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(
+        function(inst, owner)
+            owner.AnimState:OverrideSymbol("book_closed", "swap_book_maxwell", "book_closed")
+            owner.AnimState:Hide("ARM_carry")
+        end
+    )
+end)
