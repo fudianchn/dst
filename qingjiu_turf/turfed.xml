@@ -1,0 +1,6 @@
+<Atlas>
+  <Texture filename="turfed.tex" />
+  <Elements>
+    <Element name="turfed.tex" u1="0.00390625" u2="0.9960938" v1="0.00390625" v2="0.9960938" />
+  </Elements>
+</Atlas>
