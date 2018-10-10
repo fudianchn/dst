@@ -25,6 +25,19 @@ PrefabFiles = {
     "bonewall.lua",
     "hedgewall.lua",
     "livingwall.lua",
+    "carrot_planted_placer.lua",
+    "cave_fern_placer.lua",
+    "mandrake_planted_placer.lua",
+    "marbletree_placer.lua",
+    "marblepillar_placer.lua",
+    "succulent_placer.lua",
+    "cave_banana_placer",
+    "cactus_placer",
+    "statuemaxwell_placer",
+    "pigtorch_placer",
+    "rose_placer",
+    "pumpkin_planted.lua",
+    "pumpkin_planted_placer.lua",
 }
 
 Assets = {
@@ -175,6 +188,30 @@ Assets = {
     Asset("IMAGE", "images/wall_bone_item.tex"),
     Asset("IMAGE", "images/wall_hedge_item.tex"),
     Asset("IMAGE", "images/wall_living_item.tex"),
+    Asset("ATLAS", "images/inventoryimages/mandrake_planted.xml"), -- Mandrakes Info
+    Asset("IMAGE", "images/inventoryimages/mandrake_planted.tex"), -- Mandrakes Texture
+    Asset("ATLAS", "images/inventoryimages/carrot_planted.xml"), -- Carrots Info
+    Asset("IMAGE", "images/inventoryimages/carrot_planted.tex"), -- Carrots Texture
+    Asset("ATLAS", "images/inventoryimages/succulent_planted.xml"), -- Succulents Info
+    Asset("IMAGE", "images/inventoryimages/succulent_planted.tex"), -- Succulents Texture
+    Asset("ATLAS", "images/inventoryimages/cave_fern_planted.xml"), -- Ferns Info
+    Asset("IMAGE", "images/inventoryimages/cave_fern_planted.tex"), -- Ferns Texture
+    Asset("ATLAS", "images/inventoryimages/marbletree.xml"), -- Marble Trees Info
+    Asset("IMAGE", "images/inventoryimages/marbletree.tex"), -- Marble Trees Texture
+    Asset("ATLAS", "images/inventoryimages/marblepillar.xml"), -- Marble Pillars Info
+    Asset("IMAGE", "images/inventoryimages/marblepillar.tex"), -- Marble Pillars Texture
+    Asset("ATLAS", "images/inventoryimages/bananatree.xml"), -- Banana Tree Info
+    Asset("IMAGE", "images/inventoryimages/bananatree.tex"), -- Banana Tree Texture
+    Asset("ATLAS", "images/inventoryimages/cacti.xml"), -- Cactus Info
+    Asset("IMAGE", "images/inventoryimages/cacti.tex"), -- Cactus Texture
+    Asset("ATLAS", "images/inventoryimages/statuemaxwell.xml"), -- Maxwell Statue Info
+    Asset("IMAGE", "images/inventoryimages/statuemaxwell.tex"), -- Maxwell Statue Texture
+    Asset("ATLAS", "images/inventoryimages/pigtorch.xml"), -- Pig Torch Info
+    Asset("IMAGE", "images/inventoryimages/pigtorch.tex"), -- Pig Torch Texture
+    Asset("ATLAS", "images/inventoryimages/rose.xml"), -- Rose Flower Info
+    Asset("IMAGE", "images/inventoryimages/rose.tex"), -- Rose Flower Texture
+    Asset("ATLAS", "images/inventoryimages/pumpkin.xml"), -- Planted Pumpkin
+    Asset("IMAGE", "images/inventoryimages/pumpkin.tex"), -- Planted Pumpkin
 }
 
 AddMinimapAtlas("minimap/shared_islands_minimap.xml")
@@ -1260,3 +1297,221 @@ AddRecipe("wall_living_item",
         Ingredient("cutstone", 6)
     },
     RECIPETABS.TOWN, TECH.MAGIC_TWO, nil, nil, nil, 6, nil, "images/wall_living_item.xml", "wall_living_item.tex")
+
+
+
+
+
+--fr曼德拉可种植
+local Ingredient = GLOBAL.Ingredient
+local RECIPETABS = GLOBAL.RECIPETABS
+local Recipe = GLOBAL.Recipe
+local TECH = GLOBAL.TECH
+local STRINGS = GLOBAL.STRINGS
+
+STRINGS.NAMES.FLOWER_ROSE = "玫瑰花"
+STRINGS.NAMES.PUMPKIN_PLANTED = "南瓜"
+
+STRINGS.RECIPE_DESC.MANDRAKE_PLANTED = "把曼德拉草种在地里."
+STRINGS.RECIPE_DESC.CARROT_PLANTED = "把胡萝卜种在地里."
+STRINGS.RECIPE_DESC.SUCCULENT_PLANT = "在地上种植多肉植物."
+STRINGS.RECIPE_DESC.CAVE_FERN = "在地上种蕨类植物."
+STRINGS.RECIPE_DESC.MARBLETREE = "把这些大理石树栽下去."
+STRINGS.RECIPE_DESC.MARBLEPILLAR = "把这些大理石柱子建起来."
+STRINGS.RECIPE_DESC.CAVE_BANANA_TREE = "种植香蕉树!"
+STRINGS.RECIPE_DESC.CACTUS = "种植仙人掌."
+STRINGS.RECIPE_DESC.STATUEMAXWELL = "把这些漂亮的雕像种下去."
+STRINGS.RECIPE_DESC.PIGTORCH = "造些奇怪的火把."
+STRINGS.RECIPE_DESC.FLOWER_ROSE = "种些奇怪的花."
+STRINGS.RECIPE_DESC.PUMPKIN_PLANTED = "可爱的南瓜."
+
+--不可部署
+local DEPLOYABLE = false
+if not DEPLOYABLE then
+    AddRecipe("mandrake_planted", { Ingredient("mandrake", 1) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "mandrake_planted_placer", -- placer
+        1, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/mandrake_planted.xml", -- atlas
+        "mandrake_planted.tex") -- image
+
+    AddRecipe("pumpkin_planted", { Ingredient("pumpkin", 1) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "pumpkin_planted_placer",
+        1,
+        nil,
+        1,
+        nil,
+        "images/inventoryimages/pumpkin.xml",
+        "pumpkin.tex")
+
+    AddRecipe("carrot_planted", { Ingredient("carrot_seeds", 1), Ingredient("poop", 2) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "carrot_planted_placer", --placer
+        1, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/carrot_planted.xml", -- atlas
+        "carrot_planted.tex") -- image
+
+    AddRecipe("succulent_plant", { Ingredient("succulent_picked", 1) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "succulent_placer", --placer
+        1, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/succulent_planted.xml", -- atlas
+        "succulent_planted.tex") -- image
+
+    AddRecipe("cave_fern", { Ingredient("foliage", 1) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "cave_fern_placer", --placer
+        1, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/cave_fern_planted.xml", -- atlas
+        "cave_fern_planted.tex") -- image
+
+    AddRecipe("marbletree", { Ingredient("marble", 6) }, RECIPETABS.TOWN, TECH.SCULPTING_ONE,
+        "marbletree_placer", --placer
+        2, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/marbletree.xml", -- atlas
+        "marbletree.tex") -- image
+
+    AddRecipe("marblepillar", { Ingredient("marble", 6) }, RECIPETABS.TOWN, TECH.SCULPTING_ONE,
+        "marblepillar_placer", --placer
+        2, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/marblepillar.xml", -- atlas
+        "marblepillar.tex") -- image
+
+    AddRecipe("statuemaxwell", { Ingredient("marble", 6), Ingredient("nightmarefuel", 2) }, RECIPETABS.TOWN, TECH.SCULPTING_ONE,
+        "statuemaxwell_placer", -- placer
+        3, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/statuemaxwell.xml", -- atlas
+        "statuemaxwell.tex") -- image
+
+    AddRecipe("flower_rose", { Ingredient("petals", 2), Ingredient("stinger", 1) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "rose_placer", --placer
+        1, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/rose.xml", -- atlas
+        "rose.tex") -- image
+else
+    local planted_prefab = {
+        carrot = "carrot_planted",
+        mandrake = "mandrake_planted",
+        succulent_picked = "succulent_plant",
+        foliage = "cave_fern",
+        pumpkin = "pumpkin",
+    }
+
+    local function postinit(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return inst
+        end
+        inst:AddComponent("deployable")
+        inst.components.deployable:SetDeployMode(GLOBAL.DEPLOYMODE.PLANT)
+        inst.components.deployable:SetDeploySpacing(GLOBAL.DEPLOYSPACING.LESS)
+        inst.components.deployable.ondeploy = function(inst, pt)
+            local planted_item = GLOBAL.SpawnAt(planted_prefab[inst.prefab], pt)
+            if not planted_item.SoundEmitter then
+                planted_item.entity:AddSoundEmitter()
+            end
+            planted_item.SoundEmitter:PlaySound("dontstarve/wilson/plant_tree")
+        end
+        return inst
+    end
+
+    AddPrefabPostInit("carrot", postinit)
+    AddPrefabPostInit("mandrake", postinit)
+    AddPrefabPostInit("succulent_picked", postinit)
+    AddPrefabPostInit("foliage", postinit)
+    AddPrefabPostInit("pumpkin", postinit)
+
+    AddRecipe("marbletree", { Ingredient("marble", 6) }, RECIPETABS.TOWN, TECH.SCULPTING_ONE,
+        "marbletree_placer", --placer
+        2, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/marbletree.xml", -- atlas
+        "marbletree.tex") -- image
+
+    AddRecipe("marblepillar", { Ingredient("marble", 6) }, RECIPETABS.TOWN, TECH.SCULPTING_ONE,
+        "marblepillar_placer", --placer
+        2, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/marblepillar.xml", -- atlas
+        "marblepillar.tex") -- image
+
+    AddRecipe("statuemaxwell", { Ingredient("marble", 6), Ingredient("nightmarefuel", 2) }, RECIPETABS.TOWN, TECH.SCULPTING_ONE,
+        "statuemaxwell_placer", -- placer
+        3, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/statuemaxwell.xml", -- atlas
+        "statuemaxwell.tex") -- image
+
+    AddRecipe("flower_rose", { Ingredient("petals", 2), Ingredient("stinger", 1) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "rose_placer", --placer
+        1, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/rose.xml", -- atlas
+        "rose.tex") -- image
+end
+--禁止op的种植
+local OPSTUFF = false
+if OPSTUFF then
+    AddRecipe("cave_banana_tree", { Ingredient("cave_banana", 4), Ingredient("poop", 3), Ingredient("twigs", 2) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "cave_banana_placer", --placer
+        2, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/bananatree.xml", -- atlas
+        "bananatree.tex") -- image
+
+    AddRecipe("cactus", { Ingredient("cactus_meat", 5), Ingredient("poop", 4) }, RECIPETABS.FARM, TECH.SCIENCE_ONE,
+        "cactus_placer", --placer
+        2, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/cacti.xml", -- atlas
+        "cacti.tex") -- image
+
+    AddRecipe("pigtorch", { Ingredient("log", 6), Ingredient("pigskin", 4) }, RECIPETABS.TOWN, TECH.SCIENCE_ONE,
+        "pigtorch_placer", -- placer
+        3, -- min_spacing
+        nil, -- nounlock
+        nil, -- numtogive
+        nil, -- builder_tag
+        "images/inventoryimages/pigtorch.xml", -- atlas
+        "pigtorch.tex") -- image
+end
+--关闭种植的南瓜易腐烂
+local PERISH = false
+if not PERISH then
+    AddPrefabPostInit("pumpkin", function(inst)
+        if inst.components.perishable ~= nil then
+            inst.components.perishable:SetPerishTime(999999999999)
+        end
+    end)
+end
