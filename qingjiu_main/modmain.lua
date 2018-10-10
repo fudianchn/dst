@@ -4,7 +4,6 @@ local _G = GLOBAL
 LoadPOFile("guido.po", "chs")
 
 if _G.debug.getupvalue(string.match, 1) == nil then
-    -- 修复因游戏原因无法正确匹配中文
     local oldmatch = string.match
     function string.match(str, pattern, index)
         return oldmatch(str, pattern:gsub("%%w", "[%%w一-鿕]"), index)
@@ -30,7 +29,7 @@ local ignore_sinkholes = { "2", "3", "4", "5", "6" } == true
 local _config = {}
 --各大陆的名称
 _config.world_name = {
-    ["1"] = "维斯特洛大陆",
+    ["1"] = "维斯特洛",
     ["2"] = "临冬城",
     ["3"] = "高庭城",
     ["4"] = "君临城",

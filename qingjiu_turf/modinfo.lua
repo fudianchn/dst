@@ -1,17 +1,32 @@
-name = "Turfed!"
-description = "A custom turf mod for DST"
-author = "Sarifynna, jjuneified and Muche"
-version = "1.8"
--- version_compatible = "1.4"
+name = "群号:868423108"
+description = "自用"
+author = "guido"
+version = "0.2.0"
 forumthread = ""
+--api版本联机10，单机6
 api_version = 10
-all_clients_require_mod = true
-client_only_mod = false
+icon_atlas = "modicon.xml"
+icon = "modicon.tex"
+--兼容单机
+dont_starve_compatible = false
+--兼容联机
 dst_compatible = true
-server_filter_tags = { "turf", "items" }
-icon_atlas = "turfed.xml"
-icon = "turfed.tex"
+--兼容巨人国
+reign_of_giants_compatible = false
+--兼容海难
+shipwrecked_compatible = false
+--仅客户端
+client_only_mod = false
+--所有客户端
+all_clients_require_mod = true
+--仅服务器
+server_only_mod = false
+--服务器标签
+server_filter_tags = { "群号:868423108" }
 
-configuration_options =
-{
+configuration_options = {
+    {
+        name = "product",
+        default = true,
+    }
 }
