@@ -1,7 +1,7 @@
 name = "测试"
 description = "仅自用"
 author = "guido"
-version = "1.5.8"
+version = "1.5.7"
 forumthread = ""
 --api版本联机10，单机6
 api_version = 10
