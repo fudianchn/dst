@@ -8,7 +8,7 @@ Awesome islands with protected and shared access: create your beautiful, antigri
 * Whisper the sequence of three items to your friends to share the island access"
 
 author = "Ridiculous Glitch"
-version = "1.0.69"
+version = "1.0.70"
 forumthread = ""
 
 api_version = 10

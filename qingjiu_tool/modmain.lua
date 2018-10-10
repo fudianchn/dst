@@ -1302,6 +1302,32 @@ AddRecipe("wall_living_item",
 
 
 
+--fr曼德拉草可制作
+local require = GLOBAL.require
+local RECIPETABS = GLOBAL.RECIPETABS
+local Recipe = GLOBAL.Recipe
+local STRINGS = GLOBAL.STRINGS
+local Ingredient = GLOBAL.Ingredient
+local TECH = GLOBAL.TECH
+local GROUND = GLOBAL.GROUND
+local DEPLOYMODE = GLOBAL.DEPLOYMODE
+local SpawnPrefab = GLOBAL.SpawnPrefab
+
+-- Gears Recipe
+local MandrakeIngredientCarrot = 10
+local MandrakeIngredientMonsterMeat = 8
+local MandrakeIngredientPetals = 15
+-- Recipe Description
+STRINGS.RECIPE_DESC.MANDRAKE = "一种有生命的植物,也许曾经有生命?"
+
+--(name, ingredients, tab, level, placer, min_spacing, nounlock, numtogive, builder_tag, atlas, image)
+
+AddRecipe("mandrake", {Ingredient("carrot", 10), Ingredient("monstermeat", 8),Ingredient("petals", 15)}, RECIPETABS.FARM, TECH.SCIENCE_ONE)
+
+
+
+
+
 --fr曼德拉可种植
 local Ingredient = GLOBAL.Ingredient
 local RECIPETABS = GLOBAL.RECIPETABS
