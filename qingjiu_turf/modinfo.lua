@@ -1,7 +1,7 @@
 name = "群号:868423108"
 description = "自用"
 author = "guido"
-version = "0.2.0"
+version = "0.2.1"
 forumthread = ""
 --api版本联机10，单机6
 api_version = 10
@@ -26,7 +26,7 @@ server_filter_tags = { "群号:868423108" }
 
 configuration_options = {
     {
-        name = "product",
+        name = "qun868423108",
         default = true,
     }
 }

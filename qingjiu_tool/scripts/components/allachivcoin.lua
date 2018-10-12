@@ -43,6 +43,7 @@ local allachivcoin = Class(function(self, inst)
     self.a_sleep = true
     self.jump = false
     self.level = false
+    self.freya = false
     self.fastpicker = false
     
 
@@ -278,8 +279,10 @@ end
 
 --升级
 function allachivcoin:levelcoin(inst)
-    if self.level ~= true and self.coinamount >= allachiv_coinuse["level"] then
+    --if self.level ~= true and self.coinamount >= allachiv_coinuse["level"] then
+    if self.freya == false then
         self.level = true
+        self.freya = true
         self:coinDoDelta(-allachiv_coinuse["level"])
         self:ongetcoin(inst)
     end
@@ -404,7 +407,7 @@ end
 
 --提升速度获取
 function allachivcoin:speedupcoin(inst)
-    if self.coinamount >= allachiv_coinuse["speedup"] and self.speedupamount <= 4 then
+    if self.coinamount >= allachiv_coinuse["speedup"] and self.speedupamount <= 99 then
         self.speedupamount = self.speedupamount + 1
         inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier + allachiv_coindata["speedup"]
         self.speedcheck = inst.components.locomotor.externalspeedmultiplier
@@ -415,7 +418,7 @@ end
 
 --提升攻击获取
 function allachivcoin:damageupcoin(inst)
-    if self.coinamount >= allachiv_coinuse["damageup"] and self.damageupamount <= 4 then
+    if self.coinamount >= allachiv_coinuse["damageup"] and self.damageupamount <= 99 then
         self.damageupamount = self.damageupamount + 1
         inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier + allachiv_coindata["damageup"]
         self.damagemul = inst.components.combat.damagemultiplier
