@@ -1,7 +1,7 @@
 name = "群号:868423108"
 description = "自用"
 author = "guido"
-version = "0.2.1"
+version = "0.2.2"
 forumthread = ""
 --api版本联机10，单机6
 api_version = 10

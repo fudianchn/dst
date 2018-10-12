@@ -343,6 +343,6 @@ allachiv_coinuse={
 ["supply"] = 50,
 ["reader"] = 50,
 ["jump"] = 50,
-["level"] = 20,
+["level"] = 0,
 ["fastpicker"] = 25,
 }
