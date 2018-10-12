@@ -25,7 +25,7 @@ local world_prompt = true == true
 --绚丽之门作为洞口
 local migration_postern = true == true
 --id为2,3,4,5,6的世界不参与分流
-local ignore_sinkholes = { "2", "3", "4", "5", "6" } == true
+local ignore_sinkholes = false == true
 local _config = {}
 --各大陆的名称
 _config.world_name = {
@@ -39,7 +39,7 @@ _config.world_name = {
 --各大陆人数上限
 _config.population_limit = { ["_other"] = 8 } or {}
 _config.extra_worlds = {}
-for i, v in ipairs(GetModConfigData("extra_worlds") or {}) do
+for i, v in ipairs({ "2", "3", "4", "5", "6" } or {}) do
     _config.extra_worlds[v] = true
 end
 
@@ -439,8 +439,7 @@ if _G.TheNet:GetIsServer() then
         end
 
         _G.TheWorld:ListenForEvent("ms_playerspawn", SendCountMsg)
-        --玩家离开世界不提示
-        --_G.TheWorld:ListenForEvent("ms_playerleft", SendCountMsg)
+        _G.TheWorld:ListenForEvent("ms_playerleft", SendCountMsg)
     end)
 
     _G.mwp_shards = function()
