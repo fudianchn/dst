@@ -1322,7 +1322,7 @@ STRINGS.RECIPE_DESC.MANDRAKE = "一种有生命的植物,也许曾经有生命?"
 
 --(name, ingredients, tab, level, placer, min_spacing, nounlock, numtogive, builder_tag, atlas, image)
 
-AddRecipe("mandrake", {Ingredient("carrot", 10), Ingredient("monstermeat", 8),Ingredient("petals", 15)}, RECIPETABS.FARM, TECH.SCIENCE_ONE)
+AddRecipe("mandrake", { Ingredient("carrot", 10), Ingredient("monstermeat", 8), Ingredient("petals", 15) }, RECIPETABS.FARM, TECH.SCIENCE_ONE)
 
 
 
@@ -1532,8 +1532,8 @@ if OPSTUFF then
         "images/inventoryimages/pigtorch.xml", -- atlas
         "pigtorch.tex") -- image
 end
---关闭种植的南瓜易腐烂
-local PERISH = false
+--种植的南瓜易腐烂
+local PERISH = true
 if not PERISH then
     AddPrefabPostInit("pumpkin", function(inst)
         if inst.components.perishable ~= nil then

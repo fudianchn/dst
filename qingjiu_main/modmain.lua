@@ -60,6 +60,10 @@ Assets = {
     Asset("ATLAS", "images/unsharelocation.xml"),
 
     Asset("ATLAS", "images/ui/boss_hb.xml"),
+
+    Asset("ATLAS", "images/container.xml"),
+    Asset("ATLAS", "images/container_x20.xml"),
+    Asset("ATLAS", "images/krampus_sack_bg.xml"),
 }
 
 --大陆设置
@@ -3789,18 +3793,18 @@ local IsServer = GLOBAL.TheNet:GetIsServer()
 
 function setAutoCatch(inst)
     if IsServer then
-		local oldhit = inst.components.projectile.Hit
-		function inst.components.projectile:Hit(target)
-			if target == self.owner and target.components.catcher then
-				target:PushEvent("catch", {projectile = self.inst})
-				self.inst:PushEvent("caught", {catcher = target})
-				self:Catch(target)
-				target.components.catcher:StopWatching(self.inst)
-			else
-				oldhit(self, target)
-			end
-		end
-	end
+        local oldhit = inst.components.projectile.Hit
+        function inst.components.projectile:Hit(target)
+            if target == self.owner and target.components.catcher then
+                target:PushEvent("catch", { projectile = self.inst })
+                self.inst:PushEvent("caught", { catcher = target })
+                self:Catch(target)
+                target.components.catcher:StopWatching(self.inst)
+            else
+                oldhit(self, target)
+            end
+        end
+    end
 end
 
 AddPrefabPostInit("boomerang", setAutoCatch)
@@ -3821,130 +3825,130 @@ local __Highlight_ApplyColour = Highlight.ApplyColour
 local __Highlight_UnHighlight = Highlight.UnHighlight
 
 -- additional highlight of found container objects
-local c = {r = 0, g = .25, b = 0}
+local c = { r = 0, g = .25, b = 0 }
 
 -- this maintains colour when the game unhighlights our object
 local function custom_ApplyColour(self, ...)
-  local r, g, b =
-  (self.base_add_colour_red   or 0),
-  (self.base_add_colour_green or 0),
-  (self.base_add_colour_blue  or 0)
+    local r, g, b =
+    (self.base_add_colour_red or 0),
+    (self.base_add_colour_green or 0),
+    (self.base_add_colour_blue or 0)
 
-  self.base_add_colour_red,
-  self.base_add_colour_green,
-  self.base_add_colour_blue =
-  r + c.r, g + c.g, b + c.b
+    self.base_add_colour_red,
+    self.base_add_colour_green,
+    self.base_add_colour_blue =
+    r + c.r, g + c.g, b + c.b
 
-  local result = __Highlight_ApplyColour(self, ...)
+    local result = __Highlight_ApplyColour(self, ...)
 
-  self.base_add_colour_red,
-  self.base_add_colour_green,
-  self.base_add_colour_blue = r, g, b
+    self.base_add_colour_red,
+    self.base_add_colour_green,
+    self.base_add_colour_blue = r, g, b
 
-  return result
+    return result
 end
 
 -- prevents removal of the whole component on UnHighlight
 local function custom_UnHighlight(self, ...)
-  local flashing = self.flashing
-  self.flashing = true
-  local result = __Highlight_UnHighlight(self, ...)
-  self.flashing = flashing
+    local flashing = self.flashing
+    self.flashing = true
+    local result = __Highlight_UnHighlight(self, ...)
+    self.flashing = flashing
 
-  if isDST and not self.flashing then
-    local r, g, b =
-    (self.highlight_add_colour_red   or 0),
-    (self.highlight_add_colour_green or 0),
-    (self.highlight_add_colour_blue  or 0)
+    if isDST and not self.flashing then
+        local r, g, b =
+        (self.highlight_add_colour_red or 0),
+        (self.highlight_add_colour_green or 0),
+        (self.highlight_add_colour_blue or 0)
 
-    self.highlight_add_colour_red,
-    self.highlight_add_colour_green,
-    self.highlight_add_colour_blue =
-    0, 0, 0
+        self.highlight_add_colour_red,
+        self.highlight_add_colour_green,
+        self.highlight_add_colour_blue =
+        0, 0, 0
 
-    self:ApplyColour()
+        self:ApplyColour()
 
-    self.highlight_add_colour_red,
-    self.highlight_add_colour_green,
-    self.highlight_add_colour_blue = r, g, b
-  end
+        self.highlight_add_colour_red,
+        self.highlight_add_colour_green,
+        self.highlight_add_colour_blue = r, g, b
+    end
 
-  return result
+    return result
 end
 
 local function filter(chest, item)
-  return chest.components.container and item and
-         chest.components.container:Has(item, 1)
+    return chest.components.container and item and
+            chest.components.container:Has(item, 1)
 end
 
 local function unhighlight(highlit)
-  while #highlit > 0 do
-    local v = table.remove(highlit)
-    if v and v.components.highlight then
-      -- both keys will point to their original metatable values
-      -- unless they were overwritten by other mods
+    while #highlit > 0 do
+        local v = table.remove(highlit)
+        if v and v.components.highlight then
+            -- both keys will point to their original metatable values
+            -- unless they were overwritten by other mods
 
-      if v.components.highlight.ApplyColour == custom_ApplyColour then
-        v.components.highlight.ApplyColour = nil
-      end
+            if v.components.highlight.ApplyColour == custom_ApplyColour then
+                v.components.highlight.ApplyColour = nil
+            end
 
-      if v.components.highlight.UnHighlight == custom_UnHighlight then
-        v.components.highlight.UnHighlight = nil
-      end
+            if v.components.highlight.UnHighlight == custom_UnHighlight then
+                v.components.highlight.UnHighlight = nil
+            end
 
-      v.components.highlight:UnHighlight()
+            v.components.highlight:UnHighlight()
+        end
     end
-  end
 end
 
 local function highlight(e, highlit, filter, item)
-  for k, v in pairs(e) do
-    if v and v:IsValid() and v.entity:IsVisible() and filter(v, item.prefab) then
-      if not v.components.highlight then
-        v:AddComponent('highlight')
-      end
+    for k, v in pairs(e) do
+        if v and v:IsValid() and v.entity:IsVisible() and filter(v, item.prefab) then
+            if not v.components.highlight then
+                v:AddComponent('highlight')
+            end
 
-      if v.components.highlight then
-        v.components.highlight.ApplyColour = custom_ApplyColour
-        v.components.highlight.UnHighlight = custom_UnHighlight
-        v.components.highlight:Highlight(0, 0, 0)
-        table.insert(highlit, v)
-      end
+            if v.components.highlight then
+                v.components.highlight.ApplyColour = custom_ApplyColour
+                v.components.highlight.UnHighlight = custom_UnHighlight
+                v.components.highlight:Highlight(0, 0, 0)
+                table.insert(highlit, v)
+            end
+        end
     end
-  end
 end
 
 local highlit = {}
 local function onactiveitem(owner, data)
-  unhighlight(highlit)
+    unhighlight(highlit)
 
-  if owner and data and data.item then
-    local x, y, z = owner.Transform:GetWorldPosition()
-    local e = TheSim:FindEntities(x, y, z, 20, nil, {'NOBLOCK', 'player', 'FX'}) or {}
+    if owner and data and data.item then
+        local x, y, z = owner.Transform:GetWorldPosition()
+        local e = TheSim:FindEntities(x, y, z, 20, nil, { 'NOBLOCK', 'player', 'FX' }) or {}
 
-    highlight(e, highlit, filter, data.item)
-  end
+        highlight(e, highlit, filter, data.item)
+    end
 end
 
 local function init(owner)
-  if not owner then return end
+    if not owner then return end
 
-  owner:ListenForEvent('newactiveitem', onactiveitem)
+    owner:ListenForEvent('newactiveitem', onactiveitem)
 end
 
 if isDST then
-  -- Kam297's approach
-  AddPrefabPostInit('world', function(w)
-    w:ListenForEvent('playeractivated', function(w, owner)
-      if owner == _G.ThePlayer then
-        init(owner)
-      end
+    -- Kam297's approach
+    AddPrefabPostInit('world', function(w)
+        w:ListenForEvent('playeractivated', function(w, owner)
+            if owner == _G.ThePlayer then
+                init(owner)
+            end
+        end)
     end)
-  end)
 else
-  AddPlayerPostInit(function (owner)
-    init(owner)
-  end)
+    AddPlayerPostInit(function(owner)
+        init(owner)
+    end)
 end
 --]]
 
@@ -3953,43 +3957,390 @@ local IngredientUI = _G.require 'widgets/ingredientui'
 local __IngredientUI_OnGainFocus = IngredientUI.OnGainFocus
 local sw_remap
 
-function IngredientUI:OnGainFocus (...)
-  local tex   = self.ing and self.ing.texture and self.ing.texture:match('[^/]+$'):gsub('%.tex$', '')
-  local owner = self.parent and self.parent.parent and self.parent.parent.owner
+function IngredientUI:OnGainFocus(...)
+    local tex = self.ing and self.ing.texture and self.ing.texture:match('[^/]+$'):gsub('%.tex$', '')
+    local owner = self.parent and self.parent.parent and self.parent.parent.owner
 
-  if tex and owner then
-    if _G.SaveGameIndex and _G.SaveGameIndex.IsModeShipwrecked and
-       _G.SaveGameIndex:IsModeShipwrecked() and _G.SW_ICONS then
-      if not sw_remap then
-        sw_remap = {}
-        for i, v in pairs(_G.SW_ICONS) do
-          sw_remap[v] = i
+    if tex and owner then
+        if _G.SaveGameIndex and _G.SaveGameIndex.IsModeShipwrecked and
+                _G.SaveGameIndex:IsModeShipwrecked() and _G.SW_ICONS then
+            if not sw_remap then
+                sw_remap = {}
+                for i, v in pairs(_G.SW_ICONS) do
+                    sw_remap[v] = i
+                end
+            end
+
+            if sw_remap[tex] then
+                tex = sw_remap[tex]
+            end
         end
-      end
 
-      if sw_remap[tex] then
-        tex = sw_remap[tex]
-      end
+        onactiveitem(owner, { item = { prefab = tex } })
     end
 
-    onactiveitem(owner, { item = { prefab = tex } })
-  end
-
-  if __IngredientUI_OnGainFocus then
-    return __IngredientUI_OnGainFocus(self, ...)
-  end
+    if __IngredientUI_OnGainFocus then
+        return __IngredientUI_OnGainFocus(self, ...)
+    end
 end
 
 local TabGroup = _G.require 'widgets/tabgroup'
 local __TabGroup_DeselectAll = TabGroup.DeselectAll
 function TabGroup:DeselectAll(...)
-  unhighlight(highlit)
-  return __TabGroup_DeselectAll(self, ...)
+    unhighlight(highlit)
+    return __TabGroup_DeselectAll(self, ...)
 end
+
 --]]
 
 
 
 
 
---fr
+--fr箱子背包更大容量
+--get Global vars
+local require = GLOBAL.require
+local Vector3 = GLOBAL.Vector3
+local TUNING = GLOBAL.TUNING
+local IsServer = GLOBAL.TheNet:GetIsServer()
+local TheInput = GLOBAL.TheInput
+local ThePlayer = GLOBAL.ThePlayer
+local net_entity = GLOBAL.net_entity
+
+--set global vars/get config
+local containers = require("containers")
+containers.MAXITEMSLOTS = 24
+--背包由8格增加到12格
+local INCREASEBACKPACKSIZES_BACKPACK = 12
+--小猪包由12格增加到14格
+local INCREASEBACKPACKSIZES_PIGGYBACK = 14
+--坎普斯由14格增加到18格
+local INCREASEBACKPACKSIZES_KRAMPUSSACK = 18
+--绝缘包由6格增加到10格
+local INCREASEBACKPACKSIZES_ICEPACK = 10
+--冰箱由9格增加到12格
+local largericebox = 12
+--切斯特由9格增加到12格
+local largertreasurechest = 12
+--鳞甲箱子由12格增加到24格
+local largerdragonflychest = 24
+--切斯特由9格增加到12格
+local largerchester = 12
+--Define functions
+local function addItemSlotNetvarsInContainer(inst)
+    if (#inst._itemspool < containers.MAXITEMSLOTS) then
+        for i = #inst._itemspool + 1, containers.MAXITEMSLOTS do
+            table.insert(inst._itemspool, net_entity(inst.GUID, "container._items[" .. tostring(i) .. "]", "items[" .. tostring(i) .. "]dirty"))
+        end
+    end
+end
+
+AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
+
+--Change size of Backpacks and Chests
+local widgetsetup_Base = containers.widgetsetup or function() return true end
+function containers.widgetsetup(container, prefab, data, ...)
+    -- print("test1")
+    local updated = false
+    local tempPrefab = prefab or container.inst.prefab
+    local result = widgetsetup_Base(container, prefab, data, ...)
+
+    if (tempPrefab == "backpack" and INCREASEBACKPACKSIZES_BACKPACK ~= 8) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_BACKPACK == 10 then
+            container.widget.animbank = "ui_krampusbag_2x5"
+            container.widget.animbuild = "ui_krampusbag_2x5"
+            container.widget.pos = Vector3(-5, -70, 0)
+            for y = 0, 4 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 115, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 115, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 12 then
+            container.widget.animbank = "ui_piggyback_2x6"
+            container.widget.animbuild = "ui_piggyback_2x6"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 5 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 170, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 170, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 14 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -120, 0)
+            for y = 0, 6 do
+                table.insert(container.widget.slotpos, Vector3(-162, -y * 75 + 240, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -y * 75 + 240, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "piggyback" and INCREASEBACKPACKSIZES_PIGGYBACK ~= 12) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_PIGGYBACK == 14 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -120, 0)
+            for y = 0, 6 do
+                table.insert(container.widget.slotpos, Vector3(-162, -y * 75 + 240, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -y * 75 + 240, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_PIGGYBACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_PIGGYBACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "krampus_sack" and INCREASEBACKPACKSIZES_KRAMPUSSACK ~= 14) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_KRAMPUSSACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_KRAMPUSSACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "icepack" and INCREASEBACKPACKSIZES_ICEPACK ~= 6) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_ICEPACK == 8 then
+            container.widget.animbank = "ui_backpack_2x4"
+            container.widget.animbuild = "ui_backpack_2x4"
+            container.widget.pos = Vector3(-5, -70, 0)
+            for y = 0, 3 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 114, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 114, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 10 then
+            container.widget.animbank = "ui_krampusbag_2x5"
+            container.widget.animbuild = "ui_krampusbag_2x5"
+            container.widget.pos = Vector3(-5, -70, 0)
+            for y = 0, 4 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 115, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 115, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 12 then
+            container.widget.animbank = "ui_piggyback_2x6"
+            container.widget.animbuild = "ui_piggyback_2x6"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 5 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 170, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 170, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 14 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -120, 0)
+            for y = 0, 6 do
+                table.insert(container.widget.slotpos, Vector3(-162, -y * 75 + 240, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -y * 75 + 240, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "icebox" and largericebox ~= 9) then
+        container.widget.slotpos = {}
+        if largericebox == 12 then
+            for y = 2.5, -0.5, -1 do
+                for x = 0, 2 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                end
+            end
+            container.widget.animbank = "ui_chester_shadow_3x4"
+            container.widget.animbuild = "ui_chester_shadow_3x4"
+        elseif largericebox == 16 then
+            for y = 3, 0, -1 do
+                for x = 0, 3 do
+                    table.insert(container.widget.slotpos, Vector3(80 * x - 80 * 2 + 40, 80 * y - 80 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container.xml"
+            container.widget.bgimage = "container.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largericebox == 20 then
+            for y = 3, 0, -1 do
+                for x = 0, 4 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 0, 75 * y - 75 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largericebox == 24 then
+            for y = 3, 0, -1 do
+                for x = 0, 5 do
+                    table.insert(container.widget.slotpos, Vector3(65 * x - 65 * 2 - 33, 80 * y - 80 * 2 + 38, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        end
+        updated = true
+    elseif (tempPrefab == "treasurechest" and largertreasurechest ~= 9) then
+        container.widget.slotpos = {}
+        if largertreasurechest == 12 then
+            for y = 2.5, -0.5, -1 do
+                for x = 0, 2 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                end
+            end
+            container.widget.animbank = "ui_chester_shadow_3x4"
+            container.widget.animbuild = "ui_chester_shadow_3x4"
+        elseif largertreasurechest == 16 then
+            for y = 3, 0, -1 do
+                for x = 0, 3 do
+                    table.insert(container.widget.slotpos, Vector3(80 * x - 80 * 2 + 40, 80 * y - 80 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container.xml"
+            container.widget.bgimage = "container.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largertreasurechest == 20 then
+            for y = 3, 0, -1 do
+                for x = 0, 4 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 0, 75 * y - 75 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largertreasurechest == 24 then
+            for y = 3, 0, -1 do
+                for x = 0, 5 do
+                    table.insert(container.widget.slotpos, Vector3(65 * x - 65 * 2 - 33, 80 * y - 80 * 2 + 38, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        end
+        updated = true
+    elseif (tempPrefab == "dragonflychest" and largerdragonflychest ~= 12) then
+        container.widget.slotpos = {}
+        if largerdragonflychest == 16 then
+            for y = 3, 0, -1 do
+                for x = 0, 3 do
+                    table.insert(container.widget.slotpos, Vector3(80 * x - 80 * 2 + 40, 80 * y - 80 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container.xml"
+            container.widget.bgimage = "container.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largerdragonflychest == 20 then
+            for y = 3, 0, -1 do
+                for x = 0, 4 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 0, 75 * y - 75 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largerdragonflychest == 24 then
+            for y = 3, 0, -1 do
+                for x = 0, 5 do
+                    table.insert(container.widget.slotpos, Vector3(65 * x - 65 * 2 - 33, 80 * y - 80 * 2 + 38, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        end
+        updated = true
+    elseif (tempPrefab == "chester" and largerchester ~= 9) then
+        container.widget.slotpos = {}
+        if largerchester == 12 then
+            for y = 2.5, -0.5, -1 do
+                for x = 0, 2 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                end
+            end
+            container.widget.animbank = "ui_chester_shadow_3x4"
+            container.widget.animbuild = "ui_chester_shadow_3x4"
+        end
+        updated = true
+    end
+
+    if updated then
+        container:SetNumSlots(container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
+        --containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
+    end
+    return result
+end
