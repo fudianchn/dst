@@ -150,7 +150,7 @@ return {
         "statueglommer",      -- 咕噜咪雕像
         "resurrectionstone",  -- 复活石
         "moonbase", --月台
-        "graboid", --梦乡
+        --"graboid", --梦乡
 
         --地下
         "cave_exit",          -- 地下阶梯

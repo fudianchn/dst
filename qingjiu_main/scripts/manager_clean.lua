@@ -9,8 +9,8 @@ local TUNING = _G.TUNING
 
 --清理级别普通 1,2,3,4,5,-1为关闭
 local clean_level = _G.tonumber(3)
---清理周期1天
-local clean_period = _G.tonumber(1)
+--清理周期3天
+local clean_period = _G.tonumber(3)
 --自定义清理
 local clean_custom = ""
 --关闭世界连接通道
@@ -63,15 +63,15 @@ if IsServer then
             pinecone_sapling = { max = 1 * level, permission = true }, -- 松树苗
             twiggy_nut_sapling = { max = 1 * level, permission = true }, -- 树枝树苗
             lumpy_sapling = { max = 10 * level }, -- 常青树苗
-            deciduoustree = { max = 300 * level, permission = true }, -- 白树
-            evergreen = { max = 500 * level, permission = true }, -- 松树
-            evergreen_sparse = { max = 250 * level }, -- 常青树
-            twiggytree = { max = 150 * level, permission = true }, -- 树枝树
+            deciduoustree = { max = 200 * level, permission = true }, -- 白树
+            evergreen = { max = 200 * level, permission = true }, -- 松树
+            evergreen_sparse = { max = 200 * level }, -- 常青树
+            twiggytree = { max = 100 * level, permission = true }, -- 树枝树
             marsh_tree = { max = 100 * level }, -- 针刺树
-            rock_petrified_tree = { max = 100 * level }, -- 石化树
+            rock_petrified_tree = { max = 0 * level }, -- 石化树
             rock1 = { max = 70 * level }, -- 石头
-            skeleton_player = { max = 5 * level }, -- 玩家尸体
-            spiderden = { max = 5 * level, permission = true }, -- 蜘蛛巢
+            skeleton_player = { max = 1 * level }, -- 玩家尸体
+            spiderden = { max = 3 * level, permission = true }, -- 蜘蛛巢
             burntground = { max = 5 * level }, -- 陨石痕跡
 
             ------------------------ 可拾取物品  ------------------------
@@ -111,7 +111,7 @@ if IsServer then
             trinket_4 = { max = 0 * level, stack = true, reclean = 3 },
             trinket_6 = { max = 0 * level, stack = true, reclean = 3 },
             trinket_8 = { max = 0 * level, stack = true, reclean = 3 },
-            blueprint = { max = 0 * level }, -- 蓝图
+            blueprint = { max = 1 * level }, -- 蓝图
             axe = { max = 0 * level }, -- 斧子
             torch = { max = 0 * level }, -- 火炬
             pickaxe = { max = 0 * level }, -- 镐子
@@ -132,7 +132,7 @@ if IsServer then
             ------------------------ 地面玩家失去权限的建筑  ------------------------
             -- firepit     	= { max = 0 * level, permission = true },  -- 石篝火
             -- coldfire     	= { max = 0 * level, permission = true },  -- 冷火
-            -- researchlab     = { max = 0 * level, permission = true },  -- 科学机器
+             researchlab     = { max = 0 * level, permission = true },  -- 科学机器
             -- researchlab2    = { max = 0 * level, permission = true },  -- 炼金术引擎
             -- researchlab3    = { max = 0 * level, permission = true },  -- 阴影操纵者
             -- researchlab4    = { max = 0 * level, permission = true },  -- 灵子分解器
@@ -160,9 +160,9 @@ if IsServer then
             -- mushroom_light2 = { max = 0 * level, permission = true },  -- 发光器
             -- eyeturret     	= { max = 0 * level, permission = true },  -- 眼睛炮塔
             -- firesuppressor  = { max = 0 * level, permission = true },  -- 灭火器
-            -- minisign  		= { max = 0 * level, permission = true },  -- 小型标志
-            -- homesign  		= { max = 0 * level, permission = true },  -- 路牌
-            -- arrowsign_post  = { max = 0 * level, permission = true },  -- 方向指示牌
+            minisign  		= { max = 0 * level, permission = true },  -- 小型标志
+            homesign  		= { max = 0 * level, permission = true },  -- 路牌
+            arrowsign_post  = { max = 0 * level, permission = true },  -- 方向指示牌
             -- scarecrow  		= { max = 0 * level, permission = true },  -- 稻草人
 
             ------------------------ 地面玩家失去权限的门墙  ------------------------
