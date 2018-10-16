@@ -212,6 +212,12 @@ Assets = {
     Asset("IMAGE", "images/inventoryimages/rose.tex"), -- Rose Flower Texture
     Asset("ATLAS", "images/inventoryimages/pumpkin.xml"), -- Planted Pumpkin
     Asset("IMAGE", "images/inventoryimages/pumpkin.tex"), -- Planted Pumpkin
+    Asset("IMAGE", "images/container.tex"),
+    Asset("ATLAS", "images/container.xml"),
+    Asset("IMAGE", "images/container_x20.tex"),
+    Asset("ATLAS", "images/container_x20.xml"),
+    Asset("IMAGE", "images/krampus_sack_bg.tex"),
+    Asset("ATLAS", "images/krampus_sack_bg.xml"),
 }
 
 AddMinimapAtlas("minimap/shared_islands_minimap.xml")
@@ -1540,4 +1546,357 @@ if not PERISH then
             inst.components.perishable:SetPerishTime(999999999999)
         end
     end)
+end
+
+
+
+
+
+--fr更多的背包
+--fr箱子背包更大容量
+--get Global vars
+local require = GLOBAL.require
+local Vector3 = GLOBAL.Vector3
+local TUNING = GLOBAL.TUNING
+local IsServer = GLOBAL.TheNet:GetIsServer()
+local TheInput = GLOBAL.TheInput
+local ThePlayer = GLOBAL.ThePlayer
+local net_entity = GLOBAL.net_entity
+
+--set global vars/get config
+local containers = require("containers")
+containers.MAXITEMSLOTS = 24
+--背包由8格增加到12格
+local INCREASEBACKPACKSIZES_BACKPACK = 12
+--小猪包由12格增加到14格
+local INCREASEBACKPACKSIZES_PIGGYBACK = 14
+--坎普斯由14格增加到18格
+local INCREASEBACKPACKSIZES_KRAMPUSSACK = 18
+--绝缘包由6格增加到10格
+local INCREASEBACKPACKSIZES_ICEPACK = 10
+--冰箱由9格增加到12格
+local largericebox = 12
+--切斯特由9格增加到12格
+local largertreasurechest = 12
+--鳞甲箱子由12格增加到24格
+local largerdragonflychest = 24
+--切斯特由9格增加到12格
+local largerchester = 12
+--Define functions
+local function addItemSlotNetvarsInContainer(inst)
+    if (#inst._itemspool < containers.MAXITEMSLOTS) then
+        for i = #inst._itemspool + 1, containers.MAXITEMSLOTS do
+            table.insert(inst._itemspool, net_entity(inst.GUID, "container._items[" .. tostring(i) .. "]", "items[" .. tostring(i) .. "]dirty"))
+        end
+    end
+end
+
+AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
+
+--Change size of Backpacks and Chests
+local widgetsetup_Base = containers.widgetsetup or function() return true end
+function containers.widgetsetup(container, prefab, data, ...)
+    -- print("test1")
+    local updated = false
+    local tempPrefab = prefab or container.inst.prefab
+    local result = widgetsetup_Base(container, prefab, data, ...)
+
+    if (tempPrefab == "backpack" and INCREASEBACKPACKSIZES_BACKPACK ~= 8) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_BACKPACK == 10 then
+            container.widget.animbank = "ui_krampusbag_2x5"
+            container.widget.animbuild = "ui_krampusbag_2x5"
+            container.widget.pos = Vector3(-5, -70, 0)
+            for y = 0, 4 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 115, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 115, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 12 then
+            container.widget.animbank = "ui_piggyback_2x6"
+            container.widget.animbuild = "ui_piggyback_2x6"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 5 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 170, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 170, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 14 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -120, 0)
+            for y = 0, 6 do
+                table.insert(container.widget.slotpos, Vector3(-162, -y * 75 + 240, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -y * 75 + 240, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_BACKPACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "piggyback" and INCREASEBACKPACKSIZES_PIGGYBACK ~= 12) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_PIGGYBACK == 14 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -120, 0)
+            for y = 0, 6 do
+                table.insert(container.widget.slotpos, Vector3(-162, -y * 75 + 240, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -y * 75 + 240, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_PIGGYBACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_PIGGYBACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "krampus_sack" and INCREASEBACKPACKSIZES_KRAMPUSSACK ~= 14) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_KRAMPUSSACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_KRAMPUSSACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "icepack" and INCREASEBACKPACKSIZES_ICEPACK ~= 6) then
+        container.widget.slotpos = {}
+        if INCREASEBACKPACKSIZES_ICEPACK == 8 then
+            container.widget.animbank = "ui_backpack_2x4"
+            container.widget.animbuild = "ui_backpack_2x4"
+            container.widget.pos = Vector3(-5, -70, 0)
+            for y = 0, 3 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 114, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 114, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 10 then
+            container.widget.animbank = "ui_krampusbag_2x5"
+            container.widget.animbuild = "ui_krampusbag_2x5"
+            container.widget.pos = Vector3(-5, -70, 0)
+            for y = 0, 4 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 115, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 115, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 12 then
+            container.widget.animbank = "ui_piggyback_2x6"
+            container.widget.animbuild = "ui_piggyback_2x6"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 5 do
+                table.insert(container.widget.slotpos, Vector3(-162, -75 * y + 170, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -75 * y + 170, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 14 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -120, 0)
+            for y = 0, 6 do
+                table.insert(container.widget.slotpos, Vector3(-162, -y * 75 + 240, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -y * 75 + 240, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 16 then
+            container.widget.animbank = "ui_krampusbag_2x8"
+            container.widget.animbuild = "ui_krampusbag_2x8"
+            container.widget.pos = Vector3(-5, -50, 0)
+            for y = 0, 7 do
+                table.insert(container.widget.slotpos, Vector3(-162, -65 * y + 245, 0))
+                table.insert(container.widget.slotpos, Vector3(-162 + 75, -65 * y + 245, 0))
+            end
+        elseif INCREASEBACKPACKSIZES_ICEPACK == 18 then
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/krampus_sack_bg.xml"
+            container.widget.bgimage = "krampus_sack_bg.tex"
+            container.widget.pos = Vector3(-76, -70, 0)
+            for y = 0, 8 do
+                table.insert(container.widget.slotpos, Vector3(-37, -y * 75 + 300, 0))
+                table.insert(container.widget.slotpos, Vector3(-37 + 75, -y * 75 + 300, 0))
+            end
+        end
+        updated = true
+    elseif (tempPrefab == "icebox" and largericebox ~= 9) then
+        container.widget.slotpos = {}
+        if largericebox == 12 then
+            for y = 2.5, -0.5, -1 do
+                for x = 0, 2 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                end
+            end
+            container.widget.animbank = "ui_chester_shadow_3x4"
+            container.widget.animbuild = "ui_chester_shadow_3x4"
+        elseif largericebox == 16 then
+            for y = 3, 0, -1 do
+                for x = 0, 3 do
+                    table.insert(container.widget.slotpos, Vector3(80 * x - 80 * 2 + 40, 80 * y - 80 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container.xml"
+            container.widget.bgimage = "container.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largericebox == 20 then
+            for y = 3, 0, -1 do
+                for x = 0, 4 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 0, 75 * y - 75 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largericebox == 24 then
+            for y = 3, 0, -1 do
+                for x = 0, 5 do
+                    table.insert(container.widget.slotpos, Vector3(65 * x - 65 * 2 - 33, 80 * y - 80 * 2 + 38, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        end
+        updated = true
+    elseif (tempPrefab == "treasurechest" and largertreasurechest ~= 9) then
+        container.widget.slotpos = {}
+        if largertreasurechest == 12 then
+            for y = 2.5, -0.5, -1 do
+                for x = 0, 2 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                end
+            end
+            container.widget.animbank = "ui_chester_shadow_3x4"
+            container.widget.animbuild = "ui_chester_shadow_3x4"
+        elseif largertreasurechest == 16 then
+            for y = 3, 0, -1 do
+                for x = 0, 3 do
+                    table.insert(container.widget.slotpos, Vector3(80 * x - 80 * 2 + 40, 80 * y - 80 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container.xml"
+            container.widget.bgimage = "container.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largertreasurechest == 20 then
+            for y = 3, 0, -1 do
+                for x = 0, 4 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 0, 75 * y - 75 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largertreasurechest == 24 then
+            for y = 3, 0, -1 do
+                for x = 0, 5 do
+                    table.insert(container.widget.slotpos, Vector3(65 * x - 65 * 2 - 33, 80 * y - 80 * 2 + 38, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        end
+        updated = true
+    elseif (tempPrefab == "dragonflychest" and largerdragonflychest ~= 12) then
+        container.widget.slotpos = {}
+        if largerdragonflychest == 16 then
+            for y = 3, 0, -1 do
+                for x = 0, 3 do
+                    table.insert(container.widget.slotpos, Vector3(80 * x - 80 * 2 + 40, 80 * y - 80 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container.xml"
+            container.widget.bgimage = "container.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largerdragonflychest == 20 then
+            for y = 3, 0, -1 do
+                for x = 0, 4 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 0, 75 * y - 75 * 2 + 40, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        elseif largerdragonflychest == 24 then
+            for y = 3, 0, -1 do
+                for x = 0, 5 do
+                    table.insert(container.widget.slotpos, Vector3(65 * x - 65 * 2 - 33, 80 * y - 80 * 2 + 38, 0))
+                end
+            end
+            container.widget.animbank = nil
+            container.widget.animbuild = nil
+            container.widget.bgatlas = "images/container_x20.xml"
+            container.widget.bgimage = "container_x20.tex"
+            container.widget.bgimagetint = { r = .82, g = .77, b = .7, a = 1 }
+        end
+        updated = true
+    elseif (tempPrefab == "chester" and largerchester ~= 9) then
+        container.widget.slotpos = {}
+        if largerchester == 12 then
+            for y = 2.5, -0.5, -1 do
+                for x = 0, 2 do
+                    table.insert(container.widget.slotpos, Vector3(75 * x - 75 * 2 + 75, 75 * y - 75 * 2 + 75, 0))
+                end
+            end
+            container.widget.animbank = "ui_chester_shadow_3x4"
+            container.widget.animbuild = "ui_chester_shadow_3x4"
+        end
+        updated = true
+    end
+
+    if updated then
+        container:SetNumSlots(container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
+        --containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
+    end
+    return result
 end
