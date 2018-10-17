@@ -299,6 +299,16 @@ if migration_postern then
                 inst:AddComponent("worldmigrator")
                 inst.components.worldmigrator:SetID(0)
             end)
+        AddPrefabPostInit("multiplayer_portal_moonrock_constr",
+            function(inst)
+                inst:AddComponent("worldmigrator")
+                inst.components.worldmigrator:SetID(0)
+            end)
+        AddPrefabPostInit("multiplayer_portal_moonrock",
+            function(inst)
+                inst:AddComponent("worldmigrator")
+                inst.components.worldmigrator:SetID(0)
+            end)
     end
 end
 
