@@ -2163,3 +2163,160 @@ function TabGroup:DeselectAll(...)
     unhighlight(highlit)
     return __TabGroup_DeselectAll(self, ...)
 end
+
+
+
+
+
+--fr自动钓鱼
+local Text = GLOBAL.require "widgets/text"
+local TextButton = GLOBAL.require "widgets/textbutton"
+local TextEdit = GLOBAL.require "widgets/textedit"
+local Image = GLOBAL.require "widgets/image"
+local ImageButton = GLOBAL.require "widgets/imagebutton"
+
+GLOBAL.table.insert(Assets, Asset("ATLAS", "images/zuobiao.xml"))
+GLOBAL.table.insert(Assets, Asset("IMAGE", "images/zuobiao.tex"))
+GLOBAL.table.insert(Assets, Asset("ANIM", "anim/qingjiu_fish.zip"))
+
+
+
+local function CJST()
+    local inst = GLOBAL.CreateEntity()
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+    inst.entity:SetCanSleep(false)
+    inst.persists = false
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    GLOBAL.MakeInventoryPhysics(inst)
+    GLOBAL.RemovePhysicsColliders(inst)
+    inst.AnimState:SetBank("qingjiu_fish")
+    inst.AnimState:SetBuild("qingjiu_fish")
+    inst.AnimState:PlayAnimation("ldie_1")
+    inst.AnimState:SetOrientation(GLOBAL.ANIM_ORIENTATION.OnGround)
+    return inst
+end
+
+
+AddClassPostConstruct("widgets/controls", function(self)
+    self.inst:DoTaskInTime(0, function()
+        GLOBAL.TheInput:AddKeyDownHandler(GLOBAL.KEY_F1, function()
+            if GLOBAL.ThePlayer.diaoyu then
+                GLOBAL.ThePlayer.diaoyu:SetList(nil)
+                GLOBAL.ThePlayer.diaoyu = nil
+                return
+            end
+            GLOBAL.ThePlayer.zdpr = GLOBAL.ThePlayer:GetPosition()
+            local pos = GLOBAL.ThePlayer.zdpr
+            local qmc = GLOBAL.ThePlayer.components.playercontroller
+            local B = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+            local ku = GLOBAL.ThePlayer.replica.inventory
+            ----
+                local function zhuangbei()
+                    local sousuo = nil
+                    for i = 1, ku:GetNumSlots() do
+                        local sou_1 = ku:GetItemInSlot(i)
+                        if sou_1 and sou_1.prefab == "fishingrod" then
+                            sousuo = sou_1
+                            break
+                        end
+                    end
+                    local Bbao = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem("back")
+                    if Bbao and not sousuo then
+                        for i = 1, Bbao.replica.container:GetNumSlots() do
+                            local sou_1 = Bbao.replica.container:GetItemInSlot(i)
+                            if sou_1 and sou_1.prefab == "fishingrod" then
+                                sousuo = sou_1
+                                break
+                            end
+                        end
+                    end
+                    return sousuo
+                end
+
+                -----
+                if not B or B.prefab ~= "fishingrod" then
+                    local C = zhuangbei()
+                    if not C then
+                        local builder = GLOBAL.ThePlayer.replica.builder
+                        if builder:KnowsRecipe("fishingrod") and builder:CanBuild("fishingrod") then
+                            qmc:RemoteMakeRecipeFromMenu(GLOBAL.GetValidRecipe("fishingrod"))
+                        else
+                            return
+                        end
+                    end
+                    ku:ControllerUseItemOnSelfFromInvTile(C)
+                end
+                GLOBAL.ThePlayer.diaoyu = GLOBAL.ThePlayer:StartThread(function()
+                    local qid = true
+                    local ccc = 0.1
+                    while qid do
+                        local ku = GLOBAL.ThePlayer.replica.inventory
+                        local Bbao = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem("back")
+                        local B = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+                        if not B or B.prefab ~= "fishingrod" then
+                            local C = zhuangbei()
+                            if not C then
+                                local builder = GLOBAL.ThePlayer.replica.builder
+                                if builder:KnowsRecipe("fishingrod") and builder:CanBuild("fishingrod") then
+                                    qmc:RemoteMakeRecipeFromMenu(GLOBAL.GetValidRecipe("fishingrod"))
+                                else
+                                    return
+                                end
+                            end
+                            ku:ControllerUseItemOnSelfFromInvTile(C)
+                            GLOBAL.Sleep(0.3)
+                        end
+                        local C = nil
+                        C = GLOBAL.FindEntity(GLOBAL.ThePlayer, 20, function(guy)
+                            return (guy.prefab == "pond" or guy.prefab == "pond_mos" or guy.prefab == "pond_cave"
+                                    or guy.prefab == "oasislake") and guy:GetDistanceSqToPoint(pos:Get()) < 14 * 14
+                        end, nil, { "INLIMBO", "noauradamage" })
+                        if C ~= nil and qid then
+                            local A = C:GetPosition()
+                            local controlmods = qmc:EncodeControlMods()
+                            local E, F = GLOBAL.ThePlayer.components.playeractionpicker:DoGetMouseActions(A, C)
+                            if E then
+                                local S = E and E:GetActionString() or ""
+                                if S ~= GLOBAL.STRINGS.ACTIONS.REEL.CANCEL then
+                                    qmc:DoAction(E)
+                                    GLOBAL.Sleep(0.1)
+                                    GLOBAL.SendRPCToServer(GLOBAL.RPC.LeftClick, E.action.code, A.x, A.z, C, false, controlmods, false, E.action.mod_name)
+                                end
+                            end
+                        else
+                            qid = false
+                            GLOBAL.ThePlayer.diaoyu:SetList(nil)
+                            GLOBAL.ThePlayer.diaoyu = nil
+                        end
+                        GLOBAL.Sleep(ccc)
+                    end
+                end)
+        end)
+        ---------------------------------------------------------------------------
+    end)
+end)
+
+
+AddPrefabPostInit("animal_track", function(inst)
+    inst._jiantou = inst:DoPeriodicTask(0.5, function()
+        if inst and inst:IsValid() and inst.Transform then
+            local sss = 2
+            local jiaodu = inst.Transform:GetRotation() + 90
+            local x, y, z = inst.entity:LocalToWorldSpace(0, 0, -40)
+            local a = GLOBAL.TheSim:FindEntities(x, 0, z, 10, { "dirtpile" }, { "locomotor", "INLIMBO" })
+            local sd = CJST()
+            sd.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            sd.Transform:SetRotation(jiaodu)
+            if a[1] ~= nil then
+                local x1, y1, z1 = a[1].Transform:GetWorldPosition()
+                sss = math.max(math.sqrt(inst:GetDistanceSqToPoint(x1, y1, z1)) / 20, 0.01)
+                sd:FacePoint(Point(x1, y1, z1))
+            end
+            sd:DoTaskInTime(sss or 2, sd.Remove)
+            sd.AnimState:SetLightOverride(1)
+            sd.Physics:SetMotorVel(20, 0, 0)
+        end
+    end)
+end)
