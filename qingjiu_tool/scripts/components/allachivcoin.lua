@@ -1,39 +1,59 @@
+local function getcoinamount(self, coinamount) self.inst.currentcoinamount:set(coinamount) end
+
+local function currenthungerup(self, hungerupamount) self.inst.currenthungerup:set(hungerupamount) end
+
+local function currentsanityup(self, sanityupamount) self.inst.currentsanityup:set(sanityupamount) end
+
+local function currenthealthup(self, healthupamount) self.inst.currenthealthup:set(healthupamount) end
+
+local function currenthealthregen(self, healthregenamount) self.inst.currenthealthregen:set(healthregenamount) end
+
+local function currentsanityregen(self, sanityregenamount) self.inst.currentsanityregen:set(sanityregenamount) end
+
+local function currenthungerrateup(self, hungerrateupamount) self.inst.currenthungerrateup:set(hungerrateupamount) end
+
+local function currentspeedup(self, speedupamount) self.inst.currentspeedup:set(speedupamount) end
+
+local function currentabsorbup(self, absorbupamount) self.inst.currentabsorbup:set(absorbupamount) end
+
+local function currentdamageup(self, damageupamount) self.inst.currentdamageup:set(damageupamount) end
+
+local function currentcrit(self, crit) self.inst.currentcrit:set(crit) end
+
+local function currentdoubledrop(self, doubledrop) local c = 0 if doubledrop then c = 1 end self.inst.currentdoubledrop:set(c) end
+
+local function currentfireflylight(self, fireflylight) local c = 0 if fireflylight then c = 1 end self.inst.currentfireflylight:set(c) end
+
+local function currentnomoist(self, nomoist) local c = 0 if nomoist then c = 1 end self.inst.currentnomoist:set(c) end
+
+local function currentgoodman(self, goodman) local c = 0 if goodman then c = 1 end self.inst.currentgoodman:set(c) end
+
+local function currentrefresh(self, refresh) local c = 0 if refresh then c = 1 end self.inst.currentrefresh:set(c) end
+
+local function currentfishmaster(self, fishmaster) local c = 0 if fishmaster then c = 1 end self.inst.currentfishmaster:set(c) end
+
+local function currentcookmaster(self, cookmaster) local c = 0 if cookmaster then c = 1 end self.inst.currentcookmaster:set(c) end
+
+local function currentchopmaster(self, chopmaster) local c = 0 if chopmaster then c = 1 end self.inst.currentchopmaster:set(c) end
+
+local function currentpickmaster(self, pickmaster) local c = 0 if pickmaster then c = 1 end self.inst.currentpickmaster:set(c) end
+
+local function currentbuildmaster(self, buildmaster) local c = 0 if buildmaster then c = 1 end self.inst.currentbuildmaster:set(c) end
+
+local function currenticebody(self, icebody) local c = 0 if icebody then c = 1 end self.inst.currenticebody:set(c) end
+
+local function currentfirebody(self, firebody) local c = 0 if firebody then c = 1 end self.inst.currentfirebody:set(c) end
+
+local function currentsupply(self, supply) local c = 0 if supply then c = 1 end self.inst.currentsupply:set(c) end
+
+local function currentreader(self, reader) local c = 0 if reader then c = 1 end self.inst.currentreader:set(c) end
 
 
+local function currentjump(self, jump) local c = 0 if jump then c = 1 end self.inst.currentjump:set(c) end
 
-local function getcoinamount(self,coinamount) self.inst.currentcoinamount:set(coinamount) end
+local function currentlevel(self, level) local c = 0 if level then c = 1 end self.inst.currentlevel:set(c) end
 
-local function currenthungerup(self,hungerupamount) self.inst.currenthungerup:set(hungerupamount) end
-local function currentsanityup(self,sanityupamount) self.inst.currentsanityup:set(sanityupamount) end
-local function currenthealthup(self,healthupamount) self.inst.currenthealthup:set(healthupamount) end
-local function currenthealthregen(self,healthregenamount) self.inst.currenthealthregen:set(healthregenamount) end
-local function currentsanityregen(self,sanityregenamount) self.inst.currentsanityregen:set(sanityregenamount) end
-local function currenthungerrateup(self,hungerrateupamount) self.inst.currenthungerrateup:set(hungerrateupamount) end
-local function currentspeedup(self,speedupamount) self.inst.currentspeedup:set(speedupamount) end
-local function currentabsorbup(self,absorbupamount) self.inst.currentabsorbup:set(absorbupamount) end
-local function currentdamageup(self,damageupamount) self.inst.currentdamageup:set(damageupamount) end
-local function currentcrit(self,crit) self.inst.currentcrit:set(crit) end
-
-local function currentdoubledrop(self,doubledrop) local c = 0 if doubledrop then c=1 end self.inst.currentdoubledrop:set(c) end
-local function currentfireflylight(self,fireflylight) local c = 0 if fireflylight then c=1 end self.inst.currentfireflylight:set(c) end
-local function currentnomoist(self,nomoist) local c = 0 if nomoist then c=1 end self.inst.currentnomoist:set(c) end
-local function currentgoodman(self,goodman) local c = 0 if goodman then c=1 end self.inst.currentgoodman:set(c) end
-local function currentrefresh(self,refresh) local c = 0 if refresh then c=1 end self.inst.currentrefresh:set(c) end
-local function currentfishmaster(self,fishmaster) local c = 0 if fishmaster then c=1 end self.inst.currentfishmaster:set(c) end
-local function currentcookmaster(self,cookmaster) local c = 0 if cookmaster then c=1 end self.inst.currentcookmaster:set(c) end
-local function currentchopmaster(self,chopmaster) local c = 0 if chopmaster then c=1 end self.inst.currentchopmaster:set(c) end
-local function currentpickmaster(self,pickmaster) local c = 0 if pickmaster then c=1 end self.inst.currentpickmaster:set(c) end
-local function currentbuildmaster(self,buildmaster) local c = 0 if buildmaster then c=1 end self.inst.currentbuildmaster:set(c) end
-local function currenticebody(self,icebody) local c = 0 if icebody then c=1 end self.inst.currenticebody:set(c) end
-local function currentfirebody(self,firebody) local c = 0 if firebody then c=1 end self.inst.currentfirebody:set(c) end
-local function currentsupply(self,supply) local c = 0 if supply then c=1 end self.inst.currentsupply:set(c) end
-local function currentreader(self,reader) local c = 0 if reader then c=1 end self.inst.currentreader:set(c) end
-
-
-local function currentjump(self,jump) local c = 0 if jump then c=1 end self.inst.currentjump:set(c) end
-local function currentlevel(self,level) local c = 0 if level then c=1 end self.inst.currentlevel:set(c) end
-
-local function currentfastpicker(self,fastpicker) local c = 0 if fastpicker then c=1 end self.inst.currentfastpicker:set(c) end
+local function currentfastpicker(self, fastpicker) local c = 0 if fastpicker then c = 1 end self.inst.currentfastpicker:set(c) end
 
 
 local allachivcoin = Class(function(self, inst)
@@ -43,9 +63,8 @@ local allachivcoin = Class(function(self, inst)
     self.a_sleep = true
     self.jump = false
     self.level = false
-    self.freya = false
     self.fastpicker = false
-    
+
 
     self.hungerupamount = 0
     self.sanityupamount = 0
@@ -70,7 +89,7 @@ local allachivcoin = Class(function(self, inst)
     self.buildmaster = false
     self.icebody = false
     self.firebody = false
-    self.supply =  false
+    self.supply = false
     self.reader = false
 
     self.fishtimemin = 4
@@ -84,41 +103,37 @@ local allachivcoin = Class(function(self, inst)
     self.absorb = math.pi
     self.damagemul = math.pi
 end,
-nil,
-{
-    coinamount = getcoinamount,
-
-    hungerupamount = currenthungerup,
-    sanityupamount = currentsanityup,
-    healthupamount = currenthealthup,
-    healthregenamount = currenthealthregen,
-    sanityregenamount = currentsanityregen,
-    hungerrateupamount = currenthungerrateup,
-    speedupamount = currentspeedup,
-    absorbupamount = currentabsorbup,
-    damageupamount = currentdamageup,
-    crit = currentcrit,
-
-    doubledrop = currentdoubledrop,
-    fireflylight = currentfireflylight,
-    nomoist = currentnomoist,
-    goodman = currentgoodman,
-    refresh = currentrefresh,
-    fishmaster = currentfishmaster,
-    cookmaster = currentcookmaster,
-    chopmaster = currentchopmaster,
-    pickmaster = currentpickmaster,
-    buildmaster = currentbuildmaster,
-    icebody = currenticebody,
-    firebody = currentfirebody,
-    supply =  currentsupply,
-    reader =  currentreader,
-
-
-    jump =  currentjump,
-    level =  currentlevel,
-    fastpicker =  currentfastpicker,
-})
+    nil,
+    {
+        coinamount = getcoinamount,
+        hungerupamount = currenthungerup,
+        sanityupamount = currentsanityup,
+        healthupamount = currenthealthup,
+        healthregenamount = currenthealthregen,
+        sanityregenamount = currentsanityregen,
+        hungerrateupamount = currenthungerrateup,
+        speedupamount = currentspeedup,
+        absorbupamount = currentabsorbup,
+        damageupamount = currentdamageup,
+        crit = currentcrit,
+        doubledrop = currentdoubledrop,
+        fireflylight = currentfireflylight,
+        nomoist = currentnomoist,
+        goodman = currentgoodman,
+        refresh = currentrefresh,
+        fishmaster = currentfishmaster,
+        cookmaster = currentcookmaster,
+        chopmaster = currentchopmaster,
+        pickmaster = currentpickmaster,
+        buildmaster = currentbuildmaster,
+        icebody = currenticebody,
+        firebody = currentfirebody,
+        supply = currentsupply,
+        reader = currentreader,
+        jump = currentjump,
+        level = currentlevel,
+        fastpicker = currentfastpicker,
+    })
 
 --保存
 function allachivcoin:OnSave()
@@ -134,7 +149,6 @@ function allachivcoin:OnSave()
         absorbupamount = self.absorbupamount,
         damageupamount = self.damageupamount,
         crit = self.crit,
-
         doubledrop = self.doubledrop,
         fireflylight = self.fireflylight,
         nomoist = self.nomoist,
@@ -151,7 +165,7 @@ function allachivcoin:OnSave()
         reader = self.reader,
         jump = self.jump,
         level = self.level,
-        fastpicker= self.fastpicker,
+        fastpicker = self.fastpicker,
     }
     return data
 end
@@ -188,7 +202,6 @@ function allachivcoin:OnLoad(data)
     self.jump = data.jump or false
     self.level = data.level or false
     self.fastpicker = data.fastpicker or false
-    
 end
 
 --通用效果器 获取成功
@@ -205,7 +218,7 @@ function allachivcoin:coinDoDelta(value)
     self.coinamount = self.coinamount + value
 end
 
---tiaoyue  
+--tiaoyue
 function allachivcoin:jumpcoin(inst)
     if self.jump ~= true and self.coinamount >= allachiv_coinuse["jump"] then
         self.jump = true
@@ -216,70 +229,70 @@ end
 
 --跳跃能力
 function allachivcoin:jumpfn(inst)
---[[
-    inst:DoPeriodicTask(1.5, function()
-        self.a_sleep = true
-    end)
-    local w = inst.components.locomotor.walkspeed
-    local r = inst.components.locomotor.runspeed
-    inst:DoPeriodicTask(.1, function()
-    TheInput:AddKeyDownHandler(KEY_R, function()
-        if self.jump and not inst:HasTag("playerghost") and self.a_sleep then 
-            --SendModRPCToServer(MOD_RPC["DSTAchievement"]["chopmaster"])
-            --inst.Physics:SetCollides(false)
-            for i=1, 25 do
-                inst:DoTaskInTime(i/25*.8, function()
-                    inst.components.locomotor.walkspeed = w*(1+(25-i+1)/25)
-                    inst.components.locomotor.runspeed = r*(1+(25-i+1)/25)
-                end)
-            end
-            inst.AnimState:PlayAnimation("jumpout")
-            inst.sg.statemem.action = inst.bufferedaction
-            inst.sg:SetTimeout(.7)
-            SpawnPrefab("bee_poof_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    --[[
+        inst:DoPeriodicTask(1.5, function()
+            self.a_sleep = true
+        end)
+        local w = inst.components.locomotor.walkspeed
+        local r = inst.components.locomotor.runspeed
+        inst:DoPeriodicTask(.1, function()
+        TheInput:AddKeyDownHandler(KEY_R, function()
+            if self.jump and not inst:HasTag("playerghost") and self.a_sleep then
+                --SendModRPCToServer(MOD_RPC["DSTAchievement"]["chopmaster"])
+                --inst.Physics:SetCollides(false)
+                for i=1, 25 do
+                    inst:DoTaskInTime(i/25*.8, function()
+                        inst.components.locomotor.walkspeed = w*(1+(25-i+1)/25)
+                        inst.components.locomotor.runspeed = r*(1+(25-i+1)/25)
+                    end)
+                end
+                inst.AnimState:PlayAnimation("jumpout")
+                inst.sg.statemem.action = inst.bufferedaction
+                inst.sg:SetTimeout(.7)
+                SpawnPrefab("bee_poof_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
 
 
-            inst.Physics:ClearCollisionMask()
-            inst.Physics:CollidesWith(COLLISION.GROUND)
-            inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-            inst.Physics:CollidesWith(COLLISION.GIANTS)
-            local x1,y1,z1 = inst.Transform:GetWorldPosition()
+                inst.Physics:ClearCollisionMask()
+                inst.Physics:CollidesWith(COLLISION.GROUND)
+                inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+                inst.Physics:CollidesWith(COLLISION.GIANTS)
+                local x1,y1,z1 = inst.Transform:GetWorldPosition()
 
-            inst:DoTaskInTime(.6, function()
-                    ChangeToCharacterPhysics(inst)
+                inst:DoTaskInTime(.6, function()
+                        ChangeToCharacterPhysics(inst)
 
-                    local x2,y2,z2 = inst.Transform:GetWorldPosition()
+                        local x2,y2,z2 = inst.Transform:GetWorldPosition()
 
-                    if TheWorld.Map:IsPassableAtPoint(x1, 0, z1)
-                    or TheWorld.Map:IsPassableAtPoint(x1-1, 0, z1)
-                    or TheWorld.Map:IsPassableAtPoint(x1, 0, z1-1)
-                    or TheWorld.Map:IsPassableAtPoint(x1+1, 0, z1)
-                    or TheWorld.Map:IsPassableAtPoint(x1, 0, z1+1) then
-                        if not TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-                            inst:DoTaskInTime(.1, function()
-                                inst.Transform:SetPosition(x1, 0, z1)
-                            end)
-                            SpawnPrefab("spawn_fx_medium").Transform:SetPosition(x1, 0, z1)
-                            SpawnPrefab("spawn_fx_medium").Transform:SetPosition(x2, 0, z2)
+                        if TheWorld.Map:IsPassableAtPoint(x1, 0, z1)
+                        or TheWorld.Map:IsPassableAtPoint(x1-1, 0, z1)
+                        or TheWorld.Map:IsPassableAtPoint(x1, 0, z1-1)
+                        or TheWorld.Map:IsPassableAtPoint(x1+1, 0, z1)
+                        or TheWorld.Map:IsPassableAtPoint(x1, 0, z1+1) then
+                            if not TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+                                inst:DoTaskInTime(.1, function()
+                                    inst.Transform:SetPosition(x1, 0, z1)
+                                end)
+                                SpawnPrefab("spawn_fx_medium").Transform:SetPosition(x1, 0, z1)
+                                SpawnPrefab("spawn_fx_medium").Transform:SetPosition(x2, 0, z2)
+                            end
                         end
-                    end
-            end)
-            
+                end)
 
-            inst.components.locomotor.walkspeed = w
-            inst.components.locomotor.runspeed = r
-            --inst.Physics:SetCollides(true)
-            self.a_sleep = false
-        end  
-    end) 
-    end)   
-    ]]
+
+                inst.components.locomotor.walkspeed = w
+                inst.components.locomotor.runspeed = r
+                --inst.Physics:SetCollides(true)
+                self.a_sleep = false
+            end
+        end)
+        end)
+        ]]
 end
 
 
 --升级
 function allachivcoin:levelcoin(inst)
-    --if self.level ~= true and self.coinamount >= allachiv_coinuse["level"] then
+    --    if self.level ~= true and self.coinamount >= allachiv_coinuse["level"] then
     if self.freya == false then
         self.level = true
         self.freya = true
@@ -300,11 +313,12 @@ end
 
 --快速采集效果
 function allachivcoin:fastpickerfn(inst)
-    if self.fastpicker then 
+    if self.fastpicker then
         inst:AddTag("fastpicker")
         --inst:AddTag("quagmire_ fasthands")
     end
 end
+
 --提升饱腹获取
 function allachivcoin:hungerupcoin(inst)
     if self.coinamount >= allachiv_coinuse["hungerup"] then
@@ -371,12 +385,11 @@ end
 function allachivcoin:healthregenfn(inst)
     inst:DoPeriodicTask(5, function()
         if inst
-        and inst.components.health
-        and inst.components.health.currenthealth < inst.components.health.maxhealth
-        and inst.components.health.currenthealth > 0
-        and self.healthregenamount > 0
-        then
-            inst.components.health:DoDelta(allachiv_coindata["healthregen"]*self.healthregenamount)
+                and inst.components.health
+                and inst.components.health.currenthealth < inst.components.health.maxhealth
+                and inst.components.health.currenthealth > 0
+                and self.healthregenamount > 0 then
+            inst.components.health:DoDelta(allachiv_coindata["healthregen"] * self.healthregenamount)
         end
     end)
 end
@@ -394,20 +407,19 @@ end
 function allachivcoin:sanityregenfn(inst)
     inst:DoPeriodicTask(5, function()
         if inst
-        and inst.components.sanity
-        and inst.components.sanity.current < inst.components.sanity.max
-        and inst.components.health
-        and inst.components.health.currenthealth > 0
-        and self.sanityregenamount > 0
-        then
-            inst.components.sanity:DoDelta(allachiv_coindata["sanityregen"]*self.sanityregenamount)
+                and inst.components.sanity
+                and inst.components.sanity.current < inst.components.sanity.max
+                and inst.components.health
+                and inst.components.health.currenthealth > 0
+                and self.sanityregenamount > 0 then
+            inst.components.sanity:DoDelta(allachiv_coindata["sanityregen"] * self.sanityregenamount)
         end
     end)
 end
 
 --提升速度获取
 function allachivcoin:speedupcoin(inst)
-    if self.coinamount >= allachiv_coinuse["speedup"] and self.speedupamount <= 99 then
+    if self.coinamount >= allachiv_coinuse["speedup"] and self.speedupamount <= 49 then
         self.speedupamount = self.speedupamount + 1
         inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier + allachiv_coindata["speedup"]
         self.speedcheck = inst.components.locomotor.externalspeedmultiplier
@@ -429,7 +441,17 @@ end
 
 --提升防御获取
 function allachivcoin:absorbupcoin(inst)
-    if self.coinamount >= allachiv_coinuse["absorbup"] and self.absorbupamount <= 4 then
+    if inst.prefab == "wx78" and self.coinamount >= allachiv_coinuse["absorbup"] and self.absorbupamount >= 5 and self.absorbupamount <= 9 and inst.components.allachivevent_c.a_snake == true then
+        self.absorbupamount = self.absorbupamount + 1
+        inst.components.health.absorb = inst.components.health.absorb + allachiv_coindata["absorbup"]
+        if inst.components.health.absorb >= .95 then inst.components.health.absorb = .95 end
+        self.absorb = inst.components.health.absorb
+        self:coinDoDelta(-allachiv_coinuse["absorbup"])
+        self:ongetcoin(inst)
+    end
+
+
+    if self.coinamount >= allachiv_coinuse["absorbup"] and self.absorbupamount <= 18 then
         self.absorbupamount = self.absorbupamount + 1
         inst.components.health.absorb = inst.components.health.absorb + allachiv_coindata["absorbup"]
         if inst.components.health.absorb >= .95 then inst.components.health.absorb = .95 end
@@ -451,10 +473,10 @@ end
 --暴击奖励效果
 function allachivcoin:critfn(inst)
     inst:ListenForEvent("onhitother", function(inst, data)
-        local chance = allachiv_coindata["crit"]*self.crit
+        local chance = allachiv_coindata["crit"] * self.crit
         local damage = data.damage
         local target = data.target
-        if target and math.random(1,100) <= chance and not target:HasTag("wall") and self.crit > 0 and self.attackcheck ~= true then
+        if target and math.random(1, 100) <= chance and not target:HasTag("wall") and self.crit > 0 and self.attackcheck ~= true then
             self.attackcheck = true
             target.components.combat:GetAttacked(inst, damage)
             local snap = SpawnPrefab("impact")
@@ -490,25 +512,25 @@ function allachivcoin:fireflylightfn(inst)
         inst._fireflylight.Light:SetRadius(2)
         inst._fireflylight.Light:SetFalloff(.7)
         inst._fireflylight.Light:SetIntensity(.5)
-        inst._fireflylight.Light:SetColour(255/255,255/255,255/255)
+        inst._fireflylight.Light:SetColour(255 / 255, 255 / 255, 255 / 255)
         inst._fireflylight.entity:SetParent(inst.entity)
         if TheWorld.components.worldstate.data.isday then
             inst._fireflylight.Light:SetIntensity(0)
             inst._fireflylight.Light:Enable(false)
         end
         inst:WatchWorldState("startday", function()
-            for i=1, 100 do
-                inst:DoTaskInTime(i/25, function()
-                    inst._fireflylight.Light:SetIntensity(.5-i/100*.5)
+            for i = 1, 100 do
+                inst:DoTaskInTime(i / 25, function()
+                    inst._fireflylight.Light:SetIntensity(.5 - i / 100 * .5)
                 end)
             end
             inst:DoTaskInTime(4, function() inst._fireflylight.Light:Enable(false) end)
         end)
         inst:WatchWorldState("startdusk", function()
             inst._fireflylight.Light:Enable(true)
-            for i=1, 100 do
-                inst:DoTaskInTime(i/25, function()
-                    inst._fireflylight.Light:SetIntensity(i/100*.5)
+            for i = 1, 100 do
+                inst:DoTaskInTime(i / 25, function()
+                    inst._fireflylight.Light:SetIntensity(i / 100 * .5)
                 end)
             end
         end)
@@ -560,13 +582,13 @@ function allachivcoin:goodmanfn(inst)
     inst:DoPeriodicTask(1, function()
         if self.goodman then
             local pos = Vector3(inst.Transform:GetWorldPosition())
-            local ents = TheSim:FindEntities(pos.x,pos.y,pos.z, 6)
-            for k,v in pairs(ents) do
+            local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 6)
+            for k, v in pairs(ents) do
                 if v.prefab then
                     if v.prefab == "pigman" or v.prefab == "bunnyman" then
                         if v.components.follower.leader == nil
-                        and not v:HasTag("werepig")
-                        and not v:HasTag("guard") then
+                                and not v:HasTag("werepig")
+                                and not v:HasTag("guard") then
                             if v.components.combat:TargetIs(inst) then
                                 v.components.combat:SetTarget(nil)
                             end
@@ -587,8 +609,8 @@ function allachivcoin:fishmastercoin(inst)
         self:ongetcoin(inst)
 
         if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS).components
-        and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS).components.fishingrod then
+                and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS).components
+                and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS).components.fishingrod then
             local fishingrod = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS).components.fishingrod
             self.fishtimemin = fishingrod.minwaittime
             self.fishtimemax = fishingrod.maxwaittime
@@ -600,7 +622,7 @@ end
 --垂钓圣手效果
 function allachivcoin:fishmasterfn(inst)
     inst:ListenForEvent("equip", function(inst, data)
-        if  self.fishmaster and data.item and data.item.components.fishingrod then
+        if self.fishmaster and data.item and data.item.components.fishingrod then
             self.fishtimemin = data.item.components.fishingrod.minwaittime
             self.fishtimemax = data.item.components.fishingrod.maxwaittime
             data.item.components.fishingrod:SetWaitTimes(1, 1)
@@ -635,7 +657,6 @@ function allachivcoin:pickmasterfn(inst)
             end
         end
     end)
-     
 end
 
 
@@ -655,7 +676,7 @@ function allachivcoin:chopmasterfn(inst)
             local workable = data.target.components.workable
             --if workable.workleft >= 1 then
             --    if workable.onfinish then
-                    workable.workleft = 0
+            workable.workleft = 0
             --    end
             --end
         end
@@ -744,21 +765,21 @@ function allachivcoin:refreshfn(inst)
     inst:DoPeriodicTask(1, function()
         if self.refresh then
             --物品栏反鲜
-            for k,v in pairs(inst.components.inventory.itemslots) do
+            for k, v in pairs(inst.components.inventory.itemslots) do
                 if v and v.components.perishable then
                     v.components.perishable:ReducePercent(-.01)
                 end
             end
             --装备栏反鲜
-            for k,v in pairs(inst.components.inventory.equipslots) do
+            for k, v in pairs(inst.components.inventory.equipslots) do
                 if v and v.components.perishable then
                     v.components.perishable:ReducePercent(-.01)
                 end
             end
             --背包反鲜
-            for k,v in pairs(inst.components.inventory.opencontainers) do
+            for k, v in pairs(inst.components.inventory.opencontainers) do
                 if k and k:HasTag("backpack") and k.components.container then
-                    for i,j in pairs(k.components.container.slots) do
+                    for i, j in pairs(k.components.container.slots) do
                         if j and j.components.perishable then
                             j.components.perishable:ReducePercent(-.01)
                         end
@@ -847,17 +868,17 @@ end
 
 --重置奖励
 function allachivcoin:removecoin(inst)
-    local returncoin = 
-    self.hungerupamount*allachiv_coinuse["hungerup"] +
-    self.sanityupamount*allachiv_coinuse["sanityup"] +
-    self.healthupamount*allachiv_coinuse["healthup"] +
-    self.healthregenamount*allachiv_coinuse["healthregen"] +
-    self.sanityregenamount*allachiv_coinuse["sanityregen"] +
-    self.hungerrateupamount*allachiv_coinuse["hungerrateup"] +
-    self.speedupamount*allachiv_coinuse["speedup"] +
-    self.absorbupamount*allachiv_coinuse["absorbup"] +
-    self.damageupamount*allachiv_coinuse["damageup"] +
-    self.crit*allachiv_coinuse["crit"]
+    local returncoin =
+    self.hungerupamount * allachiv_coinuse["hungerup"] +
+            self.sanityupamount * allachiv_coinuse["sanityup"] +
+            self.healthupamount * allachiv_coinuse["healthup"] +
+            self.healthregenamount * allachiv_coinuse["healthregen"] +
+            self.sanityregenamount * allachiv_coinuse["sanityregen"] +
+            self.hungerrateupamount * allachiv_coinuse["hungerrateup"] +
+            self.speedupamount * allachiv_coinuse["speedup"] +
+            self.absorbupamount * allachiv_coinuse["absorbup"] +
+            self.damageupamount * allachiv_coinuse["damageup"] +
+            self.crit * allachiv_coinuse["crit"]
 
     if self.doubledrop then returncoin = returncoin + allachiv_coinuse["doubledrop"] end
     if self.fireflylight then returncoin = returncoin + allachiv_coinuse["fireflylight"] end
@@ -876,7 +897,7 @@ function allachivcoin:removecoin(inst)
     if self.jump then returncoin = returncoin + allachiv_coinuse["jump"] end
     if self.fastpicker then returncoin = returncoin + allachiv_coinuse["fastpicker"] end
 
-    self.coinamount = self.coinamount + math.ceil(returncoin*3/4)
+    self.coinamount = self.coinamount + math.ceil(returncoin * 3 / 4)
     self:resetbuff(inst)
 
     self.hungerupamount = 0
@@ -902,7 +923,7 @@ function allachivcoin:removecoin(inst)
     self.buildmaster = false
     self.icebody = false
     self.firebody = false
-    self.supply =  false
+    self.supply = false
     self.reader = false
     self.jump = false
     --self.level = false
@@ -919,30 +940,30 @@ end
 --重置属性
 function allachivcoin:resetbuff(inst)
     local hunger_percent = inst.components.hunger:GetPercent()
-    inst.components.hunger:SetMax(inst.components.hunger.max - self.hungerupamount*allachiv_coindata["hungerup"])
+    inst.components.hunger:SetMax(inst.components.hunger.max - self.hungerupamount * allachiv_coindata["hungerup"])
     inst.components.hunger:SetPercent(hunger_percent)
     self.hungermax = inst.components.hunger.max
 
     local sanity_percent = inst.components.sanity:GetPercent()
-    inst.components.sanity:SetMax(inst.components.sanity.max - self.sanityupamount*allachiv_coindata["sanityup"])
+    inst.components.sanity:SetMax(inst.components.sanity.max - self.sanityupamount * allachiv_coindata["sanityup"])
     inst.components.sanity:SetPercent(sanity_percent)
     self.sanitymax = inst.components.sanity.max
 
     local health_percent = inst.components.health:GetPercent()
-    inst.components.health:SetMaxHealth(inst.components.health.maxhealth - self.healthupamount*allachiv_coindata["healthup"])
+    inst.components.health:SetMaxHealth(inst.components.health.maxhealth - self.healthupamount * allachiv_coindata["healthup"])
     inst.components.health:SetPercent(health_percent)
     self.healthmax = inst.components.health.maxhealth
 
-    inst.components.hunger.hungerrate = inst.components.hunger.hungerrate + self.hungerrateupamount*allachiv_coindata["hungerrateup"]
+    inst.components.hunger.hungerrate = inst.components.hunger.hungerrate + self.hungerrateupamount * allachiv_coindata["hungerrateup"]
     self.hungerrate = inst.components.hunger.hungerrate
-    
-    inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier - allachiv_coindata["speedup"]*self.speedupamount
+
+    inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier - allachiv_coindata["speedup"] * self.speedupamount
     self.speedcheck = inst.components.locomotor.externalspeedmultiplier
-    
-    inst.components.health.absorb = inst.components.health.absorb - allachiv_coindata["absorbup"]*self.absorbupamount
+
+    inst.components.health.absorb = inst.components.health.absorb - allachiv_coindata["absorbup"] * self.absorbupamount
     self.absorb = inst.components.health.absorb
-    
-    inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier - allachiv_coindata["damageup"]*self.damageupamount
+
+    inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier - allachiv_coindata["damageup"] * self.damageupamount
     self.damagemul = inst.components.combat.damagemultiplier
 
     if self.fireflylight then inst._fireflylight:Remove() end
@@ -999,27 +1020,27 @@ function allachivcoin:onupdate(inst)
     --饥饿上限
     if self.hungermax ~= inst.components.hunger.max then
         local hunger_percent = inst.components.hunger:GetPercent()
-        inst.components.hunger:SetMax(inst.components.hunger.max + allachiv_coindata["hungerup"]*self.hungerupamount)
+        inst.components.hunger:SetMax(inst.components.hunger.max + allachiv_coindata["hungerup"] * self.hungerupamount)
         inst.components.hunger:SetPercent(hunger_percent)
         self.hungermax = inst.components.hunger.max
     end
     --脑残上限
     if self.sanitymax ~= inst.components.sanity.max then
         local sanity_percent = inst.components.sanity:GetPercent()
-        inst.components.sanity:SetMax(inst.components.sanity.max + allachiv_coindata["sanityup"]*self.sanityupamount)
+        inst.components.sanity:SetMax(inst.components.sanity.max + allachiv_coindata["sanityup"] * self.sanityupamount)
         inst.components.sanity:SetPercent(sanity_percent)
         self.sanitymax = inst.components.sanity.max
     end
     --血量上限
     if self.healthmax ~= inst.components.health.maxhealth then
         local health_percent = inst.components.health:GetPercent()
-        inst.components.health.maxhealth = inst.components.health.maxhealth + allachiv_coindata["healthup"]*self.healthupamount
+        inst.components.health.maxhealth = inst.components.health.maxhealth + allachiv_coindata["healthup"] * self.healthupamount
         inst.components.health:SetPercent(health_percent)
         self.healthmax = inst.components.health.maxhealth
     end
     --延缓饥饿
     if self.hungerrate ~= inst.components.hunger.hungerrate then
-        inst.components.hunger.hungerrate = inst.components.hunger.hungerrate - allachiv_coindata["hungerrateup"]*self.hungerrateupamount
+        inst.components.hunger.hungerrate = inst.components.hunger.hungerrate - allachiv_coindata["hungerrateup"] * self.hungerrateupamount
         if inst.components.hunger.hungerrate <= .01 then
             inst.components.hunger.hungerrate = .01
         end
@@ -1027,18 +1048,18 @@ function allachivcoin:onupdate(inst)
     end
     --移动速度
     if self.speedcheck ~= inst.components.locomotor.externalspeedmultiplier then
-        inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier + allachiv_coindata["speedup"]*self.speedupamount
+        inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier + allachiv_coindata["speedup"] * self.speedupamount
         self.speedcheck = inst.components.locomotor.externalspeedmultiplier
     end
     --防御力
     if self.absorb ~= inst.components.health.absorb then
-        inst.components.health.absorb = inst.components.health.absorb + allachiv_coindata["absorbup"]*self.absorbupamount
+        inst.components.health.absorb = inst.components.health.absorb + allachiv_coindata["absorbup"] * self.absorbupamount
         if inst.components.health.absorb >= .95 then inst.components.health.absorb = .95 end
         self.absorb = inst.components.health.absorb
     end
     --攻击力
     if self.damagemul ~= inst.components.combat.damagemultiplier then
-        inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier + allachiv_coindata["damageup"]*self.damageupamount
+        inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier + allachiv_coindata["damageup"] * self.damageupamount
         self.damagemul = inst.components.combat.damagemultiplier
     end
     --防水

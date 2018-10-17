@@ -1,219 +1,119 @@
-local function checkintogame(self, intogame) local c = 0 if intogame then c = 1 end self.inst.checkintogame:set(c) end
-
-local function checkfirsteat(self, firsteat) local c = 0 if firsteat then c = 1 end self.inst.checkfirsteat:set(c) end
-
-local function checksupereat(self, supereat) local c = 0 if supereat then c = 1 end self.inst.checksupereat:set(c) end
-
-local function checkdanding(self, danding) local c = 0 if danding then c = 1 end self.inst.checkdanding:set(c) end
-
-local function checkmessiah(self, messiah) local c = 0 if messiah then c = 1 end self.inst.checkmessiah:set(c) end
-
-local function checkwalkalot(self, walkalot) local c = 0 if walkalot then c = 1 end self.inst.checkwalkalot:set(c) end
-
-local function checkstopalot(self, stopalot) local c = 0 if stopalot then c = 1 end self.inst.checkstopalot:set(c) end
-
-local function checktooyoung(self, tooyoung) local c = 0 if tooyoung then c = 1 end self.inst.checktooyoung:set(c) end
-
-local function checkevil(self, evil) local c = 0 if evil then c = 1 end self.inst.checkevil:set(c) end
-
-local function checksnake(self, snake) local c = 0 if snake then c = 1 end self.inst.checksnake:set(c) end
+local function checkintogame(self,intogame) local c = 0 if intogame then c=1 end self.inst.checkintogame:set(c) end
+local function checkfirsteat(self,firsteat) local c = 0 if firsteat then c=1 end self.inst.checkfirsteat:set(c) end
+local function checksupereat(self,supereat) local c = 0 if supereat then c=1 end self.inst.checksupereat:set(c) end
+local function checkdanding(self,danding) local c = 0 if danding then c=1 end self.inst.checkdanding:set(c) end
+local function checkmessiah(self,messiah) local c = 0 if messiah then c=1 end self.inst.checkmessiah:set(c) end
+local function checkwalkalot(self,walkalot) local c = 0 if walkalot then c=1 end self.inst.checkwalkalot:set(c) end
+local function checkstopalot(self,stopalot) local c = 0 if stopalot then c=1 end self.inst.checkstopalot:set(c) end
+local function checktooyoung(self,tooyoung) local c = 0 if tooyoung then c=1 end self.inst.checktooyoung:set(c) end
+local function checkevil(self,evil) local c = 0 if evil then c=1 end self.inst.checkevil:set(c) end
+local function checksnake(self,snake) local c = 0 if snake then c=1 end self.inst.checksnake:set(c) end
 
 
 
-local function checkdeathalot(self, deathalot) local c = 0 if deathalot then c = 1 end self.inst.checkdeathalot:set(c) end
-
-local function checknosanity(self, nosanity) local c = 0 if nosanity then c = 1 end self.inst.checknosanity:set(c) end
-
-local function checksick(self, sick) local c = 0 if sick then c = 1 end self.inst.checksick:set(c) end
-
-local function checkcoldblood(self, coldblood) local c = 0 if coldblood then c = 1 end self.inst.checkcoldblood:set(c) end
-
-local function checkburn(self, burn) local c = 0 if burn then c = 1 end self.inst.checkburn:set(c) end
-
-local function checkfreeze(self, freeze) local c = 0 if freeze then c = 1 end self.inst.checkfreeze:set(c) end
-
-local function checkgoodman(self, goodman) local c = 0 if goodman then c = 1 end self.inst.checkgoodman:set(c) end
-
-local function checkbrother(self, brother) local c = 0 if brother then c = 1 end self.inst.checkbrother:set(c) end
-
-local function checkfishmaster(self, fishmaster) local c = 0 if fishmaster then c = 1 end self.inst.checkfishmaster:set(c) end
-
-local function checkpickmaster(self, pickmaster) local c = 0 if pickmaster then c = 1 end self.inst.checkpickmaster:set(c) end
-
-local function checkchopmaster(self, chopmaster) local c = 0 if chopmaster then c = 1 end self.inst.checkchopmaster:set(c) end
-
-local function checknoob(self, noob) local c = 0 if noob then c = 1 end self.inst.checknoob:set(c) end
-
-local function checkcookmaster(self, cookmaster) local c = 0 if cookmaster then c = 1 end self.inst.checkcookmaster:set(c) end
-
-local function checklongage(self, longage) local c = 0 if longage then c = 1 end self.inst.checklongage:set(c) end
-
-local function checkluck(self, luck) local c = 0 if luck then c = 1 end self.inst.checkluck:set(c) end
-
-local function checkblack(self, black) local c = 0 if black then c = 1 end self.inst.checkblack:set(c) end
-
-local function checkbuildmaster(self, buildmaster) local c = 0 if buildmaster then c = 1 end self.inst.checkbuildmaster:set(c) end
-
-local function checktank(self, tank) local c = 0 if tank then c = 1 end self.inst.checktank:set(c) end
-
-local function checkangry(self, angry) local c = 0 if angry then c = 1 end self.inst.checkangry:set(c) end
-
-local function checkicebody(self, icebody) local c = 0 if icebody then c = 1 end self.inst.checkicebody:set(c) end
-
-local function checkfirebody(self, firebody) local c = 0 if firebody then c = 1 end self.inst.checkfirebody:set(c) end
-
-local function checkmoistbody(self, moistbody) local c = 0 if moistbody then c = 1 end self.inst.checkmoistbody:set(c) end
-
-local function checkall(self, all) local c = 0 if all then c = 1 end self.inst.checkall:set(c) end
+local function checkdeathalot(self,deathalot) local c = 0 if deathalot then c=1 end self.inst.checkdeathalot:set(c) end
+local function checknosanity(self,nosanity) local c = 0 if nosanity then c=1 end self.inst.checknosanity:set(c) end
+local function checksick(self,sick) local c = 0 if sick then c=1 end self.inst.checksick:set(c) end
+local function checkcoldblood(self,coldblood) local c = 0 if coldblood then c=1 end self.inst.checkcoldblood:set(c) end
+local function checkburn(self,burn) local c = 0 if burn then c=1 end self.inst.checkburn:set(c) end
+local function checkfreeze(self,freeze) local c = 0 if freeze then c=1 end self.inst.checkfreeze:set(c) end
+local function checkgoodman(self,goodman) local c = 0 if goodman then c=1 end self.inst.checkgoodman:set(c) end
+local function checkbrother(self,brother) local c = 0 if brother then c=1 end self.inst.checkbrother:set(c) end
+local function checkfishmaster(self,fishmaster) local c = 0 if fishmaster then c=1 end self.inst.checkfishmaster:set(c) end
+local function checkpickmaster(self,pickmaster) local c = 0 if pickmaster then c=1 end self.inst.checkpickmaster:set(c) end
+local function checkchopmaster(self,chopmaster) local c = 0 if chopmaster then c=1 end self.inst.checkchopmaster:set(c) end
+local function checknoob(self,noob) local c = 0 if noob then c=1 end self.inst.checknoob:set(c) end
+local function checkcookmaster(self,cookmaster) local c = 0 if cookmaster then c=1 end self.inst.checkcookmaster:set(c) end
+local function checklongage(self,longage) local c = 0 if longage then c=1 end self.inst.checklongage:set(c) end
+local function checkluck(self,luck) local c = 0 if luck then c=1 end self.inst.checkluck:set(c) end
+local function checkblack(self,black) local c = 0 if black then c=1 end self.inst.checkblack:set(c) end
+local function checkbuildmaster(self,buildmaster) local c = 0 if buildmaster then c=1 end self.inst.checkbuildmaster:set(c) end
+local function checktank(self,tank) local c = 0 if tank then c=1 end self.inst.checktank:set(c) end
+local function checkangry(self,angry) local c = 0 if angry then c=1 end self.inst.checkangry:set(c) end
+local function checkicebody(self,icebody) local c = 0 if icebody then c=1 end self.inst.checkicebody:set(c) end
+local function checkfirebody(self,firebody) local c = 0 if firebody then c=1 end self.inst.checkfirebody:set(c) end
+local function checkmoistbody(self,moistbody) local c = 0 if moistbody then c=1 end self.inst.checkmoistbody:set(c) end
+local function checkall(self,all) local c = 0 if all then c=1 end self.inst.checkall:set(c) end
 
 
 --==============================================================================================================================
-local function checka_yingguai(self, a_yingguai) local c = 0 if a_yingguai then c = 1 end self.inst.checka_yingguai:set(c) end
-
-local function checka_worm(self, a_worm) local c = 0 if a_worm then c = 1 end self.inst.checka_worm:set(c) end
-
-local function checka_monkey(self, a_monkey) local c = 0 if a_monkey then c = 1 end self.inst.checka_monkey:set(c) end
-
-local function checka_buzzard(self, a_buzzard) local c = 0 if a_buzzard then c = 1 end self.inst.checka_buzzard:set(c) end
-
-local function checka_lightninggoat(self, a_lightninggoat) local c = 0 if a_lightninggoat then c = 1 end self.inst.checka_lightninggoat:set(c) end
-
-local function checka_spiderqueen(self, a_spiderqueen) local c = 0 if a_spiderqueen then c = 1 end self.inst.checka_spiderqueen:set(c) end
-
-local function checka_spider(self, a_spider) local c = 0 if a_spider then c = 1 end self.inst.checka_spider:set(c) end
-
-local function checka_spider_warrior(self, a_spider_warrior) local c = 0 if a_spider_warrior then c = 1 end self.inst.checka_spider_warrior:set(c) end
-
-local function checka_spider_dropper(self, a_spider_dropper) local c = 0 if a_spider_dropper then c = 1 end self.inst.checka_spider_dropper:set(c) end
-
-local function checka_spider_hider(self, a_spider_hider) local c = 0 if a_spider_hider then c = 1 end self.inst.checka_spider_hider:set(c) end
-
-local function checka_spider_spitter(self, a_spider_spitter) local c = 0 if a_spider_spitter then c = 1 end self.inst.checka_spider_spitter:set(c) end
-
-local function checka_warg(self, a_warg) local c = 0 if a_warg then c = 1 end self.inst.checka_warg:set(c) end
-
-local function checka_hound(self, a_hound) local c = 0 if a_hound then c = 1 end self.inst.checka_hound:set(c) end
-
-local function checka_firehound(self, a_firehound) local c = 0 if a_firehound then c = 1 end self.inst.checka_firehound:set(c) end
-
-local function checka_icehound(self, a_icehound) local c = 0 if a_icehound then c = 1 end self.inst.checka_icehound:set(c) end
-
-local function checka_koalefant_summer(self, a_koalefant_summer) local c = 0 if a_koalefant_summer then c = 1 end self.inst.checka_koalefant_summer:set(c) end
-
-local function checka_koalefant_winter(self, a_koalefant_winter) local c = 0 if a_koalefant_winter then c = 1 end self.inst.checka_koalefant_winter:set(c) end
-
-local function checka_catcoon(self, a_catcoon) local c = 0 if a_catcoon then c = 1 end self.inst.checka_catcoon:set(c) end
-
-local function checka_bunnyman(self, a_bunnyman) local c = 0 if a_bunnyman then c = 1 end self.inst.checka_bunnyman:set(c) end
-
-local function checka_leif(self, a_leif) local c = 0 if a_leif then c = 1 end self.inst.checka_leif:set(c) end
-
-local function checka_slurtle(self, a_slurtle) local c = 0 if a_slurtle then c = 1 end self.inst.checka_slurtle:set(c) end
-
-local function checka_tallbird(self, a_tallbird) local c = 0 if a_tallbird then c = 1 end self.inst.checka_tallbird:set(c) end
-
-local function checka_walrus(self, a_walrus) local c = 0 if a_walrus then c = 1 end self.inst.checka_walrus:set(c) end
-
-local function checka_bat(self, a_bat) local c = 0 if a_bat then c = 1 end self.inst.checka_bat:set(c) end
-
-local function checka_butterfly(self, a_butterfly) local c = 0 if a_butterfly then c = 1 end self.inst.checka_butterfly:set(c) end
-
-local function checka_killerbee(self, a_killerbee) local c = 0 if a_killerbee then c = 1 end self.inst.checka_killerbee:set(c) end
-
-local function checka_deer(self, a_deer) local c = 0 if a_deer then c = 1 end self.inst.checka_deer:set(c) end
-
-local function checka_mole(self, a_mole) local c = 0 if a_mole then c = 1 end self.inst.checka_mole:set(c) end
-
-local function checka_mosquito(self, a_mosquito) local c = 0 if a_mosquito then c = 1 end self.inst.checka_mosquito:set(c) end
-
-local function checka_penguin(self, a_penguin) local c = 0 if a_penguin then c = 1 end self.inst.checka_penguin:set(c) end
-
-local function checka_merm(self, a_merm) local c = 0 if a_merm then c = 1 end self.inst.checka_merm:set(c) end
-
-local function checka_frog(self, a_frog) local c = 0 if a_frog then c = 1 end self.inst.checka_frog:set(c) end
-
-local function checka_beefalo(self, a_beefalo) local c = 0 if a_beefalo then c = 1 end self.inst.checka_beefalo:set(c) end
-
-local function checka_perd(self, a_perd) local c = 0 if a_perd then c = 1 end self.inst.checka_perd:set(c) end
-
-local function checka_krampus(self, a_krampus) local c = 0 if a_krampus then c = 1 end self.inst.checka_krampus:set(c) end
-
-local function checka_robin_crow(self, a_robin_crow) local c = 0 if a_robin_crow then c = 1 end self.inst.checka_robin_crow:set(c) end
-
-local function checka_robin_robin(self, a_robin_robin) local c = 0 if a_robin_robin then c = 1 end self.inst.checka_robin_robin:set(c) end
-
-local function checka_robin_winter(self, a_robin_winter) local c = 0 if a_robin_winter then c = 1 end self.inst.checka_robin_winter:set(c) end
-
-local function checka_robin_canary(self, a_robin_canary) local c = 0 if a_robin_canary then c = 1 end self.inst.checka_robin_canary:set(c) end
-
-local function checka_pigman(self, a_pigman) local c = 0 if a_pigman then c = 1 end self.inst.checka_pigman:set(c) end
-
-local function checka_shadow_knight(self, a_shadow_knight) local c = 0 if a_shadow_knight then c = 1 end self.inst.checka_shadow_knight:set(c) end
-
-local function checka_shadow_bishop(self, a_shadow_bishop) local c = 0 if a_shadow_bishop then c = 1 end self.inst.checka_shadow_bishop:set(c) end
-
-local function checka_shadow_rook(self, a_shadow_rook) local c = 0 if a_shadow_rook then c = 1 end self.inst.checka_shadow_rook:set(c) end
-
-local function checka_moose(self, a_moose) local c = 0 if a_moose then c = 1 end self.inst.checka_moose:set(c) end
-
-local function checka_dragonfly(self, a_dragonfly) local c = 0 if a_dragonfly then c = 1 end self.inst.checka_dragonfly:set(c) end
-
-local function checka_bearger(self, a_bearger) local c = 0 if a_bearger then c = 1 end self.inst.checka_bearger:set(c) end
-
-local function checka_deerclops(self, a_deerclops) local c = 0 if a_deerclops then c = 1 end self.inst.checka_deerclops:set(c) end
-
-local function checka_stalker_forest(self, a_stalker_forest) local c = 0 if a_stalker_forest then c = 1 end self.inst.checka_stalker_forest:set(c) end
-
-local function checka_stalker(self, a_stalker) local c = 0 if a_stalker then c = 1 end self.inst.checka_stalker:set(c) end
-
-local function checka_stalker_atrium(self, a_stalker_atrium) local c = 0 if a_stalker_atrium then c = 1 end self.inst.checka_stalker_atrium:set(c) end
-
-local function checka_klaus(self, a_klaus) local c = 0 if a_klaus then c = 1 end self.inst.checka_klaus:set(c) end
-
-local function checka_antlion(self, a_antlion) local c = 0 if a_antlion then c = 1 end self.inst.checka_antlion:set(c) end
-
-local function checka_minotaur(self, a_minotaur) local c = 0 if a_minotaur then c = 1 end self.inst.checka_minotaur:set(c) end
-
-local function checka_beequeen(self, a_beequeen) local c = 0 if a_beequeen then c = 1 end self.inst.checka_beequeen:set(c) end
-
-local function checka_toadstool(self, a_toadstool) local c = 0 if a_toadstool then c = 1 end self.inst.checka_toadstool:set(c) end
-
-local function checka_toadstool_dark(self, a_toadstool_dark) local c = 0 if a_toadstool_dark then c = 1 end self.inst.checka_toadstool_dark:set(c) end
+local function checka_yingguai(self,a_yingguai) local c = 0 if a_yingguai then c=1 end self.inst.checka_yingguai:set(c) end
+local function checka_worm(self,a_worm) local c = 0 if a_worm then c=1 end self.inst.checka_worm:set(c) end
+local function checka_monkey(self,a_monkey) local c = 0 if a_monkey then c=1 end self.inst.checka_monkey:set(c) end
+local function checka_buzzard(self,a_buzzard) local c = 0 if a_buzzard then c=1 end self.inst.checka_buzzard:set(c) end
+local function checka_lightninggoat(self,a_lightninggoat) local c = 0 if a_lightninggoat then c=1 end self.inst.checka_lightninggoat:set(c) end
+local function checka_spiderqueen(self,a_spiderqueen) local c = 0 if a_spiderqueen then c=1 end self.inst.checka_spiderqueen:set(c) end
+local function checka_spider(self,a_spider) local c = 0 if a_spider then c=1 end self.inst.checka_spider:set(c) end
+local function checka_spider_warrior(self,a_spider_warrior) local c = 0 if a_spider_warrior then c=1 end self.inst.checka_spider_warrior:set(c) end
+local function checka_spider_dropper(self,a_spider_dropper) local c = 0 if a_spider_dropper then c=1 end self.inst.checka_spider_dropper:set(c) end
+local function checka_spider_hider(self,a_spider_hider) local c = 0 if a_spider_hider then c=1 end self.inst.checka_spider_hider:set(c) end
+local function checka_spider_spitter(self,a_spider_spitter) local c = 0 if a_spider_spitter then c=1 end self.inst.checka_spider_spitter:set(c) end
+local function checka_warg(self,a_warg) local c = 0 if a_warg then c=1 end self.inst.checka_warg:set(c) end
+local function checka_hound(self,a_hound) local c = 0 if a_hound then c=1 end self.inst.checka_hound:set(c) end
+local function checka_firehound(self,a_firehound) local c = 0 if a_firehound then c=1 end self.inst.checka_firehound:set(c) end
+local function checka_icehound(self,a_icehound) local c = 0 if a_icehound then c=1 end self.inst.checka_icehound:set(c) end
+local function checka_koalefant_summer(self,a_koalefant_summer) local c = 0 if a_koalefant_summer then c=1 end self.inst.checka_koalefant_summer:set(c) end
+local function checka_koalefant_winter(self,a_koalefant_winter) local c = 0 if a_koalefant_winter then c=1 end self.inst.checka_koalefant_winter:set(c) end
+local function checka_catcoon(self,a_catcoon) local c = 0 if a_catcoon then c=1 end self.inst.checka_catcoon:set(c) end
+local function checka_bunnyman(self,a_bunnyman) local c = 0 if a_bunnyman then c=1 end self.inst.checka_bunnyman:set(c) end
+local function checka_leif(self,a_leif) local c = 0 if a_leif then c=1 end self.inst.checka_leif:set(c) end
+local function checka_slurtle(self,a_slurtle) local c = 0 if a_slurtle then c=1 end self.inst.checka_slurtle:set(c) end
+local function checka_tallbird(self,a_tallbird) local c = 0 if a_tallbird then c=1 end self.inst.checka_tallbird:set(c) end
+local function checka_walrus(self,a_walrus) local c = 0 if a_walrus then c=1 end self.inst.checka_walrus:set(c) end
+local function checka_bat(self,a_bat) local c = 0 if a_bat then c=1 end self.inst.checka_bat:set(c) end
+local function checka_butterfly(self,a_butterfly) local c = 0 if a_butterfly then c=1 end self.inst.checka_butterfly:set(c) end
+local function checka_killerbee(self,a_killerbee) local c = 0 if a_killerbee then c=1 end self.inst.checka_killerbee:set(c) end
+local function checka_deer(self,a_deer) local c = 0 if a_deer then c=1 end self.inst.checka_deer:set(c) end
+local function checka_mole(self,a_mole) local c = 0 if a_mole then c=1 end self.inst.checka_mole:set(c) end
+local function checka_mosquito(self,a_mosquito) local c = 0 if a_mosquito then c=1 end self.inst.checka_mosquito:set(c) end
+local function checka_penguin(self,a_penguin) local c = 0 if a_penguin then c=1 end self.inst.checka_penguin:set(c) end
+local function checka_merm(self,a_merm) local c = 0 if a_merm then c=1 end self.inst.checka_merm:set(c) end
+local function checka_frog(self,a_frog) local c = 0 if a_frog then c=1 end self.inst.checka_frog:set(c) end
+local function checka_beefalo(self,a_beefalo) local c = 0 if a_beefalo then c=1 end self.inst.checka_beefalo:set(c) end
+local function checka_perd(self,a_perd) local c = 0 if a_perd then c=1 end self.inst.checka_perd:set(c) end
+local function checka_krampus(self,a_krampus) local c = 0 if a_krampus then c=1 end self.inst.checka_krampus:set(c) end
+local function checka_robin_crow(self,a_robin_crow) local c = 0 if a_robin_crow then c=1 end self.inst.checka_robin_crow:set(c) end
+local function checka_robin_robin(self,a_robin_robin) local c = 0 if a_robin_robin then c=1 end self.inst.checka_robin_robin:set(c) end
+local function checka_robin_winter(self,a_robin_winter) local c = 0 if a_robin_winter then c=1 end self.inst.checka_robin_winter:set(c) end
+local function checka_robin_canary(self,a_robin_canary) local c = 0 if a_robin_canary then c=1 end self.inst.checka_robin_canary:set(c) end
+local function checka_pigman(self,a_pigman) local c = 0 if a_pigman then c=1 end self.inst.checka_pigman:set(c) end
+local function checka_shadow_knight(self,a_shadow_knight) local c = 0 if a_shadow_knight then c=1 end self.inst.checka_shadow_knight:set(c) end
+local function checka_shadow_bishop(self,a_shadow_bishop) local c = 0 if a_shadow_bishop then c=1 end self.inst.checka_shadow_bishop:set(c) end
+local function checka_shadow_rook(self,a_shadow_rook) local c = 0 if a_shadow_rook then c=1 end self.inst.checka_shadow_rook:set(c) end
+local function checka_moose(self,a_moose) local c = 0 if a_moose then c=1 end self.inst.checka_moose:set(c) end
+local function checka_dragonfly(self,a_dragonfly) local c = 0 if a_dragonfly then c=1 end self.inst.checka_dragonfly:set(c) end
+local function checka_bearger(self,a_bearger) local c = 0 if a_bearger then c=1 end self.inst.checka_bearger:set(c) end
+local function checka_deerclops(self,a_deerclops) local c = 0 if a_deerclops then c=1 end self.inst.checka_deerclops:set(c) end
+local function checka_stalker_forest(self,a_stalker_forest) local c = 0 if a_stalker_forest then c=1 end self.inst.checka_stalker_forest:set(c) end
+local function checka_stalker(self,a_stalker) local c = 0 if a_stalker then c=1 end self.inst.checka_stalker:set(c) end
+local function checka_stalker_atrium(self,a_stalker_atrium) local c = 0 if a_stalker_atrium then c=1 end self.inst.checka_stalker_atrium:set(c) end
+local function checka_klaus(self,a_klaus) local c = 0 if a_klaus then c=1 end self.inst.checka_klaus:set(c) end
+local function checka_antlion(self,a_antlion) local c = 0 if a_antlion then c=1 end self.inst.checka_antlion:set(c) end
+local function checka_minotaur(self,a_minotaur) local c = 0 if a_minotaur then c=1 end self.inst.checka_minotaur:set(c) end
+local function checka_beequeen(self,a_beequeen) local c = 0 if a_beequeen then c=1 end self.inst.checka_beequeen:set(c) end
+local function checka_toadstool(self,a_toadstool) local c = 0 if a_toadstool then c=1 end self.inst.checka_toadstool:set(c) end
+local function checka_toadstool_dark(self,a_toadstool_dark) local c = 0 if a_toadstool_dark then c=1 end self.inst.checka_toadstool_dark:set(c) end
 
 --==============================================================================================================================
 
 
 
 
-local function checka_1(self, a_1) local c = 0 if a_1 then c = 1 end self.inst.checka_1:set(c) end
-
-local function checka_2(self, a_2) local c = 0 if a_2 then c = 1 end self.inst.checka_2:set(c) end
-
-local function checka_3(self, a_3) local c = 0 if a_3 then c = 1 end self.inst.checka_3:set(c) end
-
-local function checka_4(self, a_4) local c = 0 if a_4 then c = 1 end self.inst.checka_4:set(c) end
-
-local function checka_5(self, a_5) local c = 0 if a_5 then c = 1 end self.inst.checka_5:set(c) end
-
-local function checka_6(self, a_6) local c = 0 if a_6 then c = 1 end self.inst.checka_6:set(c) end
-
-local function checka_7(self, a_7) local c = 0 if a_7 then c = 1 end self.inst.checka_7:set(c) end
-
-local function checka_8(self, a_8) local c = 0 if a_8 then c = 1 end self.inst.checka_8:set(c) end
-
-local function checka_9(self, a_9) local c = 0 if a_9 then c = 1 end self.inst.checka_9:set(c) end
-
-local function checka_10(self, a_10) local c = 0 if a_10 then c = 1 end self.inst.checka_10:set(c) end
-
-local function checka_11(self, a_11) local c = 0 if a_11 then c = 1 end self.inst.checka_11:set(c) end
-
-local function checka_12(self, a_12) local c = 0 if a_12 then c = 1 end self.inst.checka_12:set(c) end
-
-local function checka_13(self, a_13) local c = 0 if a_13 then c = 1 end self.inst.checka_13:set(c) end
-
-local function checka_14(self, a_14) local c = 0 if a_14 then c = 1 end self.inst.checka_14:set(c) end
-
-local function checka_15(self, a_15) local c = 0 if a_15 then c = 1 end self.inst.checka_15:set(c) end
+local function checka_1(self,a_1) local c = 0 if a_1 then c=1 end self.inst.checka_1:set(c) end
+local function checka_2(self,a_2) local c = 0 if a_2 then c=1 end self.inst.checka_2:set(c) end
+local function checka_3(self,a_3) local c = 0 if a_3 then c=1 end self.inst.checka_3:set(c) end
+local function checka_4(self,a_4) local c = 0 if a_4 then c=1 end self.inst.checka_4:set(c) end
+local function checka_5(self,a_5) local c = 0 if a_5 then c=1 end self.inst.checka_5:set(c) end
+local function checka_6(self,a_6) local c = 0 if a_6 then c=1 end self.inst.checka_6:set(c) end
+local function checka_7(self,a_7) local c = 0 if a_7 then c=1 end self.inst.checka_7:set(c) end
+local function checka_8(self,a_8) local c = 0 if a_8 then c=1 end self.inst.checka_8:set(c) end
+local function checka_9(self,a_9) local c = 0 if a_9 then c=1 end self.inst.checka_9:set(c) end
+local function checka_10(self,a_10) local c = 0 if a_10 then c=1 end self.inst.checka_10:set(c) end
+local function checka_11(self,a_11) local c = 0 if a_11 then c=1 end self.inst.checka_11:set(c) end
+local function checka_12(self,a_12) local c = 0 if a_12 then c=1 end self.inst.checka_12:set(c) end
+local function checka_13(self,a_13) local c = 0 if a_13 then c=1 end self.inst.checka_13:set(c) end
+local function checka_14(self,a_14) local c = 0 if a_14 then c=1 end self.inst.checka_14:set(c) end
+local function checka_15(self,a_15) local c = 0 if a_15 then c=1 end self.inst.checka_15:set(c) end
 
 
 
@@ -223,162 +123,89 @@ local function checka_15(self, a_15) local c = 0 if a_15 then c = 1 end self.ins
 
 
 
-local function currenteatamount(self, eatamount) self.inst.currenteatamount:set(eatamount) end
+local function currenteatamount(self,eatamount) self.inst.currenteatamount:set(eatamount) end
+local function currenteatmonsterlasagna(self,eatmonsterlasagna) self.inst.currenteatmonsterlasagna:set(eatmonsterlasagna) end
+local function currentrespawnamount(self,respawnamount) self.inst.currentrespawnamount:set(respawnamount) end
+local function currentwalktime(self,walktime) self.inst.currentwalktime:set(walktime) end
+local function currentstoptime(self,stoptime) self.inst.currentstoptime:set(stoptime) end
+local function currentevilamount(self,evilamount) self.inst.currentevilamount:set(evilamount) end
+local function currentdeathamouth(self,deathamouth) self.inst.currentdeathamouth:set(deathamouth) end
+local function currentnosanitytime(self,nosanitytime) self.inst.currentnosanitytime:set(nosanitytime) end
+local function currentsnakeamount(self,snakeamount) self.inst.currentsnakeamount:set(snakeamount) end
 
-local function currenteatmonsterlasagna(self, eatmonsterlasagna) self.inst.currenteatmonsterlasagna:set(eatmonsterlasagna) end
-
-local function currentrespawnamount(self, respawnamount) self.inst.currentrespawnamount:set(respawnamount) end
-
-local function currentwalktime(self, walktime) self.inst.currentwalktime:set(walktime) end
-
-local function currentstoptime(self, stoptime) self.inst.currentstoptime:set(stoptime) end
-
-local function currentevilamount(self, evilamount) self.inst.currentevilamount:set(evilamount) end
-
-local function currentdeathamouth(self, deathamouth) self.inst.currentdeathamouth:set(deathamouth) end
-
-local function currentnosanitytime(self, nosanitytime) self.inst.currentnosanitytime:set(nosanitytime) end
-
-local function currentsnakeamount(self, snakeamount) self.inst.currentsnakeamount:set(snakeamount) end
-
-local function currentfriendpig(self, friendpig) self.inst.currentfriendpig:set(friendpig) end
-
-local function currentfriendbunny(self, friendbunny) self.inst.currentfriendbunny:set(friendbunny) end
-
-local function currentfishamount(self, fishamount) self.inst.currentfishamount:set(fishamount) end
-
-local function currentpickamount(self, pickamount) self.inst.currentpickamount:set(pickamount) end
-
-local function currentchopamount(self, chopamount) self.inst.currentchopamount:set(chopamount) end
-
-local function currentcookamount(self, cookamount) self.inst.currentcookamount:set(cookamount) end
-
-local function currentbuildamount(self, buildamount) self.inst.currentbuildamount:set(buildamount) end
-
-local function currentattackeddamage(self, attackeddamage) self.inst.currentattackeddamage:set(attackeddamage) end
-
-local function currentonhitdamage(self, onhitdamage) self.inst.currentonhitdamage:set(onhitdamage) end
-
-local function currenticetime(self, icetime) self.inst.currenticetime:set(icetime) end
-
-local function currentfiretime(self, firetime) self.inst.currentfiretime:set(firetime) end
-
-local function currentmoisttime(self, moisttime) self.inst.currentmoisttime:set(moisttime) end
-
-local function currentage(self, age) self.inst.currentage:set(age) end
+local function currentfriendpig(self,friendpig) self.inst.currentfriendpig:set(friendpig) end
+local function currentfriendbunny(self,friendbunny) self.inst.currentfriendbunny:set(friendbunny) end
+local function currentfishamount(self,fishamount) self.inst.currentfishamount:set(fishamount) end
+local function currentpickamount(self,pickamount) self.inst.currentpickamount:set(pickamount) end
+local function currentchopamount(self,chopamount) self.inst.currentchopamount:set(chopamount) end
+local function currentcookamount(self,cookamount) self.inst.currentcookamount:set(cookamount) end
+local function currentbuildamount(self,buildamount) self.inst.currentbuildamount:set(buildamount) end
+local function currentattackeddamage(self,attackeddamage) self.inst.currentattackeddamage:set(attackeddamage) end
+local function currentonhitdamage(self,onhitdamage) self.inst.currentonhitdamage:set(onhitdamage) end
+local function currenticetime(self,icetime) self.inst.currenticetime:set(icetime) end
+local function currentfiretime(self,firetime) self.inst.currentfiretime:set(firetime) end
+local function currentmoisttime(self,moisttime) self.inst.currentmoisttime:set(moisttime) end
+local function currentage(self,age) self.inst.currentage:set(age) end
 
 --====================================================================================================================
-local function currenta_yingguaiamount(self, a_yingguaiamount) self.inst.currenta_yingguaiamount:set(a_yingguaiamount) end
-
-local function currenta_wormamount(self, a_wormamount) self.inst.currenta_wormamount:set(a_wormamount) end
-
-local function currenta_monkeyamount(self, a_monkeyamount) self.inst.currenta_monkeyamount:set(a_monkeyamount) end
-
-local function currenta_buzzardamount(self, a_buzzardamount) self.inst.currenta_buzzardamount:set(a_buzzardamount) end
-
-local function currenta_lightninggoatamount(self, a_lightninggoatamount) self.inst.currenta_lightninggoatamount:set(a_lightninggoatamount) end
-
-local function currenta_spiderqueenamount(self, a_spiderqueenamount) self.inst.currenta_spiderqueenamount:set(a_spiderqueenamount) end
-
-local function currenta_spideramount(self, a_spideramount) self.inst.currenta_spideramount:set(a_spideramount) end
-
-local function currenta_spider_warrioramount(self, a_spider_warrioramount) self.inst.currenta_spider_warrioramount:set(a_spider_warrioramount) end
-
-local function currenta_spider_dropperamount(self, a_spider_dropperamount) self.inst.currenta_spider_dropperamount:set(a_spider_dropperamount) end
-
-local function currenta_spider_hideramount(self, a_spider_hideramount) self.inst.currenta_spider_hideramount:set(a_spider_hideramount) end
-
-local function currenta_spider_spitteramount(self, a_spider_spitteramount) self.inst.currenta_spider_spitteramount:set(a_spider_spitteramount) end
-
-local function currenta_wargamount(self, a_wargamount) self.inst.currenta_wargamount:set(a_wargamount) end
-
-local function currenta_houndamount(self, a_houndamount) self.inst.currenta_houndamount:set(a_houndamount) end
-
-local function currenta_firehoundamount(self, a_firehoundamount) self.inst.currenta_firehoundamount:set(a_firehoundamount) end
-
-local function currenta_icehoundamount(self, a_icehoundamount) self.inst.currenta_icehoundamount:set(a_icehoundamount) end
-
-local function currenta_koalefant_summeramount(self, a_koalefant_summeramount) self.inst.currenta_koalefant_summeramount:set(a_koalefant_summeramount) end
-
-local function currenta_koalefant_winteramount(self, a_koalefant_winteramount) self.inst.currenta_koalefant_winteramount:set(a_koalefant_winteramount) end
-
-local function currenta_catcoonamount(self, a_catcoonamount) self.inst.currenta_catcoonamount:set(a_catcoonamount) end
-
-local function currenta_bunnymanamount(self, a_bunnymanamount) self.inst.currenta_bunnymanamount:set(a_bunnymanamount) end
-
-local function currenta_leifamount(self, a_leifamount) self.inst.currenta_leifamount:set(a_leifamount) end
-
-local function currenta_slurtleamount(self, a_slurtleamount) self.inst.currenta_slurtleamount:set(a_slurtleamount) end
-
-local function currenta_tallbirdamount(self, a_tallbirdamount) self.inst.currenta_tallbirdamount:set(a_tallbirdamount) end
-
-local function currenta_walrusamount(self, a_walrusamount) self.inst.currenta_walrusamount:set(a_walrusamount) end
-
-local function currenta_batamount(self, a_batamount) self.inst.currenta_batamount:set(a_batamount) end
-
-local function currenta_butterflyamount(self, a_butterflyamount) self.inst.currenta_butterflyamount:set(a_butterflyamount) end
-
-local function currenta_killerbeeamount(self, a_killerbeeamount) self.inst.currenta_killerbeeamount:set(a_killerbeeamount) end
-
-local function currenta_deeramount(self, a_deeramount) self.inst.currenta_deeramount:set(a_deeramount) end
-
-local function currenta_moleamount(self, a_moleamount) self.inst.currenta_moleamount:set(a_moleamount) end
-
-local function currenta_mosquitoamount(self, a_mosquitoamount) self.inst.currenta_mosquitoamount:set(a_mosquitoamount) end
-
-local function currenta_penguinamount(self, a_penguinamount) self.inst.currenta_penguinamount:set(a_penguinamount) end
-
-local function currenta_mermamount(self, a_mermamount) self.inst.currenta_mermamount:set(a_mermamount) end
-
-local function currenta_frogamount(self, a_frogamount) self.inst.currenta_frogamount:set(a_frogamount) end
-
-local function currenta_beefaloamount(self, a_beefaloamount) self.inst.currenta_beefaloamount:set(a_beefaloamount) end
-
-local function currenta_perdamount(self, a_perdamount) self.inst.currenta_perdamount:set(a_perdamount) end
-
-local function currenta_krampusamount(self, a_krampusamount) self.inst.currenta_krampusamount:set(a_krampusamount) end
-
-local function currenta_robin_crowamount(self, a_robin_crowamount) self.inst.currenta_robin_crowamount:set(a_robin_crowamount) end
-
-local function currenta_robin_robinamount(self, a_robin_robinamount) self.inst.currenta_robin_robinamount:set(a_robin_robinamount) end
-
-local function currenta_robin_winteramount(self, a_robin_winteramount) self.inst.currenta_robin_winteramount:set(a_robin_winteramount) end
-
-local function currenta_robin_canaryamount(self, a_robin_canaryamount) self.inst.currenta_robin_canaryamount:set(a_robin_canaryamount) end
-
-local function currenta_pigmanamount(self, a_pigmanamount) self.inst.currenta_pigmanamount:set(a_pigmanamount) end
+local function currenta_yingguaiamount(self,a_yingguaiamount) self.inst.currenta_yingguaiamount:set(a_yingguaiamount) end
+local function currenta_wormamount(self,a_wormamount) self.inst.currenta_wormamount:set(a_wormamount) end
+local function currenta_monkeyamount(self,a_monkeyamount) self.inst.currenta_monkeyamount:set(a_monkeyamount) end
+local function currenta_buzzardamount(self,a_buzzardamount) self.inst.currenta_buzzardamount:set(a_buzzardamount) end
+local function currenta_lightninggoatamount(self,a_lightninggoatamount) self.inst.currenta_lightninggoatamount:set(a_lightninggoatamount) end
+local function currenta_spiderqueenamount(self,a_spiderqueenamount) self.inst.currenta_spiderqueenamount:set(a_spiderqueenamount) end
+local function currenta_spideramount(self,a_spideramount) self.inst.currenta_spideramount:set(a_spideramount) end
+local function currenta_spider_warrioramount(self,a_spider_warrioramount) self.inst.currenta_spider_warrioramount:set(a_spider_warrioramount) end
+local function currenta_spider_dropperamount(self,a_spider_dropperamount) self.inst.currenta_spider_dropperamount:set(a_spider_dropperamount) end
+local function currenta_spider_hideramount(self,a_spider_hideramount) self.inst.currenta_spider_hideramount:set(a_spider_hideramount) end
+local function currenta_spider_spitteramount(self,a_spider_spitteramount) self.inst.currenta_spider_spitteramount:set(a_spider_spitteramount) end
+local function currenta_wargamount(self,a_wargamount) self.inst.currenta_wargamount:set(a_wargamount) end
+local function currenta_houndamount(self,a_houndamount) self.inst.currenta_houndamount:set(a_houndamount) end
+local function currenta_firehoundamount(self,a_firehoundamount) self.inst.currenta_firehoundamount:set(a_firehoundamount) end
+local function currenta_icehoundamount(self,a_icehoundamount) self.inst.currenta_icehoundamount:set(a_icehoundamount) end
+local function currenta_koalefant_summeramount(self,a_koalefant_summeramount) self.inst.currenta_koalefant_summeramount:set(a_koalefant_summeramount) end
+local function currenta_koalefant_winteramount(self,a_koalefant_winteramount) self.inst.currenta_koalefant_winteramount:set(a_koalefant_winteramount) end
+local function currenta_catcoonamount(self,a_catcoonamount) self.inst.currenta_catcoonamount:set(a_catcoonamount) end
+local function currenta_bunnymanamount(self,a_bunnymanamount) self.inst.currenta_bunnymanamount:set(a_bunnymanamount) end
+local function currenta_leifamount(self,a_leifamount) self.inst.currenta_leifamount:set(a_leifamount) end
+local function currenta_slurtleamount(self,a_slurtleamount) self.inst.currenta_slurtleamount:set(a_slurtleamount) end
+local function currenta_tallbirdamount(self,a_tallbirdamount) self.inst.currenta_tallbirdamount:set(a_tallbirdamount) end
+local function currenta_walrusamount(self,a_walrusamount) self.inst.currenta_walrusamount:set(a_walrusamount) end
+local function currenta_batamount(self,a_batamount) self.inst.currenta_batamount:set(a_batamount) end
+local function currenta_butterflyamount(self,a_butterflyamount) self.inst.currenta_butterflyamount:set(a_butterflyamount) end
+local function currenta_killerbeeamount(self,a_killerbeeamount) self.inst.currenta_killerbeeamount:set(a_killerbeeamount) end
+local function currenta_deeramount(self,a_deeramount) self.inst.currenta_deeramount:set(a_deeramount) end
+local function currenta_moleamount(self,a_moleamount) self.inst.currenta_moleamount:set(a_moleamount) end
+local function currenta_mosquitoamount(self,a_mosquitoamount) self.inst.currenta_mosquitoamount:set(a_mosquitoamount) end
+local function currenta_penguinamount(self,a_penguinamount) self.inst.currenta_penguinamount:set(a_penguinamount) end
+local function currenta_mermamount(self,a_mermamount) self.inst.currenta_mermamount:set(a_mermamount) end
+local function currenta_frogamount(self,a_frogamount) self.inst.currenta_frogamount:set(a_frogamount) end
+local function currenta_beefaloamount(self,a_beefaloamount) self.inst.currenta_beefaloamount:set(a_beefaloamount) end
+local function currenta_perdamount(self,a_perdamount) self.inst.currenta_perdamount:set(a_perdamount) end
+local function currenta_krampusamount(self,a_krampusamount) self.inst.currenta_krampusamount:set(a_krampusamount) end
+local function currenta_robin_crowamount(self,a_robin_crowamount) self.inst.currenta_robin_crowamount:set(a_robin_crowamount) end
+local function currenta_robin_robinamount(self,a_robin_robinamount) self.inst.currenta_robin_robinamount:set(a_robin_robinamount) end
+local function currenta_robin_winteramount(self,a_robin_winteramount) self.inst.currenta_robin_winteramount:set(a_robin_winteramount) end
+local function currenta_robin_canaryamount(self,a_robin_canaryamount) self.inst.currenta_robin_canaryamount:set(a_robin_canaryamount) end
+local function currenta_pigmanamount(self,a_pigmanamount) self.inst.currenta_pigmanamount:set(a_pigmanamount) end
 
 
 
-local function currenta_1amount(self, a_1amount) self.inst.currenta_1amount:set(a_1amount) end
-
-local function currenta_2amount(self, a_2amount) self.inst.currenta_2amount:set(a_2amount) end
-
-local function currenta_3amount(self, a_3amount) self.inst.currenta_3amount:set(a_3amount) end
-
-local function currenta_4amount(self, a_4amount) self.inst.currenta_4amount:set(a_4amount) end
-
-local function currenta_5amount(self, a_5amount) self.inst.currenta_5amount:set(a_5amount) end
-
-local function currenta_6amount(self, a_6amount) self.inst.currenta_6amount:set(a_6amount) end
-
-local function currenta_7amount(self, a_7amount) self.inst.currenta_7amount:set(a_7amount) end
-
-local function currenta_8amount(self, a_8amount) self.inst.currenta_8amount:set(a_8amount) end
-
-local function currenta_9amount(self, a_9amount) self.inst.currenta_9amount:set(a_9amount) end
-
-local function currenta_10amount(self, a_10amount) self.inst.currenta_10amount:set(a_10amount) end
-
-local function currenta_11amount(self, a_11amount) self.inst.currenta_11amount:set(a_11amount) end
-
-local function currenta_12amount(self, a_12amount) self.inst.currenta_12amount:set(a_12amount) end
-
-local function currenta_13amount(self, a_13amount) self.inst.currenta_13amount:set(a_13amount) end
-
-local function currenta_14amount(self, a_14amount) self.inst.currenta_14amount:set(a_14amount) end
-
-local function currenta_15amount(self, a_15amount) self.inst.currenta_15amount:set(a_15amount) end
+local function currenta_1amount(self,a_1amount) self.inst.currenta_1amount:set(a_1amount) end
+local function currenta_2amount(self,a_2amount) self.inst.currenta_2amount:set(a_2amount) end
+local function currenta_3amount(self,a_3amount) self.inst.currenta_3amount:set(a_3amount) end
+local function currenta_4amount(self,a_4amount) self.inst.currenta_4amount:set(a_4amount) end
+local function currenta_5amount(self,a_5amount) self.inst.currenta_5amount:set(a_5amount) end
+local function currenta_6amount(self,a_6amount) self.inst.currenta_6amount:set(a_6amount) end
+local function currenta_7amount(self,a_7amount) self.inst.currenta_7amount:set(a_7amount) end
+local function currenta_8amount(self,a_8amount) self.inst.currenta_8amount:set(a_8amount) end
+local function currenta_9amount(self,a_9amount) self.inst.currenta_9amount:set(a_9amount) end
+local function currenta_10amount(self,a_10amount) self.inst.currenta_10amount:set(a_10amount) end
+local function currenta_11amount(self,a_11amount) self.inst.currenta_11amount:set(a_11amount) end
+local function currenta_12amount(self,a_12amount) self.inst.currenta_12amount:set(a_12amount) end
+local function currenta_13amount(self,a_13amount) self.inst.currenta_13amount:set(a_13amount) end
+local function currenta_14amount(self,a_14amount) self.inst.currenta_14amount:set(a_14amount) end
+local function currenta_15amount(self,a_15amount) self.inst.currenta_15amount:set(a_15amount) end
 
 --====================================================================================================================
 
@@ -402,7 +229,7 @@ local allachivevent = Class(function(self, inst)
     self.snake = false
 
 
-    --======================================
+--======================================
     self.a_yingguai = false
     self.a_worm = false
     self.a_monkey = false
@@ -479,7 +306,7 @@ local allachivevent = Class(function(self, inst)
 
 
 
-    --======================================
+--======================================
 
 
     self.deathalot = false
@@ -492,7 +319,7 @@ local allachivevent = Class(function(self, inst)
 
 
     --=============================================
-    self.a_yingguaiamount = 0
+     self.a_yingguaiamount = 0
     self.a_wormamount = 0
     self.a_monkeyamount = 0
     self.a_buzzardamount = 0
@@ -585,208 +412,214 @@ local allachivevent = Class(function(self, inst)
     self.moisttime = 0
     self.all = false
 end,
-    nil,
-    {
-        intogame = checkintogame,
-        firsteat = checkfirsteat,
-        supereat = checksupereat,
-        danding = checkdanding,
-        messiah = checkmessiah,
-        walkalot = checkwalkalot,
-        stopalot = checkstopalot,
-        tooyoung = checktooyoung,
-        evil = checkevil,
-        snake = checksnake,
+nil,
+{
+    intogame = checkintogame,
+    firsteat = checkfirsteat,
+    supereat = checksupereat,
+    danding = checkdanding,
+    messiah = checkmessiah,
+    walkalot = checkwalkalot,
+    stopalot = checkstopalot,
+    tooyoung = checktooyoung,
+    evil = checkevil,
+    snake = checksnake,
 
 
-        --================================================
-        a_yingguai = checka_yingguai,
-        a_worm = checka_worm,
-        a_monkey = checka_monkey,
-        a_buzzard = checka_buzzard,
-        a_lightninggoat = checka_lightninggoat,
-        a_spiderqueen = checka_spiderqueen,
-        a_spider = checka_spider,
-        a_spider_warrior = checka_spider_warrior,
-        a_spider_dropper = checka_spider_dropper,
-        a_spider_hider = checka_spider_hider,
-        a_spider_spitter = checka_spider_spitter,
-        a_warg = checka_warg,
-        a_hound = checka_hound,
-        a_firehound = checka_firehound,
-        a_icehound = checka_icehound,
-        a_koalefant_summer = checka_koalefant_summer,
-        a_koalefant_winter = checka_koalefant_winter,
-        a_catcoon = checka_catcoon,
-        a_bunnyman = checka_bunnyman,
-        a_leif = checka_leif,
-        a_slurtle = checka_slurtle,
-        a_tallbird = checka_tallbird,
-        a_walrus = checka_walrus,
-        a_bat = checka_bat,
-        a_butterfly = checka_butterfly,
-        a_killerbee = checka_killerbee,
-        a_deer = checka_deer,
-        a_mole = checka_mole,
-        a_mosquito = checka_mosquito,
-        a_penguin = checka_penguin,
-        a_merm = checka_merm,
-        a_frog = checka_frog,
-        a_beefalo = checka_beefalo,
-        a_perd = checka_perd,
-        a_krampus = checka_krampus,
-        a_robin_crow = checka_robin_crow,
-        a_robin_robin = checka_robin_robin,
-        a_robin_winter = checka_robin_winter,
-        a_robin_canary = checka_robin_canary,
-        a_pigman = checka_pigman,
-        a_shadow_knight = checka_shadow_knight,
-        a_shadow_bishop = checka_shadow_bishop,
-        a_shadow_rook = checka_shadow_rook,
-        a_moose = checka_moose,
-        a_dragonfly = checka_dragonfly,
-        a_bearger = checka_bearger,
-        a_deerclops = checka_deerclops,
-        a_stalker_forest = checka_stalker_forest,
-        a_stalker = checka_stalker,
-        a_stalker_atrium = checka_stalker_atrium,
-        a_klaus = checka_klaus,
-        a_antlion = checka_antlion,
-        a_minotaur = checka_minotaur,
-        a_beequeen = checka_beequeen,
-        a_toadstool = checka_toadstool,
-        a_toadstool_dark = checka_toadstool_dark,
-        a_1 = checka_1,
-        a_2 = checka_2,
-        a_3 = checka_3,
-        a_4 = checka_4,
-        a_5 = checka_5,
-        a_6 = checka_6,
-        a_7 = checka_7,
-        a_8 = checka_8,
-        a_9 = checka_9,
-        a_10 = checka_10,
-        a_11 = checka_11,
-        a_12 = checka_12,
-        a_13 = checka_13,
-        a_14 = checka_14,
-        a_15 = checka_15,
+--================================================
+    a_yingguai = checka_yingguai,
+    a_worm = checka_worm,
+    a_monkey = checka_monkey,
+    a_buzzard = checka_buzzard,
+    a_lightninggoat = checka_lightninggoat,
+    a_spiderqueen = checka_spiderqueen,
+    a_spider = checka_spider,
+    a_spider_warrior = checka_spider_warrior,
+    a_spider_dropper = checka_spider_dropper,
+    a_spider_hider = checka_spider_hider,
+    a_spider_spitter = checka_spider_spitter,
+    a_warg = checka_warg,
+    a_hound = checka_hound,
+    a_firehound = checka_firehound,
+    a_icehound = checka_icehound,
+    a_koalefant_summer = checka_koalefant_summer,
+    a_koalefant_winter = checka_koalefant_winter,
+    a_catcoon = checka_catcoon,
+    a_bunnyman = checka_bunnyman,
+    a_leif = checka_leif,
+    a_slurtle = checka_slurtle,
+    a_tallbird = checka_tallbird,
+    a_walrus = checka_walrus,
+    a_bat = checka_bat,
+    a_butterfly = checka_butterfly,
+    a_killerbee = checka_killerbee,
+    a_deer = checka_deer,
+    a_mole = checka_mole,
+    a_mosquito = checka_mosquito,
+    a_penguin = checka_penguin,
+    a_merm = checka_merm,
+    a_frog = checka_frog,
+    a_beefalo = checka_beefalo,
+    a_perd = checka_perd,
+    a_krampus = checka_krampus,
+    a_robin_crow = checka_robin_crow,
+    a_robin_robin = checka_robin_robin,
+    a_robin_winter = checka_robin_winter,
+    a_robin_canary = checka_robin_canary,
+    a_pigman = checka_pigman,
+    a_shadow_knight = checka_shadow_knight,
+    a_shadow_bishop = checka_shadow_bishop,
+    a_shadow_rook = checka_shadow_rook,
+    a_moose = checka_moose,
+    a_dragonfly = checka_dragonfly,
+    a_bearger = checka_bearger,
+    a_deerclops = checka_deerclops,
+    a_stalker_forest = checka_stalker_forest,
+    a_stalker = checka_stalker,
+    a_stalker_atrium = checka_stalker_atrium,
+    a_klaus = checka_klaus,
+    a_antlion = checka_antlion,
+    a_minotaur = checka_minotaur,
+    a_beequeen = checka_beequeen,
+    a_toadstool = checka_toadstool,
+    a_toadstool_dark = checka_toadstool_dark,
+
+    a_1 = checka_1,
+    a_2 = checka_2,
+    a_3 = checka_3,
+    a_4 = checka_4,
+    a_5 = checka_5,
+    a_6 = checka_6,
+    a_7 = checka_7,
+    a_8 = checka_8,
+    a_9 = checka_9,
+    a_10 = checka_10,
+    a_11 = checka_11,
+    a_12 = checka_12,
+    a_13 = checka_13,
+    a_14 = checka_14,
+    a_15 = checka_15,
 
 
 
 
 
 
-        --================================================
+--================================================
 
 
-        deathalot = checkdeathalot,
-        nosanity = checknosanity,
-        sick = checksick,
-        coldblood = checkcoldblood,
-        burn = checkburn,
-        freeze = checkfreeze,
-        goodman = checkgoodman,
-        brother = checkbrother,
-        fishmaster = checkfishmaster,
-        pickmaster = checkpickmaster,
-        chopmaster = checkchopmaster,
-        noob = checknoob,
-        cookmaster = checkcookmaster,
-        longage = checklongage,
-        luck = checkluck,
-        black = checkblack,
-        buildmaster = checkbuildmaster,
-        tank = checktank,
-        angry = checkangry,
-        icebody = checkicebody,
-        firebody = checkfirebody,
-        moistbody = checkmoistbody,
-        all = checkall,
-        eatamount = currenteatamount,
-        eatmonsterlasagna = currenteatmonsterlasagna,
-        respawnamount = currentrespawnamount,
-        walktime = currentwalktime,
-        stoptime = currentstoptime,
-        evilamount = currentevilamount,
-        deathamouth = currentdeathamouth,
-        nosanitytime = currentnosanitytime,
-        snakeamount = currentsnakeamount,
+    deathalot = checkdeathalot,
+    nosanity = checknosanity,
+    sick = checksick,
+    coldblood = checkcoldblood,
+    burn = checkburn,
+    freeze = checkfreeze,
+    goodman = checkgoodman,
+    brother = checkbrother,
+    fishmaster = checkfishmaster,
+    pickmaster = checkpickmaster,
+    chopmaster = checkchopmaster,
+    noob = checknoob,
+    cookmaster = checkcookmaster,
+    longage = checklongage,
+    luck = checkluck,
+    black = checkblack,
+    buildmaster = checkbuildmaster,
+    tank = checktank,
+    angry = checkangry,
+    icebody = checkicebody,
+    firebody = checkfirebody,
+    moistbody = checkmoistbody,
+    all = checkall,
 
-        --=============================================
-        a_yingguaiamount = currenta_yingguaiamount,
-        a_wormamount = currenta_wormamount,
-        a_monkeyamount = currenta_monkeyamount,
-        a_buzzardamount = currenta_buzzardamount,
-        a_lightninggoatamount = currenta_lightninggoatamount,
-        a_spiderqueenamount = currenta_spiderqueenamount,
-        a_spideramount = currenta_spideramount,
-        a_spider_warrioramount = currenta_spider_warrioramount,
-        a_spider_dropperamount = currenta_spider_dropperamount,
-        a_spider_hideramount = currenta_spider_hideramount,
-        a_spider_spitteramount = currenta_spider_spitteramount,
-        a_wargamount = currenta_wargamount,
-        a_houndamount = currenta_houndamount,
-        a_firehoundamount = currenta_firehoundamount,
-        a_icehoundamount = currenta_icehoundamount,
-        a_koalefant_summeramount = currenta_koalefant_summeramount,
-        a_koalefant_winteramount = currenta_koalefant_winteramount,
-        a_catcoonamount = currenta_catcoonamount,
-        a_bunnymanamount = currenta_bunnymanamount,
-        a_leifamount = currenta_leifamount,
-        a_slurtleamount = currenta_slurtleamount,
-        a_tallbirdamount = currenta_tallbirdamount,
-        a_walrusamount = currenta_walrusamount,
-        a_batamount = currenta_batamount,
-        a_butterflyamount = currenta_butterflyamount,
-        a_killerbeeamount = currenta_killerbeeamount,
-        a_deeramount = currenta_deeramount,
-        a_moleamount = currenta_moleamount,
-        a_mosquitoamount = currenta_mosquitoamount,
-        a_penguinamount = currenta_penguinamount,
-        a_mermamount = currenta_mermamount,
-        a_frogamount = currenta_frogamount,
-        a_beefaloamount = currenta_beefaloamount,
-        a_perdamount = currenta_perdamount,
-        a_krampusamount = currenta_krampusamount,
-        a_robin_crowamount = currenta_robin_crowamount,
-        a_robin_robinamount = currenta_robin_robinamount,
-        a_robin_winteramount = currenta_robin_winteramount,
-        a_robin_canaryamount = currenta_robin_canaryamount,
-        a_pigmanamount = currenta_pigmanamount,
-        a_1amount = currenta_1amount,
-        a_2amount = currenta_2amount,
-        a_3amount = currenta_3amount,
-        a_4amount = currenta_4amount,
-        a_5amount = currenta_5amount,
-        a_6amount = currenta_6amount,
-        a_7amount = currenta_7amount,
-        a_8amount = currenta_8amount,
-        a_9amount = currenta_9amount,
-        a_10amount = currenta_10amount,
-        a_11amount = currenta_11amount,
-        a_12amount = currenta_12amount,
-        a_13amount = currenta_13amount,
-        a_14amount = currenta_14amount,
-        a_15amount = currenta_15amount,
+    eatamount = currenteatamount,
+    eatmonsterlasagna = currenteatmonsterlasagna,
+    respawnamount = currentrespawnamount,
+    walktime = currentwalktime,
+    stoptime = currentstoptime,
+    evilamount = currentevilamount,
+    deathamouth = currentdeathamouth,
+    nosanitytime = currentnosanitytime,
+    snakeamount = currentsnakeamount,
 
-        --================================================
+--=============================================
+    a_yingguaiamount = currenta_yingguaiamount,
+    a_wormamount = currenta_wormamount,
+    a_monkeyamount = currenta_monkeyamount,
+    a_buzzardamount = currenta_buzzardamount,
+    a_lightninggoatamount = currenta_lightninggoatamount,
+    a_spiderqueenamount = currenta_spiderqueenamount,
+    a_spideramount = currenta_spideramount,
+    a_spider_warrioramount = currenta_spider_warrioramount,
+    a_spider_dropperamount = currenta_spider_dropperamount,
+    a_spider_hideramount = currenta_spider_hideramount,
+    a_spider_spitteramount = currenta_spider_spitteramount,
+    a_wargamount = currenta_wargamount,
+    a_houndamount = currenta_houndamount,
+    a_firehoundamount = currenta_firehoundamount,
+    a_icehoundamount = currenta_icehoundamount,
+    a_koalefant_summeramount = currenta_koalefant_summeramount,
+    a_koalefant_winteramount = currenta_koalefant_winteramount,
+    a_catcoonamount = currenta_catcoonamount,
+    a_bunnymanamount = currenta_bunnymanamount,
+    a_leifamount = currenta_leifamount,
+    a_slurtleamount = currenta_slurtleamount,
+    a_tallbirdamount = currenta_tallbirdamount,
+    a_walrusamount = currenta_walrusamount,
+    a_batamount = currenta_batamount,
+    a_butterflyamount = currenta_butterflyamount,
+    a_killerbeeamount = currenta_killerbeeamount,
+    a_deeramount = currenta_deeramount,
+    a_moleamount = currenta_moleamount,
+    a_mosquitoamount = currenta_mosquitoamount,
+    a_penguinamount = currenta_penguinamount,
+    a_mermamount = currenta_mermamount,
+    a_frogamount = currenta_frogamount,
+    a_beefaloamount = currenta_beefaloamount,
+    a_perdamount = currenta_perdamount,
+    a_krampusamount = currenta_krampusamount,
+    a_robin_crowamount = currenta_robin_crowamount,
+    a_robin_robinamount = currenta_robin_robinamount,
+    a_robin_winteramount = currenta_robin_winteramount,
+    a_robin_canaryamount = currenta_robin_canaryamount,
+    a_pigmanamount = currenta_pigmanamount,
+
+    a_1amount = currenta_1amount,
+    a_2amount = currenta_2amount,
+    a_3amount = currenta_3amount,
+    a_4amount = currenta_4amount,
+    a_5amount = currenta_5amount,
+    a_6amount = currenta_6amount,
+    a_7amount = currenta_7amount,
+    a_8amount = currenta_8amount,
+    a_9amount = currenta_9amount,
+    a_10amount = currenta_10amount,
+    a_11amount = currenta_11amount,
+    a_12amount = currenta_12amount,
+    a_13amount = currenta_13amount,
+    a_14amount = currenta_14amount,
+    a_15amount = currenta_15amount,
+
+--================================================
 
 
-        friendpig = currentfriendpig,
-        friendbunny = currentfriendbunny,
-        fishamount = currentfishamount,
-        pickamount = currentpickamount,
-        chopamount = currentchopamount,
-        cookamount = currentcookamount,
-        buildamount = currentbuildamount,
-        attackeddamage = currentattackeddamage,
-        onhitdamage = currentonhitdamage,
-        icetime = currenticetime,
-        firetime = currentfiretime,
-        moisttime = currentmoisttime,
-        age = currentage,
-    })
+    friendpig = currentfriendpig,
+    friendbunny = currentfriendbunny,
+    fishamount = currentfishamount,
+    pickamount = currentpickamount,
+    chopamount = currentchopamount,
+    cookamount = currentcookamount,
+    buildamount = currentbuildamount,
+    attackeddamage = currentattackeddamage,
+    onhitdamage = currentonhitdamage,
+    icetime = currenticetime,
+    firetime = currentfiretime,
+    moisttime = currentmoisttime,
+    age = currentage,
+
+
+
+})
 
 --保存
 function allachivevent:OnSave()
@@ -809,7 +642,7 @@ function allachivevent:OnSave()
         snake = self.snake,
 
 
-        --=============================================
+--=============================================
         a_yingguai = self.a_yingguai,
         a_worm = self.a_worm,
         a_monkey = self.a_monkey,
@@ -883,7 +716,7 @@ function allachivevent:OnSave()
         a_15 = self.a_15,
 
 
-        --================================================
+--================================================
 
 
         deathalot = self.deathalot,
@@ -895,7 +728,7 @@ function allachivevent:OnSave()
         snakeamount = self.snakeamount,
 
 
-        --=============================================
+--=============================================
         a_yingguaiamount = self.a_yingguaiamount,
         a_wormamount = self.a_wormamount,
         a_monkeyamount = self.a_monkeyamount,
@@ -936,6 +769,7 @@ function allachivevent:OnSave()
         a_robin_winteramount = self.a_robin_winteramount,
         a_robin_canaryamount = self.a_robin_canaryamount,
         a_pigmanamount = self.a_pigmanamount,
+
         a_1amount = self.a_1amount,
         a_2amount = self.a_2amount,
         a_3amount = self.a_3amount,
@@ -952,7 +786,7 @@ function allachivevent:OnSave()
         a_14amount = self.a_14amount,
         a_15amount = self.a_15amount,
 
-        --================================================
+--================================================
 
 
         burn = self.burn,
@@ -1010,7 +844,7 @@ function allachivevent:OnLoad(data)
     self.snake = data.snake or false
 
 
-    --=============================================
+--=============================================
     self.a_yingguai = data.a_yingguai or false
     self.a_worm = data.a_worm or false
     self.a_monkey = data.a_monkey or false
@@ -1086,7 +920,7 @@ function allachivevent:OnLoad(data)
 
 
 
-    --================================================
+--================================================
 
 
     self.deathalot = data.deathalot or false
@@ -1098,8 +932,8 @@ function allachivevent:OnLoad(data)
     self.snakeamount = data.snakeamount or 0
 
 
-    --=============================================
-    self.a_yingguaiamount = data.a_yingguaiamount or 0
+--=============================================
+     self.a_yingguaiamount = data.a_yingguaiamount or 0
     self.a_wormamount = data.a_wormamount or 0
     self.a_monkeyamount = data.a_monkeyamount or 0
     self.a_buzzardamount = data.a_buzzardamount or 0
@@ -1156,7 +990,7 @@ function allachivevent:OnLoad(data)
     self.a_14amount = data.a_14amount or 0
     self.a_15amount = data.a_15amount or 0
 
-    --================================================
+--================================================
 
 
     self.burn = data.burn or false
@@ -1200,13 +1034,13 @@ function allachivevent:seffc(inst, tag)
     local strinfo = STRINGS.ALLACHIVINFO
     local strcoin = STRINGS.ALLACHIVCOIN
     if tag == "intogame" and self.all == true then
-        TheNet:Announce(inst:GetDisplayName() .. "   " .. strinfo["intogameafterall"] .. str0[3] .. str0[1] .. strname[tag] .. str0[2])
+        TheNet:Announce(inst:GetDisplayName().."   "..strinfo["intogameafterall"]..str0[3]..str0[1]..strname[tag]..str0[2])
     elseif tag == "black" and self.blacktile == "spat" then
-        TheNet:Announce(inst:GetDisplayName() .. "   " .. strinfo["blackspat"] .. str0[3] .. str0[1] .. strname[tag] .. str0[2])
+        TheNet:Announce(inst:GetDisplayName().."   "..strinfo["blackspat"]..str0[3]..str0[1]..strname[tag]..str0[2])
     else
-        TheNet:Announce(inst:GetDisplayName() .. "   " .. strinfo[tag] .. str0[3] .. str0[1] .. strname[tag] .. str0[2])
+        TheNet:Announce(inst:GetDisplayName().."   "..strinfo[tag]..str0[3]..str0[1]..strname[tag]..str0[2])
     end
-    inst.components.talker:Say(str0[6] .. strname[tag] .. str0[2] .. "\n" .. str0[4] .. allachiv_coinget[tag] .. str0[5])
+    inst.components.talker:Say(str0[6]..strname[tag]..str0[2].."\n"..str0[4]..allachiv_coinget[tag]..str0[5])
     inst.components.allachivcoin:coinDoDelta(allachiv_coinget[tag])
 end
 
@@ -1220,14 +1054,13 @@ function allachivevent:intogamefn(inst)
 
             if self.all ~= true then
                 inst:DoTaskInTime(2, function()
-                    local item1 = SpawnPrefab("pigskin") --1个猪皮
-                    --item1.components.stackable:SetStackSize(2)
-                    inst.components.inventory:GiveItem(item1, nil, inst:GetPosition())
-                    --local item3 = SpawnPrefab("spear")--长矛
-                    local item3 = SpawnPrefab("heatrock") --热能石
+                    local item3 = SpawnPrefab("pigskin") --1个猪皮
                     inst.components.inventory:GiveItem(item3, nil, inst:GetPosition())
-                    local item4 = SpawnPrefab("amulet") --复活护符
+                    local item4 = SpawnPrefab("heatrock") --热能石
                     inst.components.inventory:GiveItem(item4, nil, inst:GetPosition())
+                    local item1 = SpawnPrefab("amulet") --复活护符
+--                    item1.components.stackable:SetStackSize(2)
+                    inst.components.inventory:GiveItem(item1, nil, inst:GetPosition())
                 end)
             end
         end
@@ -1270,7 +1103,7 @@ function allachivevent:eatfn(inst)
                     self:seffc(inst, "danding")
                 end
             end
-            --吃鳗鱼料理 
+            --吃鳗鱼料理
             if self.a_6 ~= true and food.prefab == "unagi" then
                 self.a_6amount = self.a_6amount + 1
                 if self.a_6amount >= allachiv_eventdata["a_6"] then
@@ -1278,7 +1111,7 @@ function allachivevent:eatfn(inst)
                     self:seffc(inst, "a_6")
                 end
             end
-            --吃冰激淋 
+            --吃冰激淋
             if self.a_13 ~= true and food.prefab == "icecream" then
                 self.a_13amount = self.a_13amount + 1
                 if self.a_13amount >= allachiv_eventdata["a_13"] then
@@ -1326,12 +1159,13 @@ function allachivevent:onkilled(inst)
         --你对力量一无所知
         if attacker and attacker.prefab and attacker:IsValid() and self.tooyoung ~= true then
             if attacker.prefab == "flint"
-                    or attacker.prefab == "rocks"
-                    or attacker.prefab == "redgem"
-                    or attacker.prefab == "bluegem"
-                    or attacker.prefab == "goldnugget"
-                    or attacker.prefab == "nitre"
-                    or attacker.prefab == "marble" then
+            or attacker.prefab == "rocks"
+            or attacker.prefab == "redgem"
+            or attacker.prefab == "bluegem"
+            or attacker.prefab == "goldnugget"
+            or attacker.prefab == "nitre"
+            or attacker.prefab == "cavein_boulder"
+            or attacker.prefab == "marble" then
                 inst:DoTaskInTime(2, function()
                     self.tooyoung = true
                     self:seffc(inst, "tooyoung")
@@ -1376,6 +1210,8 @@ function allachivevent:sanitycheck(inst)
                 self:seffc(inst, "nosanity")
             end
         end
+
+
     end)
 end
 
@@ -1407,16 +1243,16 @@ function allachivevent:onkilledother(inst)
             end
         end
         --击杀10只幽灵
-        if victim and victim.prefab == "ghost" and self.a_11 ~= true then
-            self.a_11amount = self.a_11amount + 1
+         if victim and victim.prefab == "ghost" and self.a_11 ~= true then
+             self.a_11amount = self.a_11amount + 1
             if self.a_11amount >= allachiv_eventdata["a_11"] then
                 self.a_11 = true
                 self:seffc(inst, "a_11")
             end
         end
         --击杀30个食人花眼睛
-        if victim and victim.prefab == "eyeplant" and self.a_12 ~= true then
-            self.a_12amount = self.a_12amount + 1
+         if victim and victim.prefab == "eyeplant" and self.a_12 ~= true then
+             self.a_12amount = self.a_12amount + 1
             if self.a_12amount >= allachiv_eventdata["a_12"] then
                 self.a_12 = true
                 self:seffc(inst, "a_12")
@@ -1605,7 +1441,7 @@ function allachivevent:onkilledother(inst)
         end
 
         --击杀30只树精
-        if victim and victim.prefab == "leif" and self.a_leif ~= true then
+        if victim and victim.prefab == "leif"  and self.a_leif ~= true then
             self.a_leifamount = self.a_leifamount + 1
             if self.a_leifamount >= allachiv_eventdata["a_leif"] then
                 self.a_leif = true
@@ -1793,7 +1629,7 @@ function allachivevent:onkilledother(inst)
                 self:seffc(inst, "a_pigman")
             end
         end
-        --击杀暗影骑士
+       --击杀暗影骑士
         if victim and victim.prefab == "shadow_knight" and self.a_shadow_knight ~= true then
             self.a_shadow_knight = true
             self:seffc(inst, "a_shadow_knight")
@@ -1846,20 +1682,20 @@ function allachivevent:onkilledother(inst)
         --击杀克劳斯
         if victim and victim.prefab == "klaus" then
 
-            if self.messiah ~= true then
-                self.respawnamount = self.respawnamount + 1
-                if self.respawnamount >= allachiv_eventdata["messiah"] then
-                    self.messiah = true
-                    self:seffc(inst, "messiah")
-                end
-            end
+            	if self.messiah ~= true then
+                	self.respawnamount = self.respawnamount + 1
+                	if self.respawnamount >= allachiv_eventdata["messiah"] then
+                    	self.messiah = true
+                    	self:seffc(inst, "messiah")
+                	end
+            	end
 
-            if self.a_klaus ~= true then
-                self.a_klaus = true
-                self:seffc(inst, "a_klaus")
+        	if self.a_klaus ~= true  then
+            	self.a_klaus = true
+            	self:seffc(inst, "a_klaus")
             end
         end
-        --击杀蚁狮
+       --击杀蚁狮
         if victim and victim.prefab == "antlion" and self.a_antlion ~= true then
             self.a_antlion = true
             self:seffc(inst, "a_antlion")
@@ -1890,15 +1726,18 @@ function allachivevent:onkilledother(inst)
         if victim and victim.prefab == "krampus" then
             local pos = Vector3(victim.Transform:GetWorldPosition())
             inst:DoTaskInTime(.1, function()
-                local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 3)
-                for k, v in pairs(ents) do
+                local ents = TheSim:FindEntities(pos.x,pos.y,pos.z, 3)
+                for k,v in pairs(ents) do
                     if v.prefab == "krampus_sack"
-                            and v.components.inventoryitem.owner == nil
-                            and v.components.ksmark.mark == false then
+                    and v.components.inventoryitem.owner == nil
+                    and v.components.ksmark.mark == false then
                         v.components.ksmark.mark = true
                         if self.luck ~= true then
                             self.luck = true
                             self:seffc(inst, "luck")
+                            if self.a_2amount <=22 then
+                            	self:seffc(inst, "a_a2")
+                            end
                         end
                     end
                 end
@@ -1908,8 +1747,8 @@ function allachivevent:onkilledother(inst)
         if victim and victim.prefab == "spat" and self.black ~= true then
             local single = true
             local pos = Vector3(victim.Transform:GetWorldPosition())
-            local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 40)
-            for k, v in pairs(ents) do
+            local ents = TheSim:FindEntities(pos.x,pos.y,pos.z, 40)
+            for k,v in pairs(ents) do
                 if v:HasTag("player") and v ~= inst then
                     single = false
                 end
@@ -1958,7 +1797,7 @@ function allachivevent:makefriend(inst)
                     achiv:seffc(inst, "brother")
                 end
             end
-            --- 石虾
+            ---石虾
             if follower.prefab == "rocky" and achiv.a_7 ~= true then
                 achiv.a_7amount = achiv.a_7amount + 1
                 if achiv.a_7amount >= allachiv_eventdata["a_7"] then
@@ -1989,7 +1828,7 @@ function allachivevent:makefriend(inst)
             self.inst:ListenForEvent("onremove", self._onfollowerremoved, follower)
 
             if self.inst:HasTag("player") and follower.prefab ~= nil then
-                ProfileStatsAdd("befriend_" .. follower.prefab)
+                ProfileStatsAdd("befriend_"..follower.prefab)
             end
         end
     end
@@ -2070,7 +1909,7 @@ function allachivevent:ontimepass(inst)
         end
         --隐藏
         if self.a_2 ~= true then
-            self.a_2amount = math.ceil(inst.components.age:GetAge() / TUNING.TOTAL_DAY_TIME)
+             self.a_2amount = math.ceil(inst.components.age:GetAge() / TUNING.TOTAL_DAY_TIME)
             if self.a_2amount >= allachiv_eventdata["a_2"] then
                 self.a_2 = true
                 self:seffc(inst, "a_2")
@@ -2105,22 +1944,22 @@ function allachivevent:onattacked(inst)
         if self.tank ~= true then
             if data.damage and data.damage >= 0 then
                 self.attackeddamage = math.ceil(self.attackeddamage + data.damage)
-                if self.attackeddamage >= allachiv_eventdata["tank"] then
+	            if self.attackeddamage >= allachiv_eventdata["tank"] then
                     self.attackeddamage = allachiv_eventdata["tank"]
-                    self.tank = true
-                    self:seffc(inst, "tank")
-                end
-            end
+	                self.tank = true
+	                self:seffc(inst, "tank")
+	            end
+	        end
         end
         if self.a_5 ~= true then
             if data.damage and data.damage >= 0 then
                 self.a_5amount = math.ceil(self.a_5amount + data.damage)
-                if self.a_5amount >= allachiv_eventdata["a_5"] then
+	            if self.a_5amount >= allachiv_eventdata["a_5"] then
                     self.a_5amount = allachiv_eventdata["a_5"]
-                    self.a_5 = true
-                    self:seffc(inst, "a_5")
-                end
-            end
+	                self.a_5 = true
+	                self:seffc(inst, "a_5")
+	            end
+	        end
         end
     end)
 end
@@ -2155,8 +1994,8 @@ end
 function allachivevent:ontemperature(inst)
     inst:DoPeriodicTask(1, function()
         if inst.components.temperature.current <= 0
-                and self.icebody ~= true
-                and inst.components.health.currenthealth > 0 then
+        and self.icebody ~= true
+        and inst.components.health.currenthealth > 0 then
             self.icetime = self.icetime + 1
             if self.icetime >= allachiv_eventdata["icebody"] then
                 self.icebody = true
@@ -2166,8 +2005,8 @@ function allachivevent:ontemperature(inst)
     end)
     inst:DoPeriodicTask(1, function()
         if inst.components.temperature.current >= 70
-                and self.firebody ~= true
-                and inst.components.health.currenthealth > 0 then
+        and self.firebody ~= true
+        and inst.components.health.currenthealth > 0 then
             self.firetime = self.firetime + 1
             if self.firetime >= allachiv_eventdata["firebody"] then
                 self.firebody = true
@@ -2179,39 +2018,39 @@ end
 
 --湿身
 function allachivevent:moist(inst)
-    inst:DoPeriodicTask(1, function()
-        if self.moistbody ~= true and inst.components.moisture.moisture == 100 then
-            self.moisttime = self.moisttime + 1
-            if self.moisttime >= allachiv_eventdata["moistbody"] then
-                self.moistbody = true
-                self:seffc(inst, "moistbody")
-            end
-        end
-    end)
+	inst:DoPeriodicTask(1, function()
+		if self.moistbody ~= true and inst.components.moisture.moisture == 100 then
+			self.moisttime = self.moisttime + 1
+			if self.moisttime >= allachiv_eventdata["moistbody"] then
+				self.moistbody = true
+				self:seffc(inst, "moistbody")
+			end
+		end
+	end)
 end
 
 --预运行
 function allachivevent:Init(inst)
     inst:DoTaskInTime(.1, function()
-        self:intogamefn(inst)
-        self:eatfn(inst)
-        self:onwalkfn(inst)
-        self:onkilled(inst)
-        self:onkilledother(inst)
-        self:burnorfreeze(inst)
-        self:makefriend(inst)
-        self:onhook(inst)
-        self:onpick(inst)
-        self:chopper(inst)
-        self:respawn(inst)
-        self:ontimepass(inst)
-        self:onbuild(inst)
-        self:onattacked(inst)
-        self:hitother(inst)
-        self:sanitycheck(inst)
-        self:ontemperature(inst)
-        self:moist(inst)
-        self:allget(inst)
+    self:intogamefn(inst)
+    self:eatfn(inst)
+    self:onwalkfn(inst)
+    self:onkilled(inst)
+    self:onkilledother(inst)
+    self:burnorfreeze(inst)
+    self:makefriend(inst)
+    self:onhook(inst)
+    self:onpick(inst)
+    self:chopper(inst)
+    self:respawn(inst)
+    self:ontimepass(inst)
+    self:onbuild(inst)
+    self:onattacked(inst)
+    self:hitother(inst)
+    self:sanitycheck(inst)
+    self:ontemperature(inst)
+    self:moist(inst)
+    self:allget(inst)
     end)
 
     inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier or 1
@@ -2223,118 +2062,120 @@ function allachivevent:allget(inst)
         inst:DoPeriodicTask(1, function()
             if self.all ~= true then
                 if self.intogame
-                        and self.firsteat
-                        and self.supereat
-                        and self.danding
-                        and self.messiah
-                        and self.walkalot
-                        and self.stopalot
-                        and self.tooyoung
-                        and self.evil
-                        and self.snake
+                and self.firsteat
+                and self.supereat
+                and self.danding
+                and self.messiah
+                and self.walkalot
+                and self.stopalot
+                and self.tooyoung
+                and self.evil
+                and self.snake
 
 
-                        --==================================
-                        and self.a_yingguai
-                        and self.a_worm
-                        and self.a_monkey
-                        and self.a_buzzard
-                        and self.a_lightninggoat
-                        and self.a_spiderqueen
-                        and self.a_spider
-                        and self.a_spider_warrior
-                        and self.a_spider_dropper
-                        and self.a_spider_hider
-                        and self.a_spider_spitter
-                        and self.a_warg
-                        and self.a_hound
-                        and self.a_firehound
-                        and self.a_icehound
-                        and self.a_koalefant_summer
-                        and self.a_koalefant_winter
-                        and self.a_catcoon
-                        and self.a_bunnyman
-                        and self.a_leif
-                        and self.a_slurtle
-                        and self.a_tallbird
-                        and self.a_walrus
-                        and self.a_bat
-                        and self.a_butterfly
-                        and self.a_killerbee
-                        and self.a_deer
-                        and self.a_mole
-                        and self.a_mosquito
-                        and self.a_penguin
-                        and self.a_merm
-                        and self.a_frog
-                        and self.a_beefalo
-                        and self.a_perd
-                        and self.a_krampus
-                        and self.a_robin_crow
-                        and self.a_robin_robin
-                        and self.a_robin_winter
-                        and self.a_robin_canary
-                        and self.a_pigman
-                        and self.a_shadow_knight
-                        and self.a_shadow_bishop
-                        and self.a_shadow_rook
-                        and self.a_moose
-                        and self.a_dragonfly
-                        and self.a_bearger
-                        and self.a_deerclops
-                        and self.a_stalker_forest
-                        and self.a_stalker
-                        and self.a_stalker_atrium
-                        and self.a_klaus
-                        and self.a_antlion
-                        and self.a_minotaur
-                        and self.a_beequeen
-                        and self.a_toadstool
-                        and self.a_toadstool_dark
+                --==================================
+                and self.a_yingguai
+                and self.a_worm
+                and self.a_monkey
+                and self.a_buzzard
+                and self.a_lightninggoat
+                and self.a_spiderqueen
+                and self.a_spider
+                and self.a_spider_warrior
+                and self.a_spider_dropper
+                and self.a_spider_hider
+                and self.a_spider_spitter
+                and self.a_warg
+                and self.a_hound
+                and self.a_firehound
+                and self.a_icehound
+                and self.a_koalefant_summer
+                and self.a_koalefant_winter
+                and self.a_catcoon
+                and self.a_bunnyman
+                and self.a_leif
+                and self.a_slurtle
+                and self.a_tallbird
+                and self.a_walrus
+                and self.a_bat
+                and self.a_butterfly
+                and self.a_killerbee
+                and self.a_deer
+                and self.a_mole
+                and self.a_mosquito
+                and self.a_penguin
+                and self.a_merm
+                and self.a_frog
+                and self.a_beefalo
+                and self.a_perd
+                and self.a_krampus
+                and self.a_robin_crow
+                and self.a_robin_robin
+                and self.a_robin_winter
+                and self.a_robin_canary
+                and self.a_pigman
+                and self.a_shadow_knight
+                and self.a_shadow_bishop
+                and self.a_shadow_rook
+                and self.a_moose
+                and self.a_dragonfly
+                and self.a_bearger
+                and self.a_deerclops
+                and self.a_stalker_forest
+                and self.a_stalker
+                and self.a_stalker_atrium
+                and self.a_klaus
+                and self.a_antlion
+                and self.a_minotaur
+                and self.a_beequeen
+                and self.a_toadstool
+                and self.a_toadstool_dark
 
-                        --=================================
+                --=================================
 
 
-                        and self.deathalot
-                        and self.nosanity
-                        and self.sick
-                        and self.coldblood
-                        and self.burn
-                        and self.freeze
-                        and self.goodman
-                        and self.brother
-                        and self.fishmaster
-                        and self.pickmaster
-                        and self.chopmaster
-                        and self.noob
-                        and self.cookmaster
-                        and self.longage
-                        and self.luck
-                        and self.black
-                        and self.buildmaster
-                        and self.tank
-                        and self.angry
-                        and self.icebody
-                        and self.firebody
-                        and self.moistbody
-                        and self.a_7
-                        and self.a_6
-                        and self.a_8
-                        and self.a_9
-                        and self.a_10
-                        and self.a_11
-                        and self.a_12
-                        and self.a_14 then
+                and self.deathalot
+                and self.nosanity
+                and self.sick
+                and self.coldblood
+                and self.burn
+                and self.freeze
+                and self.goodman
+                and self.brother
+                and self.fishmaster
+                and self.pickmaster
+                and self.chopmaster
+                and self.noob
+                and self.cookmaster
+                and self.longage
+                and self.luck
+                and self.black
+                and self.buildmaster
+                and self.tank
+                and self.angry
+                and self.icebody
+                and self.firebody
+                and self.moistbody
+                and self.a_7
+                and self.a_6
+                and self.a_8
+                and self.a_9
+                and self.a_10
+                and self.a_11
+                and self.a_12
+                and self.a_14
+
+                then
                     self.all = true
                     inst:DoTaskInTime(2.5, function()
                         self:seffc(inst, "all")
                         inst:DoTaskInTime(.3, function()
                             inst.sg:GoToState("mime")
                             if not inst.components.locomotor.wantstomoveforward then inst.sg:AddStateTag("busy") end
-                            for i = 1, 25 do
-                                inst:DoTaskInTime(i / 25 * 3, function()
+                            for i=1, 25 do
+                                inst:DoTaskInTime(i/25*3, function()
                                     local pos = Vector3(inst.Transform:GetWorldPosition())
-                                    SpawnPrefab("explode_firecrackers").Transform:SetPosition(pos.x + math.random(-3, 3), pos.y, pos.z + math.random(-3, 3))
+                                    SpawnPrefab("explode_firecrackers").Transform:SetPosition(pos.x+math.random(-3,3), pos.y, pos.z+math.random(-3,3))
                                 end)
                             end
                         end)

@@ -531,7 +531,9 @@ function uiachievement:loadlist()
         {name = "a_a7",check = self.owner.checka_a7:value(),current = self.owner.currenta_a7amount:value(),},
         {name = "a_a8",check = self.owner.checka_a8:value(),current = self.owner.currenta_a8amount:value(),},
 
-        
+        {name = "a_a9",check = self.owner.checka_a9:value(),current = self.owner.currenta_a9amount:value(),},
+        {name = "a_a10",check = self.owner.checka_a10:value(),current = self.owner.currenta_a10amount:value(),},
+
 
         {name = "a_shadow_knight",check = self.owner.checka_shadow_knight:value(),
         	current = nil,},
@@ -572,11 +574,7 @@ function uiachievement:loadlist()
 			check = self.owner.checkdeathalot:value(),
 			current = self.owner.currentdeathamouth:value(),
 		},
-		{
-			name = "nosanity",
-			check = self.owner.checknosanity:value(),
-			current = self.owner.currentnosanitytime:value(),
-		},
+
 		{
 			name = "sick",
 			check = self.owner.checksick:value(),
@@ -619,6 +617,9 @@ function uiachievement:loadlist()
 			check = self.owner.checkfishmaster:value(),
 			current = self.owner.currentfishamount:value(),
 		},
+
+        {name = "a_a22",check = self.owner.checka_a22:value(),current = self.owner.currenta_a22amount:value(),},
+
 		{
 			name = "pickmaster",
 			check = self.owner.checkpickmaster:value(),
@@ -634,6 +635,18 @@ function uiachievement:loadlist()
 			check = self.owner.checkcookmaster:value(),
 			current = self.owner.currentcookamount:value(),
 		},
+
+        {name = "a_a13",check = self.owner.checka_a13:value(),current = self.owner.currenta_a13amount:value(),},
+        {name = "a_a14",check = self.owner.checka_a14:value(),current = self.owner.currenta_a14amount:value(),},
+        {name = "a_a15",check = self.owner.checka_a15:value(),current = self.owner.currenta_a15amount:value(),},
+        {name = "a_a16",check = self.owner.checka_a16:value(),current = self.owner.currenta_a16amount:value(),},
+        {name = "a_a17",check = self.owner.checka_a17:value(),current = self.owner.currenta_a17amount:value(),},
+        {name = "a_a18",check = self.owner.checka_a18:value(),current = self.owner.currenta_a18amount:value(),},
+        {name = "a_a19",check = self.owner.checka_a19:value(),current = self.owner.currenta_a19amount:value(),},
+        {name = "a_a20",check = self.owner.checka_a20:value(),current = self.owner.currenta_a20amount:value(),},
+        {name = "a_a21",check = self.owner.checka_a21:value(),current = self.owner.currenta_a21amount:value(),},
+
+
 		{
 			name = "buildmaster",
 			check = self.owner.checkbuildmaster:value(),
@@ -668,6 +681,15 @@ function uiachievement:loadlist()
 			name = "angry",
 			check = self.owner.checkangry:value(),
 			current = self.owner.currentonhitdamage:value(),
+		},
+
+        {name = "a_a11",check = self.owner.checka_a11:value(),current = self.owner.currenta_a11amount:value(),},
+        {name = "a_a12",check = self.owner.checka_a12:value(),current = self.owner.currenta_a12amount:value(),},
+
+		{
+			name = "nosanity",
+			check = self.owner.checknosanity:value(),
+			current = self.owner.currentnosanitytime:value(),
 		},
 		{
 			name = "icebody",
@@ -763,6 +785,9 @@ function uiachievement:loadcoinlist()
 			name = "cookmaster",
 			current = self.owner.currentcookmaster:value(),
 		},
+
+
+
 		{
 			name = "pickmaster",
 			current = self.owner.currentpickmaster:value(),

@@ -49,6 +49,7 @@ Assets = {
     Asset("IMAGE", "minimap/shared_islands_minimap.tex"),
     Asset("SOUNDPACKAGE", "sound/graboid.fev"),
     Asset("SOUND", "sound/graboid.fsb"),
+
     Asset("ATLAS", "images/inventoryimages/expbean.xml"),
     Asset("IMAGE", "images/inventoryimages/expbean.tex"),
 
@@ -431,7 +432,6 @@ require 'AllAchiv/allachivbalance'
 require 'AllAchiv/strings_acm_c'
 TUNING.AllAchivLan = "cn"
 
-
 require "AllAchiv/allachivrpc"
 
 
@@ -564,6 +564,28 @@ local namelist = {
     "a_a6",
     "a_a7",
     "a_a8",
+
+
+    "a_a9", --击杀6只秃鹫      死亡聚集地
+    "a_a10", --击杀11只缀食者     吃豆豆
+    "a_a11", --装备缀食者800秒       撑得慌
+    "a_a12", --装备独奏乐器800秒    一个人的乐队
+    "a_a13", --制作22个大理石盔甲    不痛不痒
+    "a_a14", --制作33个铥矿皇冠     远古三件套 Ⅰ
+    "a_a15", --制作33个铥矿盔甲     远古三件套 Ⅱ
+    "a_a16", --制作33个铥矿棒       远古三件套 Ⅲ
+    "a_a17", --制作200个火药           一硫二硝三木炭
+    "a_a18", --制作80个噩梦燃料     黑燃料
+    "a_a19", --制作6个南瓜灯    万圣节
+    "a_a20", --制作88个治疗药膏   小伤无碍
+    "a_a21", --制作66个蜂蜜药膏  甜蜜绷带
+    "a_a22", --采集88次仙人掌   扎手手
+
+
+
+
+
+
 
     --================================
     "all",
@@ -796,6 +818,36 @@ AddPlayerPostInit(function(inst)
     inst.checka_a8 = GLOBAL.net_shortint(inst.GUID, "checka_a8")
     inst.checka_a9 = GLOBAL.net_shortint(inst.GUID, "checka_a9")
     inst.checka_a10 = GLOBAL.net_shortint(inst.GUID, "checka_a10")
+    inst.checka_a11 = GLOBAL.net_shortint(inst.GUID, "checka_a11")
+    inst.checka_a12 = GLOBAL.net_shortint(inst.GUID, "checka_a12")
+    inst.checka_a13 = GLOBAL.net_shortint(inst.GUID, "checka_a13")
+    inst.checka_a14 = GLOBAL.net_shortint(inst.GUID, "checka_a14")
+    inst.checka_a15 = GLOBAL.net_shortint(inst.GUID, "checka_a15")
+    inst.checka_a16 = GLOBAL.net_shortint(inst.GUID, "checka_a16")
+    inst.checka_a17 = GLOBAL.net_shortint(inst.GUID, "checka_a17")
+    inst.checka_a18 = GLOBAL.net_shortint(inst.GUID, "checka_a18")
+    inst.checka_a19 = GLOBAL.net_shortint(inst.GUID, "checka_a19")
+    inst.checka_a20 = GLOBAL.net_shortint(inst.GUID, "checka_a20")
+    inst.checka_a21 = GLOBAL.net_shortint(inst.GUID, "checka_a21")
+    inst.checka_a22 = GLOBAL.net_shortint(inst.GUID, "checka_a22")
+    inst.checka_a23 = GLOBAL.net_shortint(inst.GUID, "checka_a23")
+    inst.checka_a24 = GLOBAL.net_shortint(inst.GUID, "checka_a24")
+    inst.checka_a25 = GLOBAL.net_shortint(inst.GUID, "checka_a25")
+    inst.checka_a26 = GLOBAL.net_shortint(inst.GUID, "checka_a26")
+    inst.checka_a27 = GLOBAL.net_shortint(inst.GUID, "checka_a27")
+    inst.checka_a28 = GLOBAL.net_shortint(inst.GUID, "checka_a28")
+    inst.checka_a29 = GLOBAL.net_shortint(inst.GUID, "checka_a29")
+    inst.checka_a30 = GLOBAL.net_shortint(inst.GUID, "checka_a30")
+    inst.checka_a31 = GLOBAL.net_shortint(inst.GUID, "checka_a31")
+    inst.checka_a32 = GLOBAL.net_shortint(inst.GUID, "checka_a32")
+    inst.checka_a33 = GLOBAL.net_shortint(inst.GUID, "checka_a33")
+    inst.checka_a34 = GLOBAL.net_shortint(inst.GUID, "checka_a34")
+    inst.checka_a35 = GLOBAL.net_shortint(inst.GUID, "checka_a35")
+    inst.checka_a36 = GLOBAL.net_shortint(inst.GUID, "checka_a36")
+    inst.checka_a37 = GLOBAL.net_shortint(inst.GUID, "checka_a37")
+    inst.checka_a38 = GLOBAL.net_shortint(inst.GUID, "checka_a38")
+    inst.checka_a39 = GLOBAL.net_shortint(inst.GUID, "checka_a39")
+    inst.checka_a40 = GLOBAL.net_shortint(inst.GUID, "checka_a40")
 
     --==========================================================================================
 
@@ -958,6 +1010,36 @@ AddPlayerPostInit(function(inst)
     inst.currenta_a10amount = GLOBAL.net_shortint(inst.GUID, "currenta_a10amount")
 
 
+    inst.currenta_a11amount = GLOBAL.net_shortint(inst.GUID, "currenta_a11amount")
+    inst.currenta_a12amount = GLOBAL.net_shortint(inst.GUID, "currenta_a12amount")
+    inst.currenta_a13amount = GLOBAL.net_shortint(inst.GUID, "currenta_a13amount")
+    inst.currenta_a14amount = GLOBAL.net_shortint(inst.GUID, "currenta_a14amount")
+    inst.currenta_a15amount = GLOBAL.net_shortint(inst.GUID, "currenta_a15amount")
+    inst.currenta_a16amount = GLOBAL.net_shortint(inst.GUID, "currenta_a16amount")
+    inst.currenta_a17amount = GLOBAL.net_shortint(inst.GUID, "currenta_a17amount")
+    inst.currenta_a18amount = GLOBAL.net_shortint(inst.GUID, "currenta_a18amount")
+    inst.currenta_a19amount = GLOBAL.net_shortint(inst.GUID, "currenta_a19amount")
+    inst.currenta_a20amount = GLOBAL.net_shortint(inst.GUID, "currenta_a20amount")
+    inst.currenta_a21amount = GLOBAL.net_shortint(inst.GUID, "currenta_a21amount")
+    inst.currenta_a22amount = GLOBAL.net_shortint(inst.GUID, "currenta_a22amount")
+    inst.currenta_a23amount = GLOBAL.net_shortint(inst.GUID, "currenta_a23amount")
+    inst.currenta_a24amount = GLOBAL.net_shortint(inst.GUID, "currenta_a24amount")
+    inst.currenta_a25amount = GLOBAL.net_shortint(inst.GUID, "currenta_a25amount")
+    inst.currenta_a26amount = GLOBAL.net_shortint(inst.GUID, "currenta_a26amount")
+    inst.currenta_a27amount = GLOBAL.net_shortint(inst.GUID, "currenta_a27amount")
+    inst.currenta_a28amount = GLOBAL.net_shortint(inst.GUID, "currenta_a28amount")
+    inst.currenta_a29amount = GLOBAL.net_shortint(inst.GUID, "currenta_a29amount")
+    inst.currenta_a30amount = GLOBAL.net_shortint(inst.GUID, "currenta_a30amount")
+    inst.currenta_a31amount = GLOBAL.net_shortint(inst.GUID, "currenta_a31amount")
+    inst.currenta_a32amount = GLOBAL.net_shortint(inst.GUID, "currenta_a32amount")
+    inst.currenta_a33amount = GLOBAL.net_shortint(inst.GUID, "currenta_a33amount")
+    inst.currenta_a34amount = GLOBAL.net_shortint(inst.GUID, "currenta_a34amount")
+    inst.currenta_a35amount = GLOBAL.net_shortint(inst.GUID, "currenta_a35amount")
+    inst.currenta_a36amount = GLOBAL.net_shortint(inst.GUID, "currenta_a36amount")
+    inst.currenta_a37amount = GLOBAL.net_shortint(inst.GUID, "currenta_a37amount")
+    inst.currenta_a38amount = GLOBAL.net_shortint(inst.GUID, "currenta_a38amount")
+    inst.currenta_a39amount = GLOBAL.net_shortint(inst.GUID, "currenta_a39amount")
+    inst.currenta_a40amount = GLOBAL.net_shortint(inst.GUID, "currenta_a40amount")
 
 
     --==========================================================================================
@@ -1899,4 +1981,185 @@ function containers.widgetsetup(container, prefab, data, ...)
         --containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
     end
     return result
+end
+
+
+
+
+
+--fr箱子提示
+local _G = GLOBAL
+local isDST = _G.TheSim:GetGameID() == 'DST'
+
+--[ highlighting when active item is changed
+
+local Highlight = _G.require 'components/highlight'
+local __Highlight_ApplyColour = Highlight.ApplyColour
+local __Highlight_UnHighlight = Highlight.UnHighlight
+
+-- additional highlight of found container objects
+local c = { r = 0, g = .25, b = 0 }
+
+-- this maintains colour when the game unhighlights our object
+local function custom_ApplyColour(self, ...)
+    local r, g, b =
+    (self.base_add_colour_red or 0),
+    (self.base_add_colour_green or 0),
+    (self.base_add_colour_blue or 0)
+
+    self.base_add_colour_red,
+    self.base_add_colour_green,
+    self.base_add_colour_blue =
+    r + c.r, g + c.g, b + c.b
+
+    local result = __Highlight_ApplyColour(self, ...)
+
+    self.base_add_colour_red,
+    self.base_add_colour_green,
+    self.base_add_colour_blue = r, g, b
+
+    return result
+end
+
+-- prevents removal of the whole component on UnHighlight
+local function custom_UnHighlight(self, ...)
+    local flashing = self.flashing
+    self.flashing = true
+    local result = __Highlight_UnHighlight(self, ...)
+    self.flashing = flashing
+
+    if isDST and not self.flashing then
+        local r, g, b =
+        (self.highlight_add_colour_red or 0),
+        (self.highlight_add_colour_green or 0),
+        (self.highlight_add_colour_blue or 0)
+
+        self.highlight_add_colour_red,
+        self.highlight_add_colour_green,
+        self.highlight_add_colour_blue =
+        0, 0, 0
+
+        self:ApplyColour()
+
+        self.highlight_add_colour_red,
+        self.highlight_add_colour_green,
+        self.highlight_add_colour_blue = r, g, b
+    end
+
+    return result
+end
+
+local function filter(chest, item)
+    return chest.components.container and item and
+            chest.components.container:Has(item, 1)
+end
+
+local function unhighlight(highlit)
+    while #highlit > 0 do
+        local v = table.remove(highlit)
+        if v and v.components.highlight then
+            -- both keys will point to their original metatable values
+            -- unless they were overwritten by other mods
+
+            if v.components.highlight.ApplyColour == custom_ApplyColour then
+                v.components.highlight.ApplyColour = nil
+            end
+
+            if v.components.highlight.UnHighlight == custom_UnHighlight then
+                v.components.highlight.UnHighlight = nil
+            end
+
+            v.components.highlight:UnHighlight()
+        end
+    end
+end
+
+local function highlight(e, highlit, filter, item)
+    for k, v in pairs(e) do
+        if v and v:IsValid() and v.entity:IsVisible() and filter(v, item.prefab) then
+            if not v.components.highlight then
+                v:AddComponent('highlight')
+            end
+
+            if v.components.highlight then
+                v.components.highlight.ApplyColour = custom_ApplyColour
+                v.components.highlight.UnHighlight = custom_UnHighlight
+                v.components.highlight:Highlight(0, 0, 0)
+                table.insert(highlit, v)
+            end
+        end
+    end
+end
+
+local highlit = {}
+local function onactiveitem(owner, data)
+    unhighlight(highlit)
+
+    if owner and data and data.item then
+        local x, y, z = owner.Transform:GetWorldPosition()
+        local e = TheSim:FindEntities(x, y, z, 20, nil, { 'NOBLOCK', 'player', 'FX' }) or {}
+
+        highlight(e, highlit, filter, data.item)
+    end
+end
+
+local function init(owner)
+    if not owner then return end
+
+    owner:ListenForEvent('newactiveitem', onactiveitem)
+end
+
+if isDST then
+    -- Kam297's approach
+    AddPrefabPostInit('world', function(w)
+        w:ListenForEvent('playeractivated', function(w, owner)
+            if owner == _G.ThePlayer then
+                init(owner)
+            end
+        end)
+    end)
+else
+    AddPlayerPostInit(function(owner)
+        init(owner)
+    end)
+end
+--]]
+
+--[ highlighting when ingredient in recipepopup is hovered
+local IngredientUI = _G.require 'widgets/ingredientui'
+local __IngredientUI_OnGainFocus = IngredientUI.OnGainFocus
+local sw_remap
+
+function IngredientUI:OnGainFocus(...)
+    local tex = self.ing and self.ing.texture and self.ing.texture:match('[^/]+$'):gsub('%.tex$', '')
+    local owner = self.parent and self.parent.parent and self.parent.parent.owner
+
+    if tex and owner then
+        if _G.SaveGameIndex and _G.SaveGameIndex.IsModeShipwrecked and
+                _G.SaveGameIndex:IsModeShipwrecked() and _G.SW_ICONS then
+            if not sw_remap then
+                sw_remap = {}
+                for i, v in pairs(_G.SW_ICONS) do
+                    sw_remap[v] = i
+                end
+            end
+
+            if sw_remap[tex] then
+                tex = sw_remap[tex]
+            end
+        end
+
+        onactiveitem(owner, { item = { prefab = tex } })
+    end
+
+    if __IngredientUI_OnGainFocus then
+        return __IngredientUI_OnGainFocus(self, ...)
+    end
+end
+
+local TabGroup = _G.require 'widgets/tabgroup'
+local __TabGroup_DeselectAll = TabGroup.DeselectAll
+function TabGroup:DeselectAll(...)
+    unhighlight(highlit)
+    return __TabGroup_DeselectAll(self, ...)
 end
