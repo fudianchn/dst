@@ -8,9 +8,9 @@ local TheWorld, TheSim, SpawnPrefab
 
 local perlin_island = require("perlin_island")
 
-GLOBAL.STRINGS.NAMES.GRABOID = "梦乡"
-GLOBAL.STRINGS.NAMES.DYNAMITE = "梦乡烟花"
-GLOBAL.STRINGS.RECIPE_DESC.DYNAMITE = "记住并按固定顺序喂我三样物品做钥匙."
+GLOBAL.STRINGS.NAMES.GRABOID = "梦岛"
+GLOBAL.STRINGS.NAMES.DYNAMITE = "梦岛烟花"
+GLOBAL.STRINGS.RECIPE_DESC.DYNAMITE = "每座城堡只有一座岛屿"
 
 PrefabFiles = {
     "graboid",
@@ -222,8 +222,8 @@ Assets = {
 }
 
 AddMinimapAtlas("minimap/shared_islands_minimap.xml")
---炸药配方8个火药8个红宝石2个绳索
-local dynamiteRecipe = { { "gunpowder", 8 }, { "redgem", 8 }, { "rope", 2 } }
+--炸药配方12个紫宝石68个绳索20个火药
+local dynamiteRecipe = { { "purplegem", 12 }, { "rope", 68 }, { "gunpowder", 20 } }
 local ingredients = {}
 for i = 1, #dynamiteRecipe do
     ingredients[#ingredients + 1] = Ingredient(dynamiteRecipe[i][1], dynamiteRecipe[i][2])
@@ -349,8 +349,8 @@ AddSimPostInit(function()
         local shared_island_hub = TheSim:FindFirstEntityWithTag("multiteleporter_root")
 
         if shared_island_hub == nil then
-            --最大20个岛屿
-            local n = 10
+            --最大1个岛屿
+            local n = 1
             for i = 1, n do
                 local hub = gen_island()
                 if hub ~= nil then
@@ -1989,18 +1989,36 @@ end
 
 --fr箱子提示
 local _G = GLOBAL
-local isDST = _G.TheSim:GetGameID() == 'DST'
 
---[ highlighting when active item is changed
+local SERVER_SIDE = nil
+local DEDICATED_SIDE = nil
+local CLIENT_SIDE = nil
+local ONLY_CLIENT_SIDE = nil
+if GLOBAL.TheNet:GetIsServer() then
+    SERVER_SIDE = true
+    if GLOBAL.TheNet:IsDedicated() then
+        DEDICATED_SIDE = true
+    else
+        CLIENT_SIDE = true
+    end
+elseif GLOBAL.TheNet:GetIsClient() then
+    SERVER_SIDE = false
+    CLIENT_SIDE = true
+    ONLY_CLIENT_SIDE = true
+end
+
+
+--允许箱子高亮显示
+local client_option = true
+
+local isDST = _G.TheSim:GetGameID() == 'DST'
 
 local Highlight = _G.require 'components/highlight'
 local __Highlight_ApplyColour = Highlight.ApplyColour
 local __Highlight_UnHighlight = Highlight.UnHighlight
 
--- additional highlight of found container objects
 local c = { r = 0, g = .25, b = 0 }
 
--- this maintains colour when the game unhighlights our object
 local function custom_ApplyColour(self, ...)
     local r, g, b =
     (self.base_add_colour_red or 0),
@@ -2021,7 +2039,6 @@ local function custom_ApplyColour(self, ...)
     return result
 end
 
--- prevents removal of the whole component on UnHighlight
 local function custom_UnHighlight(self, ...)
     local flashing = self.flashing
     self.flashing = true
@@ -2054,269 +2071,219 @@ local function filter(chest, item)
             chest.components.container:Has(item, 1)
 end
 
-local function unhighlight(highlit)
-    while #highlit > 0 do
-        local v = table.remove(highlit)
-        if v and v.components.highlight then
-            -- both keys will point to their original metatable values
-            -- unless they were overwritten by other mods
 
-            if v.components.highlight.ApplyColour == custom_ApplyColour then
-                v.components.highlight.ApplyColour = nil
-            end
-
-            if v.components.highlight.UnHighlight == custom_UnHighlight then
-                v.components.highlight.UnHighlight = nil
-            end
-
-            v.components.highlight:UnHighlight()
-        end
-    end
-end
-
-local function highlight(e, highlit, filter, item)
-    for k, v in pairs(e) do
-        if v and v:IsValid() and v.entity:IsVisible() and filter(v, item.prefab) then
-            if not v.components.highlight then
-                v:AddComponent('highlight')
-            end
-
-            if v.components.highlight then
-                v.components.highlight.ApplyColour = custom_ApplyColour
-                v.components.highlight.UnHighlight = custom_UnHighlight
-                v.components.highlight:Highlight(0, 0, 0)
-                table.insert(highlit, v)
+local function ServerRPCFunction(owner, prefab, source, unhighlighten, highlighten)
+    if unhighlighten then
+        local v = nil
+        for i = 1, 50 do
+            v = owner["mynetvarSearchedChest" .. tostring(i)]:value()
+            if v ~= nil and not (not v:HasTag("HighlightSourceCraftPot") and source == "CraftPotClose") then
+                v:RemoveTag("HighlightSourceCraftPot")
+                owner["mynetvarSearchedChest" .. tostring(i)]:set(nil)
             end
         end
     end
-end
-
-local highlit = {}
-local function onactiveitem(owner, data)
-    unhighlight(highlit)
-
-    if owner and data and data.item then
-        local x, y, z = owner.Transform:GetWorldPosition()
-        local e = TheSim:FindEntities(x, y, z, 20, nil, { 'NOBLOCK', 'player', 'FX' }) or {}
-
-        highlight(e, highlit, filter, data.item)
-    end
-end
-
-local function init(owner)
-    if not owner then return end
-
-    owner:ListenForEvent('newactiveitem', onactiveitem)
-end
-
-if isDST then
-    -- Kam297's approach
-    AddPrefabPostInit('world', function(w)
-        w:ListenForEvent('playeractivated', function(w, owner)
-            if owner == _G.ThePlayer then
-                init(owner)
-            end
-        end)
-    end)
-else
-    AddPlayerPostInit(function(owner)
-        init(owner)
-    end)
-end
---]]
-
---[ highlighting when ingredient in recipepopup is hovered
-local IngredientUI = _G.require 'widgets/ingredientui'
-local __IngredientUI_OnGainFocus = IngredientUI.OnGainFocus
-local sw_remap
-
-function IngredientUI:OnGainFocus(...)
-    local tex = self.ing and self.ing.texture and self.ing.texture:match('[^/]+$'):gsub('%.tex$', '')
-    local owner = self.parent and self.parent.parent and self.parent.parent.owner
-
-    if tex and owner then
-        if _G.SaveGameIndex and _G.SaveGameIndex.IsModeShipwrecked and
-                _G.SaveGameIndex:IsModeShipwrecked() and _G.SW_ICONS then
-            if not sw_remap then
-                sw_remap = {}
-                for i, v in pairs(_G.SW_ICONS) do
-                    sw_remap[v] = i
-                end
-            end
-
-            if sw_remap[tex] then
-                tex = sw_remap[tex]
-            end
-        end
-
-        onactiveitem(owner, { item = { prefab = tex } })
-    end
-
-    if __IngredientUI_OnGainFocus then
-        return __IngredientUI_OnGainFocus(self, ...)
-    end
-end
-
-local TabGroup = _G.require 'widgets/tabgroup'
-local __TabGroup_DeselectAll = TabGroup.DeselectAll
-function TabGroup:DeselectAll(...)
-    unhighlight(highlit)
-    return __TabGroup_DeselectAll(self, ...)
-end
-
-
-
-
-
---fr自动钓鱼
-local Text = GLOBAL.require "widgets/text"
-local TextButton = GLOBAL.require "widgets/textbutton"
-local TextEdit = GLOBAL.require "widgets/textedit"
-local Image = GLOBAL.require "widgets/image"
-local ImageButton = GLOBAL.require "widgets/imagebutton"
-
-GLOBAL.table.insert(Assets, Asset("ATLAS", "images/zuobiao.xml"))
-GLOBAL.table.insert(Assets, Asset("IMAGE", "images/zuobiao.tex"))
-GLOBAL.table.insert(Assets, Asset("ANIM", "anim/qingjiu_fish.zip"))
-
-
-
-local function CJST()
-    local inst = GLOBAL.CreateEntity()
-    inst:AddTag("FX")
-    inst:AddTag("NOCLICK")
-    inst.entity:SetCanSleep(false)
-    inst.persists = false
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    GLOBAL.MakeInventoryPhysics(inst)
-    GLOBAL.RemovePhysicsColliders(inst)
-    inst.AnimState:SetBank("qingjiu_fish")
-    inst.AnimState:SetBuild("qingjiu_fish")
-    inst.AnimState:PlayAnimation("ldie_1")
-    inst.AnimState:SetOrientation(GLOBAL.ANIM_ORIENTATION.OnGround)
-    return inst
-end
-
-
-AddClassPostConstruct("widgets/controls", function(self)
-    self.inst:DoTaskInTime(0, function()
-        GLOBAL.TheInput:AddKeyDownHandler(GLOBAL.KEY_F1, function()
-            if GLOBAL.ThePlayer.diaoyu then
-                GLOBAL.ThePlayer.diaoyu:SetList(nil)
-                GLOBAL.ThePlayer.diaoyu = nil
-                return
-            end
-            GLOBAL.ThePlayer.zdpr = GLOBAL.ThePlayer:GetPosition()
-            local pos = GLOBAL.ThePlayer.zdpr
-            local qmc = GLOBAL.ThePlayer.components.playercontroller
-            local B = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-            local ku = GLOBAL.ThePlayer.replica.inventory
-            ----
-                local function zhuangbei()
-                    local sousuo = nil
-                    for i = 1, ku:GetNumSlots() do
-                        local sou_1 = ku:GetItemInSlot(i)
-                        if sou_1 and sou_1.prefab == "fishingrod" then
-                            sousuo = sou_1
+    if highlighten then
+        if owner and prefab then
+            local x, y, z = owner.Transform:GetWorldPosition()
+            local e = TheSim:FindEntities(x, y, z, 20, nil, { 'NOBLOCK', 'player', 'FX' }) or {}
+            for k, v in pairs(e) do
+                if v and v:IsValid() and v.entity:IsVisible() and filter(v, prefab) then
+                    -- print("server highlight "..tostring(v))
+                    if source == "CraftPot" then
+                        v:AddTag("HighlightSourceCraftPot")
+                    end
+                    for i = 1, 50 do
+                        if owner["mynetvarSearchedChest" .. tostring(i)]:value() == nil then
+                            v.highlightsource = source
+                            owner["mynetvarSearchedChest" .. tostring(i)]:set(v)
                             break
                         end
                     end
-                    local Bbao = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem("back")
-                    if Bbao and not sousuo then
-                        for i = 1, Bbao.replica.container:GetNumSlots() do
-                            local sou_1 = Bbao.replica.container:GetItemInSlot(i)
-                            if sou_1 and sou_1.prefab == "fishingrod" then
-                                sousuo = sou_1
-                                break
-                            end
+                end
+            end
+        end
+    end
+end
+
+local function ClientUnhighlightChests(owner, prefab, source, unhighlighten, highlighten)
+    if CLIENT_SIDE then
+        if unhighlighten then
+            for i = 1, 50 do
+                local chest = owner["mynetvarSearchedChest" .. tostring(i)]:value()
+                if chest and chest.components.highlight then
+                    if not (not chest:HasTag("HighlightSourceCraftPot") and source == "CraftPotClose") then
+
+                        if chest.components.highlight.ApplyColour == custom_ApplyColour then
+                            chest.components.highlight.ApplyColour = nil
                         end
+
+                        if chest.components.highlight.UnHighlight == custom_UnHighlight then
+                            chest.components.highlight.UnHighlight = nil
+                        end
+
+                        chest.components.highlight:UnHighlight()
                     end
-                    return sousuo
+                end
+            end
+        end
+        if SERVER_SIDE then
+            ServerRPCFunction(owner, prefab, source, unhighlighten, highlighten) -- call it directly without rpc, if we are also server
+        else
+            local rpc = GetModRPC("FinderMod", "CheckContainersItem")
+            SendModRPCToServer(rpc, prefab, source, unhighlighten, highlighten)
+        end
+    end
+end
+
+local function DoHighlightStuff(owner, prefab, source, unhighlighten, highlighten)
+    if CLIENT_SIDE and owner == GLOBAL.ThePlayer then
+        ClientUnhighlightChests(owner, prefab, source, unhighlighten, highlighten)
+    end
+end
+
+local function onactiveitem(owner, data)
+    local prefab = data.item and data.item.prefab or nil
+    local source = "newactiveitem"
+    if owner and prefab then
+        DoHighlightStuff(owner, prefab, source, true, true)
+    else
+        DoHighlightStuff(owner, prefab, source, true, false)
+    end
+end
+
+local function OnDirtyEventSearchedChest(inst, i)
+    if CLIENT_SIDE and inst == GLOBAL.ThePlayer then
+        if client_option then
+            local chest = inst["mynetvarSearchedChest" .. tostring(i)]:value()
+            if chest then
+                if not chest.components.highlight then
+                    chest:AddComponent('highlight')
                 end
 
-                -----
-                if not B or B.prefab ~= "fishingrod" then
-                    local C = zhuangbei()
-                    if not C then
-                        local builder = GLOBAL.ThePlayer.replica.builder
-                        if builder:KnowsRecipe("fishingrod") and builder:CanBuild("fishingrod") then
-                            qmc:RemoteMakeRecipeFromMenu(GLOBAL.GetValidRecipe("fishingrod"))
-                        else
-                            return
-                        end
-                    end
-                    ku:ControllerUseItemOnSelfFromInvTile(C)
+                if chest.components.highlight then
+                    chest.components.highlight.ApplyColour = custom_ApplyColour
+                    chest.components.highlight.UnHighlight = custom_UnHighlight
+                    chest.components.highlight:Highlight(0, 0, 0)
                 end
-                GLOBAL.ThePlayer.diaoyu = GLOBAL.ThePlayer:StartThread(function()
-                    local qid = true
-                    local ccc = 0.1
-                    while qid do
-                        local ku = GLOBAL.ThePlayer.replica.inventory
-                        local Bbao = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem("back")
-                        local B = GLOBAL.ThePlayer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-                        if not B or B.prefab ~= "fishingrod" then
-                            local C = zhuangbei()
-                            if not C then
-                                local builder = GLOBAL.ThePlayer.replica.builder
-                                if builder:KnowsRecipe("fishingrod") and builder:CanBuild("fishingrod") then
-                                    qmc:RemoteMakeRecipeFromMenu(GLOBAL.GetValidRecipe("fishingrod"))
-                                else
-                                    return
-                                end
-                            end
-                            ku:ControllerUseItemOnSelfFromInvTile(C)
-                            GLOBAL.Sleep(0.3)
-                        end
-                        local C = nil
-                        C = GLOBAL.FindEntity(GLOBAL.ThePlayer, 20, function(guy)
-                            return (guy.prefab == "pond" or guy.prefab == "pond_mos" or guy.prefab == "pond_cave"
-                                    or guy.prefab == "oasislake") and guy:GetDistanceSqToPoint(pos:Get()) < 14 * 14
-                        end, nil, { "INLIMBO", "noauradamage" })
-                        if C ~= nil and qid then
-                            local A = C:GetPosition()
-                            local controlmods = qmc:EncodeControlMods()
-                            local E, F = GLOBAL.ThePlayer.components.playeractionpicker:DoGetMouseActions(A, C)
-                            if E then
-                                local S = E and E:GetActionString() or ""
-                                if S ~= GLOBAL.STRINGS.ACTIONS.REEL.CANCEL then
-                                    qmc:DoAction(E)
-                                    GLOBAL.Sleep(0.1)
-                                    GLOBAL.SendRPCToServer(GLOBAL.RPC.LeftClick, E.action.code, A.x, A.z, C, false, controlmods, false, E.action.mod_name)
-                                end
-                            end
-                        else
-                            qid = false
-                            GLOBAL.ThePlayer.diaoyu:SetList(nil)
-                            GLOBAL.ThePlayer.diaoyu = nil
-                        end
-                        GLOBAL.Sleep(ccc)
-                    end
-                end)
-        end)
-        ---------------------------------------------------------------------------
-    end)
+            end
+        end
+    end
+end
+
+
+local function RegisterListeners(inst)
+    for i = 1, 50 do
+        inst:ListenForEvent("DirtyEventSearchedChest" .. tostring(i), function(inst) inst:DoTaskInTime(0, OnDirtyEventSearchedChest(inst, i)) end)
+    end
+end
+
+local function init(inst)
+    if not inst then return end
+    for i = 1, 50 do
+        inst["mynetvarSearchedChest" .. tostring(i)] = GLOBAL.net_entity(inst.GUID, "SearchedChest" .. tostring(i) .. "NetStuff", "DirtyEventSearchedChest" .. tostring(i))
+        inst["mynetvarSearchedChest" .. tostring(i)]:set(nil)
+    end
+    inst:DoTaskInTime(0, RegisterListeners)
+    inst:ListenForEvent('newactiveitem', onactiveitem)
+end
+
+AddPlayerPostInit(function(owner)
+    init(owner)
+end)
+
+AddModRPCHandler("FinderMod", "CheckContainersItem", ServerRPCFunction)
+
+AddClassPostConstruct("widgets/ingredientui", function(self)
+    local __IngredientUI_OnGainFocus = self.OnGainFocus
+
+    function self:OnGainFocus(...)
+        local tex = self.ing and self.ing.texture and self.ing.texture:match('[^/]+$'):gsub('%.tex$', '')
+        local owner = self.parent and self.parent.parent and self.parent.parent.owner
+        if tex and owner then
+            DoHighlightStuff(owner, tex, "Crafting", true, true)
+        end
+        if __IngredientUI_OnGainFocus then
+            return __IngredientUI_OnGainFocus(self, ...)
+        end
+    end
+
+    local __IngredientUI_OnLoseFocus = self.OnLoseFocus
+    function self:OnLoseFocus(...)
+        local owner = self.parent and self.parent.parent and self.parent.parent.owner
+        DoHighlightStuff(owner, nil, "Crafting", true, false)
+        if __IngredientUI_OnLoseFocus then
+            return __IngredientUI_OnLoseFocus(self, ...)
+        end
+    end
 end)
 
 
-AddPrefabPostInit("animal_track", function(inst)
-    inst._jiantou = inst:DoPeriodicTask(0.5, function()
-        if inst and inst:IsValid() and inst.Transform then
-            local sss = 2
-            local jiaodu = inst.Transform:GetRotation() + 90
-            local x, y, z = inst.entity:LocalToWorldSpace(0, 0, -40)
-            local a = GLOBAL.TheSim:FindEntities(x, 0, z, 10, { "dirtpile" }, { "locomotor", "INLIMBO" })
-            local sd = CJST()
-            sd.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            sd.Transform:SetRotation(jiaodu)
-            if a[1] ~= nil then
-                local x1, y1, z1 = a[1].Transform:GetWorldPosition()
-                sss = math.max(math.sqrt(inst:GetDistanceSqToPoint(x1, y1, z1)) / 20, 0.01)
-                sd:FacePoint(Point(x1, y1, z1))
+local function testCraftPot()
+    local FoodIngredientUI = _G.require 'widgets/foodingredientui'
+end
+
+if GLOBAL.pcall(testCraftPot) then
+    local cooking = _G.require("cooking")
+    local ing = cooking.ingredients
+
+    AddClassPostConstruct("widgets/foodingredientui", function(self)
+        local __FoodIngredientUI_OnGainFocus = self.OnGainFocus
+        function self:OnGainFocus(...)
+            local searchtag = self.prefab
+            local isname = self.is_name
+            local owner = self.owner
+            local prefabs = {}
+
+            if not isname then
+                for prefab, xyz in pairs(ing) do
+                    for tag, number in pairs(xyz.tags) do
+                        if tag == searchtag then
+                            table.insert(prefabs, prefab)
+                        end
+                    end
+                end
+            elseif isname and GLOBAL.PREFABDEFINITIONS[searchtag] then
+                table.insert(prefabs, GLOBAL.PREFABDEFINITIONS[searchtag].name)
             end
-            sd:DoTaskInTime(sss or 2, sd.Remove)
-            sd.AnimState:SetLightOverride(1)
-            sd.Physics:SetMotorVel(20, 0, 0)
+            DoHighlightStuff(owner, nil, "CraftPot", true, false)
+            for k, prefab in pairs(prefabs) do
+                if prefab and owner then
+                    DoHighlightStuff(owner, prefab, "CraftPot", false, true)
+                end
+            end
+            if __FoodIngredientUI_OnGainFocus then
+                return __FoodIngredientUI_OnGainFocus(self, ...)
+            end
         end
     end)
+
+    AddClassPostConstruct("widgets/foodcrafting", function(self)
+        local _OnLoseFocus = self.OnLoseFocus
+        self.OnLoseFocus = function(...)
+            local owner = self.owner
+            DoHighlightStuff(owner, nil, "CraftPot", true, false)
+            if _OnLoseFocus then
+                return _OnLoseFocus(self, ...)
+            end
+        end
+
+        local _Close = self.Close
+        self.Close = function(...)
+            local owner = self.owner
+            DoHighlightStuff(owner, nil, "CraftPotClose", true, false)
+            if _Close then
+                return _Close(self, ...)
+            end
+        end
+    end)
+end
+
+
+AddClassPostConstruct("widgets/tabgroup", function(self)
+    local __TabGroup_DeselectAll = self.DeselectAll
+    function self:DeselectAll(...)
+        DoHighlightStuff(GLOBAL.ThePlayer, nil, "CraftingClose", true, false)
+        return __TabGroup_DeselectAll(self, ...)
+    end
 end)
