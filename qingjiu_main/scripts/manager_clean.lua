@@ -44,13 +44,13 @@ if IsServer then
             bunnyman = { max = 10 * level }, -- 兔人
             slurtle = { max = 5 * level }, -- 鼻涕虫
             snurtle = { max = 5 * level }, -- 蜗牛
-            --leif            = { max = 2 * level },    -- 树精
-            --spat            = { max = 1 * level },    -- 钢羊
-            --warg            = { max = 1 * level },    -- 座狼
+            leif = { max = 2 * level }, -- 树精
+            spat = { max = 1 * level }, -- 钢羊
+            warg = { max = 1 * level }, -- 座狼
             mooseegg = { max = 1 * level }, -- 春鸭巢
-            --moose           = { max = 1 * level },    -- 春鸭
-            --bearger         = { max = 1 * level },    -- 熊
-            --deerclops       = { max = 1 * level },    -- 巨鹿
+            moose = { max = 1 * level }, -- 春鸭
+            bearger = { max = 1 * level }, -- 熊
+            deerclops = { max = 1 * level }, -- 巨鹿
 
             ------------------------ 地面物体  ------------------------
             grass = { max = 150 * level, permission = true }, -- 草
@@ -58,7 +58,7 @@ if IsServer then
             berrybush = { max = 150 * level, permission = true }, -- 浆果丛
             berrybush2 = { max = 150 * level, permission = true }, -- 分叉浆果丛
             berrybush_juicy = { max = 150 * level, permission = true }, -- 多汁浆果丛
-            flower = { max = 80 * level, permission = true }, -- 花
+            --flower = { max = 80 * level, permission = true }, -- 花
             acorn_sapling = { max = 10 * level, permission = true }, -- 白树苗
             pinecone_sapling = { max = 1 * level, permission = true }, -- 松树苗
             twiggy_nut_sapling = { max = 1 * level, permission = true }, -- 树枝树苗
@@ -132,7 +132,7 @@ if IsServer then
             ------------------------ 地面玩家失去权限的建筑  ------------------------
             -- firepit     	= { max = 0 * level, permission = true },  -- 石篝火
             -- coldfire     	= { max = 0 * level, permission = true },  -- 冷火
-             researchlab     = { max = 0 * level, permission = true },  -- 科学机器
+            researchlab = { max = 0 * level, permission = true }, -- 科学机器
             -- researchlab2    = { max = 0 * level, permission = true },  -- 炼金术引擎
             -- researchlab3    = { max = 0 * level, permission = true },  -- 阴影操纵者
             -- researchlab4    = { max = 0 * level, permission = true },  -- 灵子分解器
@@ -148,7 +148,7 @@ if IsServer then
             -- fast_farmplot   = { max = 0 * level, permission = true },  -- 高级农田
             -- siestahut     	= { max = 0 * level, permission = true },  -- 午睡小屋
             -- tent     		= { max = 0 * level, permission = true },  -- 帐篷
-            -- wardrobe     	= { max = 0 * level, permission = true },  -- 衣柜
+            wardrobe = { max = 0 * level, permission = true }, -- 衣柜
             -- birdcage     	= { max = 0 * level, permission = true },  -- 鸟笼
             -- bebox         	= { max = 0 * level, permission = true },  -- 蜂箱
             -- meatrack     	= { max = 0 * level, permission = true },  -- 晾肉架
@@ -160,9 +160,9 @@ if IsServer then
             -- mushroom_light2 = { max = 0 * level, permission = true },  -- 发光器
             -- eyeturret     	= { max = 0 * level, permission = true },  -- 眼睛炮塔
             -- firesuppressor  = { max = 0 * level, permission = true },  -- 灭火器
-            minisign  		= { max = 0 * level, permission = true },  -- 小型标志
-            homesign  		= { max = 0 * level, permission = true },  -- 路牌
-            arrowsign_post  = { max = 0 * level, permission = true },  -- 方向指示牌
+            minisign = { max = 0 * level, permission = true }, -- 小型标志
+            homesign = { max = 0 * level, permission = true }, -- 路牌
+            arrowsign_post = { max = 0 * level, permission = true }, -- 方向指示牌
             -- scarecrow  		= { max = 0 * level, permission = true },  -- 稻草人
 
             ------------------------ 地面玩家失去权限的门墙  ------------------------

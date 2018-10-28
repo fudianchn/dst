@@ -1490,7 +1490,7 @@ if IsServer then
     --防止怪物摧毁建筑
     local cant_destroyby_monster = true
     --防止恶意封门50码
-    local portal_clear = 50
+    local portal_clear = 25
     --背包拾取增强(当身上有背包时拾取地上的背包将持有在手上而不是直接装备)
     local pack_pickup = true
     --完整远古祭坛防拆毁
@@ -3721,8 +3721,8 @@ end
 
 
 --fr狗牙陷阱自动重置
---十秒重置
-local reTrapAuto = 10
+--三秒重置
+local reTrapAuto = 3
 local function TrapComponentPostInit(self)
     function self:Explode(target)
         self:StopTesting()

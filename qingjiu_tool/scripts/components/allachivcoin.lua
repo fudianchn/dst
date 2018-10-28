@@ -63,6 +63,7 @@ local allachivcoin = Class(function(self, inst)
     self.a_sleep = true
     self.jump = false
     self.level = false
+    self.freya = false
     self.fastpicker = false
 
 
@@ -419,7 +420,7 @@ end
 
 --提升速度获取
 function allachivcoin:speedupcoin(inst)
-    if self.coinamount >= allachiv_coinuse["speedup"] and self.speedupamount <= 49 then
+    if self.coinamount >= allachiv_coinuse["speedup"] and self.speedupamount <= 19 then
         self.speedupamount = self.speedupamount + 1
         inst.components.locomotor.externalspeedmultiplier = inst.components.locomotor.externalspeedmultiplier + allachiv_coindata["speedup"]
         self.speedcheck = inst.components.locomotor.externalspeedmultiplier

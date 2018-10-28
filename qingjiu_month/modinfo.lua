@@ -193,10 +193,10 @@ configuration_options =
 	
 	{	
 		name = "temperature",
-		label = "地下室温度 凉爽",
+		label = "地下室温度 正常温度",
 		hover = "角色所感受到的温度.",
 		options = options_temperature,
-		default = -25,
+		default = 0,
 	},
 	
 	divide("Miscellaneous", ""),

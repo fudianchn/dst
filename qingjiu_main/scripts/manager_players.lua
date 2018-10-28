@@ -6,8 +6,8 @@ local IsServer = TheNet:GetIsServer() or TheNet:IsDedicated()
 local GetTaskRemaining = _G.GetTaskRemaining
 --防止怪物摧毁建筑
 local cant_destroyby_monster = true
---玩家离线48小时自动解锁
-local remove_owner_time = 172800
+--玩家离线72小时自动解锁
+local remove_owner_time = 259200
 --TheShard:StartMigration(migrationdata.player.userid, migrationdata.worldid)
 
 --local AllPlayers = _G.AllPlayers

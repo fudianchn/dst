@@ -18,7 +18,7 @@ local CAMERASHAKE = _G.CAMERASHAKE
 --火焰不蔓延
 local spreadFire = 0
 --防止恶意封门50码
-local portal_clear = 50
+local portal_clear = 25
 --小偷包不保鲜
 local krampus_sack_ice = false
 --远古犀牛刷新时间10天,如果小于0则不刷新

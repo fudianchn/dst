@@ -298,7 +298,7 @@ allachiv_coinget={
 ["all"] = 2000,
 
 ["a_1"] = 4,
-["a_2"] = 500,
+["a_2"] = 150,
 ["a_3"] = 4,
 ["a_4"] = 4,
 ["a_5"] = 4,
@@ -321,7 +321,7 @@ allachiv_coinget={
 ["a_fishtacos"] =1,
 ["a_turkeydinner"] = 1,
 ["a_fishsticks"] = 1,
-["a_meatballs"] = 11,
+["a_meatballs"] = 1,
 ["a_perogies"] = 1,
 ["a_bisque"] = 1,
 ["a_surfnturf"] = 1,

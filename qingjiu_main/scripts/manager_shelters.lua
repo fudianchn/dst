@@ -4,9 +4,9 @@ local IsServer = TheNet:GetIsServer() or TheNet:IsDedicated()
 
 if IsServer then
 	-- 防止怪物摧毁建筑
-	local cant_destroyby_monster = GetModConfigData("cant_destroyby_monster")
+	local cant_destroyby_monster = true
 	-- 防止玩家破坏野外猪人房兔人房
-	local house_plain_nodestroy = GetModConfigData("house_plain_nodestroy")
+	local house_plain_nodestroy = true
 	--------------------------------------- 防止摧毁野外猪人房/兔人房/完整的远古祭坛 ---------------------------------------
 	local shelterTable = {
 		"rabbithouse",     -- 兔人房

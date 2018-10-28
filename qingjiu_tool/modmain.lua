@@ -309,8 +309,8 @@ local function get_tile_pos(x, y)
 end
 
 local function gen_island()
-    --岛屿尺寸为15左右
-    local centroid_x, centroid_y, lines = perlin_island(math.floor(15 * (0.85 + 0.3 * math.random())), { { 0.5, 1 }, { 0.35, 4 } })
+    --岛屿尺寸为50左右
+    local centroid_x, centroid_y, lines = perlin_island(math.floor(30 * (0.85 + 0.3 * math.random())), { { 0.5, 1 }, { 0.35, 4 } })
     local tx, ty = find_place(lines, 12)
     local terrains = {
         GLOBAL.GROUND.MARSH,
@@ -410,7 +410,7 @@ end)
 local function WelcomeMessageInit(inst)
     inst:AddComponent("message")
     inst.components.message:SetTitle("榜文告示")
-    inst.components.message:SetMessage("作为一名饥荒玩家,你要学会自己生存\n1.点击城门选择城堡\n2.时间季节异步执行\n其他详情参见Q群\n868423108")
+    inst.components.message:SetMessage("作为一名饥荒玩家,你要学会自己生存\n1.点击城门选择城堡\n2.时间季节异步执行\n详情参见Q群\n868423108")
 end
 
 AddPrefabPostInit("world", WelcomeMessageInit)
@@ -1634,9 +1634,7 @@ end
 
 
 
---fr更多的背包
 --fr箱子背包更大容量
---get Global vars
 local require = GLOBAL.require
 local Vector3 = GLOBAL.Vector3
 local TUNING = GLOBAL.TUNING
@@ -1645,7 +1643,6 @@ local TheInput = GLOBAL.TheInput
 local ThePlayer = GLOBAL.ThePlayer
 local net_entity = GLOBAL.net_entity
 
---set global vars/get config
 local containers = require("containers")
 containers.MAXITEMSLOTS = 24
 --背包由8格增加到12格
