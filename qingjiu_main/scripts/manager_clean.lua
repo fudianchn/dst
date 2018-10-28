@@ -26,14 +26,14 @@ if IsServer then
     local function GetLevelPrefabs(level)
         local levelPrefabs = {
             ------------------------ 生物  ------------------------
-            hound = { max = 1 * level }, -- 狗
-            firehound = { max = 1 * level }, -- 火狗
-            spider_warrior = { max = 1 * level }, -- 蜘蛛战士
-            spider = { max = 1 * level }, -- 蜘蛛
-            spiderqueen = { max = 1 * level }, -- 蜘蛛女王
-            flies = { max = 1 * level }, -- 苍蝇
-            mosquito = { max = 1 * level }, -- 蚊子
-            bee = { max = 1 * level }, -- 蜜蜂
+            hound = { max = 0 * level }, -- 狗
+            firehound = { max = 0 * level }, -- 火狗
+            spider_warrior = { max = 0 * level }, -- 蜘蛛战士
+            spider = { max = 0 * level }, -- 蜘蛛
+            spiderqueen = { max = 0 * level }, -- 蜘蛛女王
+            flies = { max = 0 * level }, -- 苍蝇
+            mosquito = { max = 0 * level }, -- 蚊子
+            bee = { max = 0 * level }, -- 蜜蜂
             killerbee = { max = 0 * level }, -- 杀人蜂
             mole = { max = 10 * level }, -- 鼹鼠
             frog = { max = 0 * level }, -- 青蛙
@@ -41,10 +41,10 @@ if IsServer then
             beefalo = { max = 12 * level, permission = true }, -- 牛
             lightninggoat = { max = 8 * level }, -- 羊
             deer = { max = 10 * level }, -- 鹿
-            bunnyman = { max = 10 * level }, -- 兔人
+            bunnyman = { max = 0 * level }, -- 兔人
             slurtle = { max = 5 * level }, -- 鼻涕虫
             snurtle = { max = 5 * level }, -- 蜗牛
-            leif = { max = 2 * level }, -- 树精
+            leif = { max = 1 * level }, -- 树精
             spat = { max = 1 * level }, -- 钢羊
             warg = { max = 1 * level }, -- 座狼
             mooseegg = { max = 1 * level }, -- 春鸭巢
@@ -75,54 +75,130 @@ if IsServer then
             burntground = { max = 5 * level }, -- 陨石痕跡
 
             ------------------------ 可拾取物品  ------------------------
-            seeds = { max = 1, stack = true, reclean = 3 }, -- 种子
-            log = { max = 10 * level, stack = true, reclean = 3 }, -- 木头
-            pinecone = { max = 10 * level, stack = true, reclean = 3 }, -- 松果
-            cutgrass = { max = 10 * level, stack = true, reclean = 3 }, -- 草
-            twigs = { max = 10 * level, stack = true, reclean = 3 }, -- 树枝
-            rocks = { max = 10 * level, stack = true, reclean = 3 }, -- 石头
-            nitre = { max = 10 * level, stack = true, reclean = 3 }, -- 硝石
-            flint = { max = 10 * level, stack = true, reclean = 3 }, -- 燧石
-            poop = { max = 7 * level, stack = true, reclean = 3 }, -- 屎
-            guano = { max = 5 * level, stack = true, reclean = 3 }, -- 鸟屎
-            manrabbit_tail = { max = 7 * level, stack = true, reclean = 3 }, -- 兔毛
-            silk = { max = 7 * level, stack = true, reclean = 3 }, -- 蜘蛛丝
-            spidergland = { max = 7 * level, stack = true, reclean = 3 }, -- 蜘蛛腺体
-            stinger = { max = 5 * level, stack = true, reclean = 3 }, -- 蜂刺
-            houndstooth = { max = 8 * level, stack = true, reclean = 3 }, -- 犬牙
-            mosquitosack = { max = 8 * level, stack = true, reclean = 3 }, -- 蚊子血袋
-            glommerfuel = { max = 8 * level, stack = true, reclean = 3 }, -- 咕嚕咪粘液
-            slurtleslime = { max = 6 * level, stack = true, reclean = 3 }, -- 鼻涕虫粘液
-            slurtle_shellpieces = { max = 10 * level, stack = true, reclean = 3 }, -- 鼻涕虫壳碎片
+            seeds = { max = 0, reclean = 3 }, -- 种子
+            log = { max = 0 * level, reclean = 3 }, -- 木头
+            pinecone = { max = 0 * level, reclean = 3 }, -- 松果
+            cutgrass = { max = 0 * level, reclean = 3 }, -- 草
+            twigs = { max = 0 * level, reclean = 3 }, -- 树枝
+            rocks = { max = 0 * level, reclean = 3 }, -- 石头
+            nitre = { max = 0 * level, reclean = 3 }, -- 硝石
+            flint = { max = 0 * level, reclean = 3 }, -- 燧石
+            poop = { max = 0 * level, reclean = 3 }, -- 屎
+            guano = { max = 0 * level, reclean = 3 }, -- 鸟屎
+            manrabbit_tail = { max = 0 * level, reclean = 3 }, -- 兔毛
+            silk = { max = 0 * level, reclean = 3 }, -- 蜘蛛丝
+            spidergland = { max = 0 * level, reclean = 3 }, -- 蜘蛛腺体
+            stinger = { max = 0 * level, reclean = 3 }, -- 蜂刺
+            houndstooth = { max = 0 * level, reclean = 3 }, -- 犬牙
+            mosquitosack = { max = 0 * level, reclean = 3 }, -- 蚊子血袋
+            glommerfuel = { max = 0 * level, reclean = 3 }, -- 咕嚕咪粘液
+            slurtleslime = { max = 0 * level, reclean = 3 }, -- 鼻涕虫粘液
+            slurtle_shellpieces = { max = 0 * level, reclean = 3 }, -- 鼻涕虫壳碎片
 
-            spoiled_food = { max = 100 * level }, -- 腐烂食物
-            winter_food1 = { max = 0 * level, stack = true, reclean = 3 }, -- 姜饼人曲奇饼
-            winter_food2 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_food3 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_food4 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_food5 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_ornament_plain1 = { max = 0 * level, stack = true, reclean = 3 }, -- 节日小饰品
-            winter_ornament_plain2 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_ornament_plain4 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_ornament_plain5 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_ornament_plain6 = { max = 0 * level, stack = true, reclean = 3 },
-            winter_ornament_plain7 = { max = 0 * level, stack = true, reclean = 3 },
-            trinket_3 = { max = 0 * level, stack = true, reclean = 3 }, -- 戈尔迪乌姆之结
-            trinket_4 = { max = 0 * level, stack = true, reclean = 3 },
-            trinket_6 = { max = 0 * level, stack = true, reclean = 3 },
-            trinket_8 = { max = 0 * level, stack = true, reclean = 3 },
-            blueprint = { max = 1 * level }, -- 蓝图
+            spoiled_food = { max = 0 * level }, -- 腐烂食物
+            winter_food1 = { max = 0 * level }, -- 姜饼人曲奇饼
+            winter_food2 = { max = 0 * level },
+            winter_food3 = { max = 0 * level },
+            winter_food4 = { max = 0 * level },
+            winter_food5 = { max = 0 * level },
+            winter_food6 = { max = 0 * level },
+            winter_food7 = { max = 0 * level },
+            winter_food8 = { max = 0 * level },
+            winter_food9 = { max = 0 * level },
+            winter_ornament_plain1 = { max = 0 * level }, -- 节日小饰品
+            winter_ornament_plain2 = { max = 0 * level },
+            winter_ornament_plain4 = { max = 0 * level },
+            winter_ornament_plain5 = { max = 0 * level },
+            winter_ornament_plain6 = { max = 0 * level },
+            winter_ornament_plain7 = { max = 0 * level },
+            winter_ornament_plain8 = { max = 0 * level },
+            winter_ornament_plain9 = { max = 0 * level },
+            winter_ornament_fancy1 = { max = 0 * level }, --不规则形状饰品
+            winter_ornament_fancy2 = { max = 0 * level },
+            winter_ornament_fancy3 = { max = 0 * level },
+            winter_ornament_fancy4 = { max = 0 * level },
+            winter_ornament_fancy5 = { max = 0 * level },
+            winter_ornament_fancy6 = { max = 0 * level },
+            winter_ornament_fancy7 = { max = 0 * level },
+            winter_ornament_fancy8 = { max = 0 * level },
+            winter_ornament_fancy9 = { max = 0 * level },
+            winter_ornament_boss_bearger = { max = 0 * level }, --华丽装饰物
+            winter_ornament_boss_deerclops = { max = 0 * level },
+            winter_ornament_boss_moose = { max = 0 * level },
+            winter_ornament_boss_antlion = { max = 0 * level },
+            winter_ornament_boss_dragonfly = { max = 0 * level },
+            winter_ornament_boss_beequeen = { max = 0 * level },
+            winter_ornament_boss_klaus = { max = 0 * level },
+            winter_ornament_boss_krampus = { max = 0 * level },
+            winter_ornament_boss_noeyeblue = { max = 0 * level },
+            winter_ornament_boss_noeyered = { max = 0 * level },
+            winter_ornament_boss_toadstool = { max = 0 * level },
+            winter_ornament_boss_fuelweaver = { max = 0 * level },
+            trinket_1 = { max = 0 * level }, -- 戈尔迪乌姆之结
+            trinket_2 = { max = 0 * level },
+            trinket_3 = { max = 0 * level },
+            trinket_4 = { max = 0 * level },
+            trinket_5 = { max = 0 * level },
+            trinket_6 = { max = 0 * level },
+            trinket_7 = { max = 0 * level },
+            trinket_8 = { max = 0 * level },
+            trinket_9 = { max = 0 * level },
+            trinket_10 = { max = 0 * level },
+            trinket_11 = { max = 0 * level },
+            trinket_12 = { max = 0 * level },
+            trinket_13 = { max = 0 * level },
+            trinket_14 = { max = 0 * level },
+            trinket_15 = { max = 0 * level },
+            trinket_16 = { max = 0 * level },
+            trinket_17 = { max = 0 * level },
+            trinket_18 = { max = 0 * level },
+            trinket_19 = { max = 0 * level },
+            trinket_20 = { max = 0 * level },
+            trinket_21 = { max = 0 * level },
+            trinket_22 = { max = 0 * level },
+            trinket_23 = { max = 0 * level },
+            trinket_24 = { max = 0 * level },
+            trinket_25 = { max = 0 * level },
+            trinket_26 = { max = 0 * level },
+            trinket_27 = { max = 0 * level },
+            trinket_28 = { max = 0 * level },
+            trinket_29 = { max = 0 * level },
+            trinket_30 = { max = 0 * level },
+            trinket_31 = { max = 0 * level },
+            chesspiece_muse_sketch = { max = 0 * level }, --王后图纸
+            chesspiece_formal_sketch = { max = 0 * level },
+            chesspiece_knight_sketch = { max = 0 * level },
+            chesspiece_bishop_sketch = { max = 0 * level },
+            chesspiece_deerclops_sketch = { max = 0 * level },
+            chesspiece_bearger_sketch = { max = 0 * level },
+            chesspiece_moosegoose_sketch = { max = 0 * level },
+            chesspiece_dragonfly_sketch = { max = 0 * level },
+            blueprint = { max = 0 * level }, -- 蓝图
             axe = { max = 0 * level }, -- 斧子
+            goldenaxe = { max = 0 * level }, --黄金斧子
             torch = { max = 0 * level }, -- 火炬
             pickaxe = { max = 0 * level }, -- 镐子
+            goldenpickaxe = { max = 0 * level }, -- 黄金稿子
             hammer = { max = 0 * level }, -- 锤子
             shovel = { max = 0 * level }, -- 铲子
+            goldenshovel = { max = 0 * level }, -- 黄金铲子
             razor = { max = 0 * level }, -- 剃刀
             pitchfork = { max = 0 * level }, -- 草叉
             bugnet = { max = 0 * level }, -- 捕虫网
             fishingrod = { max = 0 * level }, -- 魚竿
             spear = { max = 0 * level }, -- 矛
             earmuffshat = { max = 0 * level }, -- 兔耳罩
+
+            spiderhat = { max = 0 * level }, -- 蜘蛛帽
+            avae_egg = { max = 0 * level, reclean = 5 }, --熔岩虫卵
+            feather_crow = { max = 0 * level }, --乌鸦羽毛
+            feather_robin = { max = 0 * level }, --红雀羽毛
+            feather_robin_winter = { max = 0 * level }, --雪雀羽毛
+            nightmarefuel = { max = 0 * level }, --噩梦燃料
+            beardhair = { max = 0 * level }, --胡须
+            pigskin = { max = 0 * level }, --猪皮
+
+
             winterhat = { max = 0 * level }, -- 冬帽
             heatrock = { max = 3 * level }, -- 热能石
             trap = { max = 30 * level }, -- 动物陷阱

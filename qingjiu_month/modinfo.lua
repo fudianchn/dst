@@ -1,7 +1,7 @@
 name = "每月更新"
 description = "自用"
 author = "guido"
-version = "0.0.2"
+version = "0.0.6"
 forumthread = ""
 --api版本联机10，单机6
 api_version = 10
@@ -196,7 +196,7 @@ configuration_options =
 		label = "地下室温度 正常温度",
 		hover = "角色所感受到的温度.",
 		options = options_temperature,
-		default = 0,
+		default = -25,
 	},
 	
 	divide("Miscellaneous", ""),
