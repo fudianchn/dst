@@ -295,7 +295,7 @@ allachiv_coinget={
 ["a_toadstool_dark"] = 10,
 
 
-["all"] = 2000,
+["all"] = 1000,
 
 ["a_1"] = 4,
 ["a_2"] = 150,

@@ -10,7 +10,7 @@ local perlin_island = require("perlin_island")
 
 GLOBAL.STRINGS.NAMES.GRABOID = "梦岛"
 GLOBAL.STRINGS.NAMES.DYNAMITE = "梦岛烟花"
-GLOBAL.STRINGS.RECIPE_DESC.DYNAMITE = "每座城堡只有一座岛屿"
+GLOBAL.STRINGS.RECIPE_DESC.DYNAMITE = "每座城堡只有三座岛屿"
 
 PrefabFiles = {
     "graboid",
@@ -38,6 +38,20 @@ PrefabFiles = {
     "rose_placer",
     "pumpkin_planted.lua",
     "pumpkin_planted_placer.lua",
+
+    "prayer_symbol",
+    "lucky_gem",
+    "keep_amulet",
+    "dyed_bucket",
+    "keep_pill",
+    "transport_pill",
+    "lucky_ash",
+    "lucky_light",
+    "lucky_staff",
+    "lucky_hat",
+    "lucky_fruit_seeds",
+    "lucky_fruit",
+    "lucky_juice",
 }
 
 Assets = {
@@ -219,11 +233,37 @@ Assets = {
     Asset("ATLAS", "images/container_x20.xml"),
     Asset("IMAGE", "images/krampus_sack_bg.tex"),
     Asset("ATLAS", "images/krampus_sack_bg.xml"),
+
+    Asset("ATLAS", "images/prayer_symbol.xml"),
+    Asset("IMAGE", "images/prayer_symbol.tex"),
+    Asset("ATLAS", "images/lucky_gem.xml"),
+    Asset("IMAGE", "images/lucky_gem.tex"),
+    Asset("ATLAS", "images/keep_amulet.xml"),
+    Asset("IMAGE", "images/keep_amulet.tex"),
+    Asset("ATLAS", "images/dyed_bucket.xml"),
+    Asset("IMAGE", "images/dyed_bucket.tex"),
+    Asset("ATLAS", "images/keep_pill.xml"),
+    Asset("IMAGE", "images/keep_pill.tex"),
+    Asset("ATLAS", "images/transport_pill.xml"),
+    Asset("IMAGE", "images/transport_pill.tex"),
+    Asset("ATLAS", "images/lucky_ash.xml"),
+    Asset("IMAGE", "images/lucky_ash.tex"),
+    Asset("ATLAS", "images/lucky_staff.xml"),
+    Asset("IMAGE", "images/lucky_staff.tex"),
+    Asset("ATLAS", "images/lucky_hat.xml"),
+    Asset("IMAGE", "images/lucky_hat.tex"),
+    Asset("ATLAS", "images/lucky_seed.xml"),
+    Asset("IMAGE", "images/lucky_seed.tex"),
+    Asset("ATLAS", "images/lucky_fruit.xml"),
+    Asset("IMAGE", "images/lucky_fruit.tex"),
+    Asset("ANIM", "anim/lucky_juice.zip"),
+    Asset("ATLAS", "images/lucky_juice.xml"),
+    Asset("IMAGE", "images/lucky_juice.tex"),
 }
 
 AddMinimapAtlas("minimap/shared_islands_minimap.xml")
---炸药配方12个紫宝石68个绳索20个火药
-local dynamiteRecipe = { { "purplegem", 12 }, { "rope", 68 }, { "gunpowder", 20 } }
+--炸药配方480个紫宝石888个绳索100个火药
+local dynamiteRecipe = { { "purplegem", 480 }, { "rope", 380 }, { "gunpowder", 120 } }
 local ingredients = {}
 for i = 1, #dynamiteRecipe do
     ingredients[#ingredients + 1] = Ingredient(dynamiteRecipe[i][1], dynamiteRecipe[i][2])
@@ -309,8 +349,8 @@ local function get_tile_pos(x, y)
 end
 
 local function gen_island()
-    --岛屿尺寸为50左右
-    local centroid_x, centroid_y, lines = perlin_island(math.floor(30 * (0.85 + 0.3 * math.random())), { { 0.5, 1 }, { 0.35, 4 } })
+    --岛屿尺寸为25左右
+    local centroid_x, centroid_y, lines = perlin_island(math.floor(25 * (0.85 + 0.3 * math.random())), { { 0.5, 1 }, { 0.35, 4 } })
     local tx, ty = find_place(lines, 12)
     local terrains = {
         GLOBAL.GROUND.MARSH,
@@ -349,8 +389,8 @@ AddSimPostInit(function()
         local shared_island_hub = TheSim:FindFirstEntityWithTag("multiteleporter_root")
 
         if shared_island_hub == nil then
-            --最大1个岛屿
-            local n = 1
+            --最大3个岛屿
+            local n = 3
             for i = 1, n do
                 local hub = gen_island()
                 if hub ~= nil then
@@ -2284,3 +2324,270 @@ AddClassPostConstruct("widgets/tabgroup", function(self)
         return __TabGroup_DeselectAll(self, ...)
     end
 end)
+
+
+
+
+
+--fr风滚草
+TUNING.ZYZS_OPEN = false --资源再生
+TUNING.GAME_LEVEL = 10 --难度选择0,1,2,5,10(由简至难)
+TUNING.JCZY_TIMES = 1 --基础资源(0,1,2,5,10,20,50,100)
+TUNING.GJZY_TIMES = 1 --高级资源(一些需要通过打怪、合成或其他方式得到的高级资源)
+TUNING.XYZY_TIMES = 1 --稀有资源
+TUNING.DXZY_TIMES = 1 --地穴资源
+TUNING.JCSW_TIMES = 1 --基础食物
+TUNING.GJSW_TIMES = 1 --高级食物
+TUNING.SPLL_TIMES = 1 --食谱料理
+TUNING.GZLT_TIMES = 1 --各种蓝图
+TUNING.JCDJ_TIMES = 1 --基础道具
+TUNING.JJDJ_TIMES = 1 --进阶道具
+TUNING.XYDJ_TIMES = 1 --稀有道具
+TUNING.JCZB_TIMES = 1 --基础装备
+TUNING.JJZB_TIMES = 1 --进阶装备
+TUNING.XYZB_TIMES = 1 --稀有装备
+TUNING.PTGW_TIMES = 1 --普通怪物
+TUNING.JJGW_TIMES = 1 --进阶怪物
+TUNING.GJGW_TIMES = 100 --高级怪物
+TUNING.HYZS_TIMES = 100 --花样作死
+TUNING.TSFL_TIMES = 1 --特殊福利
+
+
+--添加幸运值组件
+AddPrefabPostInitAny(function(inst)
+    if inst:HasTag("player") then
+        if GLOBAL.TheNet:GetIsServer() then
+            inst:AddComponent("lucky")
+            inst.components.lucky:DoDelta(0)
+            inst.components.lucky:auraListen()
+        end
+    end
+end)
+
+--添加lucky的riplica
+AddReplicableComponent("lucky")
+
+--注册新物品
+
+--祈运符
+local prayer_symbol = AddRecipe("prayer_symbol",
+    { GLOBAL.Ingredient("featherpencil", 1), GLOBAL.Ingredient("papyrus", 1) },
+    GLOBAL.RECIPETABS.CARTOGRAPHY, GLOBAL.TECH.CARTOGRAPHY_TWO,
+    nil, nil, true, nil, nil, "images/prayer_symbol.xml")
+GLOBAL.STRINGS.NAMES.PRAYER_SYMBOL = "祈运符"
+GLOBAL.STRINGS.RECIPE_DESC.PRAYER_SYMBOL = "使用后可增加10点幸运值"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.PRAYER_SYMBOL = "使用后可增加10点幸运值"
+
+--幸运宝石
+local lucky_gem = AddRecipe("lucky_gem",
+    { GLOBAL.Ingredient("lucky_ash", 5, "images/lucky_ash.xml"), GLOBAL.Ingredient("purplegem", 1) },
+    GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.MAGIC_TWO,
+    nil, nil, nil, nil, nil, "images/lucky_gem.xml")
+GLOBAL.STRINGS.NAMES.LUCKY_GEM = "幸运宝石"
+GLOBAL.STRINGS.RECIPE_DESC.LUCKY_GEM = "合成幸运装备的必要材料"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_GEM = "合成幸运装备的必要材料"
+
+
+--保运护符
+local keep_amulet = AddRecipe("keep_amulet",
+    { GLOBAL.Ingredient("lucky_gem", 1, "images/lucky_gem.xml"), GLOBAL.Ingredient("nightmarefuel", 3), GLOBAL.Ingredient("goldnugget", 5) },
+    GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.MAGIC_THREE,
+    nil, nil, nil, nil, nil, "images/keep_amulet.xml")
+GLOBAL.STRINGS.NAMES.KEEP_AMULET = "保运护符"
+GLOBAL.STRINGS.RECIPE_DESC.KEEP_AMULET = "佩戴后开风滚草不减幸运值"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.KEEP_AMULET = "佩戴后开风滚草不减幸运值"
+
+--染色桶
+local dyed_bucket = AddRecipe("dyed_bucket",
+    { GLOBAL.Ingredient("boards", 5), GLOBAL.Ingredient("rope", 2), GLOBAL.Ingredient("charcoal", 10) },
+    GLOBAL.RECIPETABS.TOWN, GLOBAL.TECH.LOST,
+    "dyed_bucket_placer", 1, nil, nil, nil, "images/dyed_bucket.xml", "dyed_bucket.tex")
+GLOBAL.STRINGS.NAMES.DYED_BUCKET = "染色桶"
+GLOBAL.STRINGS.RECIPE_DESC.DYED_BUCKET = "能将彩色的羽毛染成黑色~"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.DYED_BUCKET = "能将彩色的羽毛染成黑色~"
+
+--保运丸
+local keep_pill = AddRecipe("keep_pill",
+    { GLOBAL.Ingredient("lucky_ash", 5, "images/lucky_ash.xml") },
+    GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.MAGIC_THREE,
+    nil, nil, nil, nil, nil, "images/keep_pill.xml")
+GLOBAL.STRINGS.NAMES.KEEP_PILL = "保运丸"
+GLOBAL.STRINGS.RECIPE_DESC.KEEP_PILL = "使用后可将幸运值重置为50~"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.KEEP_PILL = "使用后可将幸运值重置为50~"
+
+--转运丸
+local transport_pill = AddRecipe("transport_pill",
+    { GLOBAL.Ingredient("lucky_ash", 3, "images/lucky_ash.xml"), GLOBAL.Ingredient("nightmarefuel", 2), GLOBAL.Ingredient("goldnugget", 3) },
+    GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.MAGIC_THREE,
+    nil, nil, nil, nil, nil, "images/transport_pill.xml")
+GLOBAL.STRINGS.NAMES.TRANSPORT_PILL = "转运丸"
+GLOBAL.STRINGS.RECIPE_DESC.TRANSPORT_PILL = "使用后可随机改变自己的幸运值~"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRANSPORT_PILL = "使用后可随机改变自己的幸运值~"
+
+--幸运粉尘
+GLOBAL.STRINGS.NAMES.LUCKY_ASH = "幸运粉尘"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_ASH = "闪耀着幸运之光的粉尘，会被风吹走哦~"
+
+--幸运之星
+GLOBAL.STRINGS.NAMES.LUCKY_LIGHT = "幸运之星"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_LIGHT = "散发着幸运女神的光芒~"
+
+--幸运法杖
+local lucky_staff = AddRecipe("lucky_staff",
+    { GLOBAL.Ingredient("lucky_gem", 1, "images/lucky_gem.xml"), GLOBAL.Ingredient("nightmarefuel", 3), GLOBAL.Ingredient("livinglog", 2) },
+    GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.MAGIC_THREE,
+    nil, nil, nil, nil, nil, "images/lucky_staff.xml")
+GLOBAL.STRINGS.NAMES.LUCKY_STAFF = "幸运法杖"
+GLOBAL.STRINGS.RECIPE_DESC.LUCKY_STAFF = "拥有着召唤幸运之星的神奇力量~"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_STAFF = "拥有着召唤幸运之星的神奇力量~"
+
+--幸运帽
+local lucky_hat = AddRecipe("lucky_hat",
+    { GLOBAL.Ingredient("lucky_gem", 1, "images/lucky_gem.xml"), GLOBAL.Ingredient("walrushat", 1), GLOBAL.Ingredient("goldnugget", 5) },
+    GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.LOST,
+    nil, nil, nil, nil, nil, "images/lucky_hat.xml")
+GLOBAL.STRINGS.NAMES.LUCKY_HAT = "幸运帽"
+GLOBAL.STRINGS.RECIPE_DESC.LUCKY_HAT = "戴着它会很幸运~"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_HAT = "戴着它会很幸运~"
+
+--幸运种子
+GLOBAL.STRINGS.NAMES.LUCKY_FRUIT_SEEDS = "幸运种子"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_FRUIT_SEEDS = "能种出幸运果实哦~"
+
+--幸运果实
+GLOBAL.STRINGS.NAMES.LUCKY_FRUIT = "幸运果实"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_FRUIT = "幸运女神最爱吃的果子~"
+
+--幸运果汁
+GLOBAL.STRINGS.NAMES.LUCKY_JUICE = "幸运果汁"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKY_JUICE = "喝了之后又是运气满满的一天~"
+
+--添加食谱
+AddIngredientValues({ "lucky_fruit" }, { fruit = 0.5 })
+local lucky_juice =
+{
+    name = "lucky_juice",
+    test = function(cooker, names, tags) return names.lucky_fruit == 2 and names.honey == 1 and names.ice == 1 end,
+    priority = 100,
+    weight = 1,
+    foodtype = "VEGGIE",
+    health = 5,
+    hunger = 75,
+    sanity = 30,
+    perishtime = TUNING.PERISH_TWO_DAY,
+    cooktime = 1,
+}
+AddCookerRecipe("cookpot", lucky_juice)
+
+--幸运值显示
+local showlucky = GLOBAL.require("widgets/showlucky")
+local function addShowLuckyWidget(self)
+    if self.owner then
+        self.showlucky = self:AddChild(showlucky(self.owner))
+        self.showlucky:SetHAnchor(0) -- 设置原点x坐标位置，0、1、2分别对应屏幕中、左、右
+        self.showlucky:SetVAnchor(1) -- 设置原点y坐标位置，0、1、2分别对应屏幕中、上、下
+        self.showlucky:SetPosition(0, -20, 0) --设置偏移量
+    end
+end
+
+AddClassPostConstruct("widgets/controls", addShowLuckyWidget)
+
+--祈祷动作
+local ACTIONS = GLOBAL.ACTIONS
+local ActionHandler = GLOBAL.ActionHandler
+AddAction("PRAY", "祈祷", function(act)
+    if act.doer ~= nil and act.invobject ~= nil and act.invobject.components.prayable ~= nil then
+        act.invobject.components.prayable:BeginPray(act.invobject, act.doer)
+        --act.doer.components.inventory:GiveItem(GLOBAL.SpawnPrefab("log"))
+        return true
+    end
+end)
+AddComponentAction("INVENTORY", "prayable", function(inst, doer, actions, right)
+    if doer:HasTag("player") then
+        table.insert(actions, ACTIONS.PRAY)
+    end
+end)
+
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.PRAY, "give"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.PRAY, "give"))
+
+--给三种羽毛添加可染色组件
+local function addDyefn(inst)
+    if GLOBAL.TheWorld.ismastersim then
+        inst:AddComponent("dyeable")
+    end
+end
+
+AddPrefabPostInit("feather_robin", addDyefn)
+AddPrefabPostInit("feather_robin_winter", addDyefn)
+AddPrefabPostInit("feather_canary", addDyefn)
+
+--染色动作
+AddAction("DYE", "染色", function(act)
+    if act.doer ~= nil and act.invobject ~= nil and act.invobject.components.dyeable ~= nil and act.target:HasTag("dyed_bucket") then
+        act.invobject.components.dyeable:BeginDye(act.invobject, act.doer)
+        return true
+    end
+end)
+AddComponentAction("USEITEM", "dyeable", function(inst, doer, target, actions)
+    if doer:HasTag("player") and target:HasTag("dyed_bucket") then
+        table.insert(actions, ACTIONS.DYE)
+    end
+end)
+
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.DYE, "give"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.DYE, "give"))
+
+--补充幸运帽燃料动作
+AddAction("REPAIRLUCKYHAT", "续~", function(act)
+    if act.doer ~= nil and act.invobject ~= nil and act.invobject:HasTag("lucky_ash") and act.target:HasTag("lucky_hat") then
+        local fuel = act.doer.components.inventory:RemoveItem(act.invobject)
+        local percent = act.target.components.fueled:GetPercent()
+        if fuel then
+            if percent < 1 then
+                percent = math.min(1, percent + 0.1)
+                act.target.components.fueled:SetPercent(percent)
+                return true
+            else
+                act.doer.components.inventory:GiveItem(fuel)
+            end
+        end
+        return true
+    end
+end)
+AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions, right)
+    if doer:HasTag("player") and inst:HasTag("lucky_ash") and target:HasTag("lucky_hat") then
+        table.insert(actions, ACTIONS.REPAIRLUCKYHAT)
+    end
+end)
+
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.REPAIRLUCKYHAT, "give"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.REPAIRLUCKYHAT, "give"))
+
+--圣光祝福动作
+AddAction("BLESSING", "祝福", function(act)
+    if act.doer ~= nil and act.invobject ~= nil and act.invobject.prefab == "lucky_fruit" and act.target:HasTag("lucky_light") then
+        local fuel = act.doer.components.inventory:RemoveItem(act.invobject)
+        if fuel then
+            act.doer.components.inventory:GiveItem(GLOBAL.SpawnPrefab("lucky_ash"))
+        end
+        return true
+    end
+end)
+AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions)
+    if doer:HasTag("player") and inst.prefab == "lucky_fruit" and target:HasTag("lucky_light") then
+        table.insert(actions, ACTIONS.BLESSING)
+    end
+end)
+
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BLESSING, "give"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BLESSING, "give"))
+
+--击杀小海象有机会掉落幸运帽蓝图
+if GLOBAL.TheNet:GetIsServer() then
+    local function luckyhatblueprint(inst)
+        inst.components.lootdropper:AddChanceLoot("lucky_hat_blueprint", 0.25)
+    end
+
+    AddPrefabPostInit("little_walrus", luckyhatblueprint)
+end

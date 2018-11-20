@@ -9,8 +9,8 @@ local TUNING = _G.TUNING
 
 --清理级别普通 1,2,3,4,5,-1为关闭
 local clean_level = _G.tonumber(3)
---清理周期1天
-local clean_period = _G.tonumber(1)
+--清理周期5天
+local clean_period = _G.tonumber(5)
 --自定义清理
 local clean_custom = ""
 --关闭世界连接通道

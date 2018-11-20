@@ -1,7 +1,7 @@
 name = "guido"
 description = "自用"
 author = "guido"
-version = "0.4.7"
+version = "0.4.9"
 forumthread = ""
 --api版本联机10，单机6
 api_version = 10
